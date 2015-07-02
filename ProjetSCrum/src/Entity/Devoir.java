@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -109,6 +110,6 @@ public class Devoir {
 
     @Override
     public String toString() {
-        return libelle + " - " + matiere + " - " + date;
+        return libelle + " - " + matiere + " - " + DateFormat.getDateInstance( DateFormat.MEDIUM ).format(date);
     }        
 }
