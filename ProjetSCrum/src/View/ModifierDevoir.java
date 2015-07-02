@@ -5,6 +5,7 @@
  */
 package View;
 
+import Entity.Devoir;
 import Model.DAO_Devoir;
 import java.util.Date;
 
@@ -23,6 +24,14 @@ public class ModifierDevoir extends javax.swing.JFrame {
         // Apeller le find by id pour avoir le devoir
         // Et remplir les champs avec les valeurs du devoir
       
+    }
+
+    ModifierDevoir(Entity.Devoir devoir) {
+        initComponents();
+        this.setVisible(true);
+        
+        matiereDevoir.setSelectedItem(devoir.getMatiere());
+        txt_nomDevoir.setText(devoir.getLibelle());
     }
 
     /**

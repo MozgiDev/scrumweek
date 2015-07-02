@@ -18,7 +18,7 @@ import javax.swing.DefaultListModel;
 public class ListerDevoir extends javax.swing.JFrame {
 
     private DefaultListModel model = null;
-    
+    public List<Entity.Devoir> listeDevoir;
     /**
      * Creates new form ListerDevoir
      */
@@ -29,7 +29,7 @@ public class ListerDevoir extends javax.swing.JFrame {
     }
     
     public void updateListeDevoir() {
-        List<Entity.Devoir> listeDevoir = new ArrayList<Entity.Devoir>();
+        listeDevoir = new ArrayList<Entity.Devoir>();
         DAO_Devoir dao = new DAO_Devoir(null);
         listeDevoir = dao.findAll();
         model.clear();
@@ -60,6 +60,16 @@ public class ListerDevoir extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -107,6 +117,16 @@ public class ListerDevoir extends javax.swing.JFrame {
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bt_ajouter_devoirActionPerformed
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        Integer index = jList1.getSelectedIndex();
+        Entity.Devoir devoir = listeDevoir.get(index);
+        ModifierDevoir modifDevoir = new ModifierDevoir(devoir);
+    }//GEN-LAST:event_jList1MouseClicked
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        //pas utile
+    }//GEN-LAST:event_jList1ValueChanged
 
     /**
      * @param args the command line arguments
