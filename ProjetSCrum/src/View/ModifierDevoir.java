@@ -5,6 +5,9 @@
  */
 package View;
 
+import Model.DAO_Devoir;
+import java.util.Date;
+
 /**
  *
  * @author Jérôme
@@ -33,11 +36,12 @@ public class ModifierDevoir extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        matiereDevoir = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         txt_nomDevoir = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         bt_quitter = new javax.swing.JButton();
+        bt_modifier = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,7 +49,7 @@ public class ModifierDevoir extends javax.swing.JFrame {
 
         jLabel2.setText("Matière : ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Java", "CGI", "Mod", "SCRUM", "" }));
+        matiereDevoir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Java", "CGI", "Mod", "SCRUM", "" }));
 
         jLabel3.setText("Nom :");
 
@@ -58,6 +62,13 @@ public class ModifierDevoir extends javax.swing.JFrame {
             }
         });
 
+        bt_modifier.setText("Modifier");
+        bt_modifier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_modifierActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,19 +78,25 @@ public class ModifierDevoir extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, 297, Short.MAX_VALUE)
-                            .addComponent(txt_nomDevoir)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(matiereDevoir, 0, 297, Short.MAX_VALUE)
+                                    .addComponent(txt_nomDevoir)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(bt_quitter))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(bt_quitter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_modifier, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +106,7 @@ public class ModifierDevoir extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(matiereDevoir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -97,7 +114,9 @@ public class ModifierDevoir extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(bt_quitter, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bt_modifier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_quitter, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -109,6 +128,18 @@ public class ModifierDevoir extends javax.swing.JFrame {
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bt_quitterActionPerformed
+
+    private void bt_modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modifierActionPerformed
+        
+        String matiere = (String) matiereDevoir.getSelectedItem();
+        String libelle = txt_nomDevoir.getText();
+        Date selectedDate = new Date();//(Date) datePicker.getModel().getValue();
+        
+        DAO_Devoir dao = new DAO_Devoir(null);
+        Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
+        dao.create(devoir);
+        dao.update(devoir, devoir);
+    }//GEN-LAST:event_bt_modifierActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,12 +177,13 @@ public class ModifierDevoir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_modifier;
     private javax.swing.JButton bt_quitter;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox matiereDevoir;
     private javax.swing.JTextField txt_nomDevoir;
     // End of variables declaration//GEN-END:variables
 }
