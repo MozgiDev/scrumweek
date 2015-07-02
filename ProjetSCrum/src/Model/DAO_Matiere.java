@@ -15,7 +15,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import static javafx.scene.Cursor.cursor;
 import org.bson.types.ObjectId;
 
 /**
