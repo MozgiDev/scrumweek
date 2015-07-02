@@ -97,24 +97,22 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(matiereDevoir, 0, 297, Short.MAX_VALUE)
-                            .addComponent(txt_nomDevoir)))
+                        .addComponent(bt_quitter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_modifier, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bt_quitter)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bt_modifier, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(matiereDevoir, 0, 297, Short.MAX_VALUE)
+                            .addComponent(txt_nomDevoir))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,9 +143,13 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_quitterActionPerformed
-        IHM_ListerDevoir window = new IHM_ListerDevoir();
-        window.setVisible(true);
-        this.setVisible(false);
+        try {
+            IHM_ListerDevoir window = new IHM_ListerDevoir();
+            window.setVisible(true);
+            this.setVisible(false);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bt_quitterActionPerformed
 
     private void bt_modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modifierActionPerformed
@@ -162,11 +164,11 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
             DAO_Devoir dao;
             try {
                 dao = new DAO_Devoir(null);
+                Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
+                dao.update(currentDevoir, devoir);
             } catch (UnknownHostException ex) {
                 Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
-            dao.update(currentDevoir, devoir);
         }
     }//GEN-LAST:event_bt_modifierActionPerformed
 
@@ -207,12 +209,16 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
     }
 
     public void updateMatiere() {
-        matiereDevoir.removeAllItems();
-        DAO_Matiere dao = new DAO_Matiere(null);
-        List<Matiere> liste = new ArrayList<Matiere>();
-        liste = dao.findAll();
-        for (Matiere matiere : liste) {
-            matiereDevoir.addItem(matiere.toString());
+        try {
+            matiereDevoir.removeAllItems();
+            DAO_Matiere dao = new DAO_Matiere(null);
+            List<Matiere> liste = new ArrayList<Matiere>();
+            liste = dao.findAll();
+            for (Matiere matiere : liste) {
+                matiereDevoir.addItem(matiere.toString());
+            }
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
