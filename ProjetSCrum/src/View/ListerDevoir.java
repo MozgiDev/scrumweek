@@ -5,19 +5,39 @@
  */
 package View;
 
+import Model.DAO_Devoir;
+import Model.DAO_Template;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Jérôme
  */
 public class ListerDevoir extends javax.swing.JFrame {
 
+    private DefaultListModel model = null;
+    
     /**
      * Creates new form ListerDevoir
      */
     public ListerDevoir() {
         initComponents();
+        model = new DefaultListModel();
+        updateListeDevoir();
     }
-
+    
+    public void updateListeDevoir() {
+        List<Entity.Devoir> listeDevoir = new ArrayList<Entity.Devoir>();
+        DAO_Devoir dao = new DAO_Devoir(null);
+        listeDevoir = dao.findAll();
+        model.clear();
+        for (int i = 0; i < listeDevoir.size(); i++) {
+            model.addElement(listeDevoir.get(i));
+        }
+        jList1.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,9 +79,9 @@ public class ListerDevoir extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
                 .addComponent(bt_ajouter_devoir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,7 +94,7 @@ public class ListerDevoir extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(91, 91, 91)
                         .addComponent(bt_ajouter_devoir)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
