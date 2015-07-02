@@ -27,6 +27,11 @@ ArrayList<String> eleve;
         this.eleve = eleve;
     }
 
+    public Groupe() 
+    {
+        
+    }
+
     public Integer getId() 
     {
         return id;
