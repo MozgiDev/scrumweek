@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Devoir {
     private String libelle;
     private String matiere;
     private Date date;
-    private List<Critere> lstCritere;
+    private List<Rubrique> lstRubrique;
 
     public Devoir(String libelle, String matiere, Date date) {
         this.libelle = libelle;
@@ -26,6 +27,13 @@ public class Devoir {
         this.date = date;
     }
 
+    public List<Rubrique> parseFromDbToList(String trucQuiVientDeMongoDb)
+    {
+        List<Rubrique> lstRubrique = new ArrayList<>();
+        
+        return lstRubrique;
+    }
+    
     public int getId() {
         return id;
     }
@@ -58,12 +66,12 @@ public class Devoir {
         this.date = date;
     }
 
-    public List getLstCritere() {
-        return lstCritere;
+    public List getLstRubrique() {
+        return lstRubrique;
     }
 
-    public void setLstCritere(List lstCritere) {
-        this.lstCritere = lstCritere;
+    public void setLstRubrique(List lstRubrique) {
+        this.lstRubrique = lstRubrique;
     }
     
     
