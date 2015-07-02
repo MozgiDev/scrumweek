@@ -23,6 +23,10 @@ public class Rubrique {
     public Rubrique(String libelle) {
         this.libelle = libelle;
     }
+
+    public Rubrique() {
+       
+    }
     
     public List<Critere> parseFromDbToList(String trucQuiVientDeMongoDb)
     {
