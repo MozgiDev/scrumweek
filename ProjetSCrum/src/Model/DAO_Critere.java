@@ -9,6 +9,7 @@ import Entity.Critere;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class DAO_Critere extends DAO_Template<Critere> {
     //On instancie le curseur
     Cursor cursor = null;
 
-    public DAO_Critere(Connection conn) {
+    public DAO_Critere(Connection conn) throws UnknownHostException {
         super(conn);
     }
 

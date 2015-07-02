@@ -9,6 +9,7 @@ import Entity.Devoir;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
     //On instancie le curseur
     Cursor cursor = null;
 
-    public DAO_Devoir(Connection conn) {
+    public DAO_Devoir(Connection conn) throws UnknownHostException {
         super(conn);
     }
 

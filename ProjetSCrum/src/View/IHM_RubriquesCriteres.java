@@ -25,7 +25,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
         model = new DefaultListModel();
         initComponents();
         //On met à jour la liste
-        updateList();
+        //updateList();
     }
 
     /**

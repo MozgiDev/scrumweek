@@ -29,9 +29,9 @@ public abstract class DAO_Template<T> {
     protected DB db = null;
     protected DBCollection collection;
 
-    public DAO_Template(Connection conn) {
+    public DAO_Template(Connection conn) throws UnknownHostException {
 
-        try {
+       // try {
             this.mongoClient = new MongoClient("172.16.1.20", 27017);
             db = mongoClient.getDB("test");
 
@@ -42,9 +42,9 @@ public abstract class DAO_Template<T> {
                 collection = db.createCollection("collection", options);
             }
 
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(DAO_Template.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       // } catch (Exception ex) {
+         //   Logger.getLogger(DAO_Template.class.getName()).log(Level.SEVERE, null, ex);
+        //}
 
     }
 

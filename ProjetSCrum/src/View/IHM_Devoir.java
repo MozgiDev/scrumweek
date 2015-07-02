@@ -8,9 +8,13 @@ package View;
 import Entity.Matiere;
 import Model.DAO_Devoir;
 import Model.DAO_Matiere;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.jdatepicker.impl.JDatePickerImpl;
 
 /**
@@ -28,7 +32,6 @@ public class IHM_Devoir extends javax.swing.JFrame {
         initComponents();
         updateMatiere();
 
-     
     }
 
     /**
@@ -163,9 +166,18 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         Date selectedDate = jXDatePicker1.getDate();
 
-        DAO_Devoir dao = new DAO_Devoir(null);
-        Entity.Devoir devoir = new Entity.Devoir(text, matiere, selectedDate);
-        dao.create(devoir);
+        if (text == "" || matiere == "" || selectedDate == null) {
+            JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
+        } else {
+            DAO_Devoir dao;
+            try {
+                dao = new DAO_Devoir(null);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Entity.Devoir devoir = new Entity.Devoir(text, matiere, selectedDate);
+            dao.create(devoir);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -210,7 +222,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void updateMatiere() {
         matiereDevoir.removeAllItems();
         DAO_Matiere dao = new DAO_Matiere(null);

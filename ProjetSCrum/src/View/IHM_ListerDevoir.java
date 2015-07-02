@@ -7,8 +7,11 @@ package View;
 
 import Model.DAO_Devoir;
 import Model.DAO_Template;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -22,13 +25,13 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     /**
      * Creates new form ListerDevoir
      */
-    public IHM_ListerDevoir() {
+    public IHM_ListerDevoir() throws UnknownHostException {
         initComponents();
         model = new DefaultListModel();
         updateListeDevoir();
     }
     
-    public void updateListeDevoir() {
+    public void updateListeDevoir() throws UnknownHostException {
         listeDevoir = new ArrayList<Entity.Devoir>();
         DAO_Devoir dao = new DAO_Devoir(null);
         listeDevoir = dao.findAll();
@@ -159,7 +162,11 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_ListerDevoir().setVisible(true);
+                try {
+                    new IHM_ListerDevoir().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(IHM_ListerDevoir.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -9,9 +9,12 @@ import Entity.Devoir;
 import Entity.Matiere;
 import Model.DAO_Devoir;
 import Model.DAO_Matiere;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -156,7 +159,12 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
         if (matiere == "" || libelle == "" || selectedDate == null) {
             JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
         } else {
-            DAO_Devoir dao = new DAO_Devoir(null);
+            DAO_Devoir dao;
+            try {
+                dao = new DAO_Devoir(null);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(Level.SEVERE, null, ex);
+            }
             Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
             dao.update(currentDevoir, devoir);
         }

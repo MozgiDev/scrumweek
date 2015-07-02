@@ -9,6 +9,7 @@ import Entity.Rubrique;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class DAO_Rubrique extends DAO_Template<Rubrique> {
     //On instancie le curseur
     Cursor cursor = null;
     
-    public DAO_Rubrique(Connection conn) {
+    public DAO_Rubrique(Connection conn) throws UnknownHostException {
         super(conn);
     }
 
