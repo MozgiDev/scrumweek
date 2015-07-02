@@ -9,6 +9,7 @@ import Entity.Etudiant;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import org.bson.types.ObjectId;
 public class DAO_Etudiant extends DAO_Template<Etudiant>{
 
     Cursor cursor;
-    public DAO_Etudiant(Connection conn) {
+    public DAO_Etudiant(Connection conn) throws UnknownHostException {
         super(conn);
         cursor = null;
     }

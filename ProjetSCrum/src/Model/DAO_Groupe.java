@@ -10,6 +10,7 @@ import Entity.Groupe;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
     //On instancie le curseur
     Cursor cursor = null;
 
-    public DAO_Groupe(Connection conn) {
+    public DAO_Groupe(Connection conn) throws UnknownHostException {
         super(conn);
     }
 

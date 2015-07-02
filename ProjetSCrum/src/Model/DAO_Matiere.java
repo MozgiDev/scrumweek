@@ -10,6 +10,7 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.Cursor;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class DAO_Matiere extends DAO_Template<Matiere> {
     protected DBCollection collection;
     protected Cursor cursor = null;
 
-    public DAO_Matiere(Connection conn) {
+    public DAO_Matiere(Connection conn) throws UnknownHostException {
         super(conn);
         if (db.collectionExists("matiere")) {
             collection = db.getCollection("matiere");
