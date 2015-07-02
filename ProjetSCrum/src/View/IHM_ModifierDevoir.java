@@ -12,28 +12,30 @@ import Model.DAO_Matiere;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jérôme
  */
 public class IHM_ModifierDevoir extends javax.swing.JFrame {
-    
+
     protected Devoir currentDevoir;
+
     /**
      * Creates new form ModifierDevoir
      */
     public IHM_ModifierDevoir() {
         initComponents();
         updateMatiere();
-        this.setVisible(true);     
+        this.setVisible(true);
     }
 
     IHM_ModifierDevoir(Entity.Devoir devoir) {
         initComponents();
         this.setVisible(true);
         currentDevoir = devoir;
-        
+
         matiereDevoir.setSelectedItem(devoir.getMatiere());
         txt_nomDevoir.setText(devoir.getLibelle());
         jXDatePicker1.setDate(devoir.getDate());
@@ -146,14 +148,18 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_quitterActionPerformed
 
     private void bt_modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_modifierActionPerformed
-        
+
         String matiere = (String) matiereDevoir.getSelectedItem();
         String libelle = txt_nomDevoir.getText();
         Date selectedDate = jXDatePicker1.getDate();
-        
-        DAO_Devoir dao = new DAO_Devoir(null);
-        Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
-        dao.update(currentDevoir, devoir);
+
+        if (matiere == "" || libelle == "" || selectedDate == null) {
+            JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
+        } else {
+            DAO_Devoir dao = new DAO_Devoir(null);
+            Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
+            dao.update(currentDevoir, devoir);
+        }
     }//GEN-LAST:event_bt_modifierActionPerformed
 
     /**
@@ -191,7 +197,7 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void updateMatiere() {
         matiereDevoir.removeAllItems();
         DAO_Matiere dao = new DAO_Matiere(null);
@@ -201,7 +207,7 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
             matiereDevoir.addItem(matiere.toString());
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_modifier;
