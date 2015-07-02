@@ -23,7 +23,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
 
     //On instancie le curseur
     Cursor cursor = null;
-    
+
     public DAO_Devoir(Connection conn) {
         super(conn);
     }
@@ -53,8 +53,25 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
     }
 
     @Override
-    public boolean update(Devoir obj, Devoir obje) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(Devoir oldDevoir, Devoir newDevoir) {
+        //Ceci contiendra l'objet à remplacer
+        BasicDBObject doc = null;
+
+        //on crée un nouvel objet à insérer pour remplacer celui existant
+        BasicDBObject newDoc = new BasicDBObject("libelle", newDevoir.getLibelle())
+                .append("matiere", newDevoir.getMatiere())
+                .append("date", newDevoir.getDate());
+
+        //On crée les parametres de la requete
+        BasicDBObject query = new BasicDBObject();
+        query.put("libelle", oldDevoir.getLibelle());
+        query.put("matiere", oldDevoir.getMatiere());
+        query.put("date", oldDevoir.getDate());
+
+        //On met à jour l'enregistrement
+        collection.update(query, newDoc);
+
+        return true;
     }
 
     @Override
@@ -63,7 +80,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         List<Devoir> listDevoir = new ArrayList<>();
 
         BasicDBObject query = new BasicDBObject("_id", id);
-        cursor = collection.find(query);        
+        cursor = collection.find(query);
 
         try {
             //Pour chaque enregistrement trouvé
@@ -74,25 +91,25 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 Devoir devoir = new Devoir(
                         objet.get("libelle").toString(),
                         objet.get("matiere").toString(),
-                        (Date)objet.get("date"));
+                        (Date) objet.get("date"));
                 //On ajoute l'id de l'enregistrement
                 devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
-                devoir.setLstRubrique((List<Devoir>)objet.get("lstRubrique"));
+                devoir.setLstRubrique((List<Devoir>) objet.get("lstRubrique"));
                 //On ajoute le client à la liste
                 listDevoir.add(devoir);
             }
         } finally {
             cursor.close();
         }
-        return listDevoir.get(0); 
+        return listDevoir.get(0);
     }
 
     @Override
     public List<Devoir> findAll() {
         //On instancie la liste qui va contenir les clients retournés par la requête
         List<Devoir> listDevoir = new ArrayList<>();
-        
+
         cursor = collection.find();
 
         try {
@@ -104,11 +121,11 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 Devoir devoir = new Devoir(
                         objet.get("libelle").toString(),
                         objet.get("matiere").toString(),
-                        (Date)objet.get("date"));
+                        (Date) objet.get("date"));
                 //On ajoute l'id de l'enregistrement
                 devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
-                devoir.setLstRubrique((List<Devoir>)objet.get("lstRubrique"));
+                devoir.setLstRubrique((List<Devoir>) objet.get("lstRubrique"));
                 //On ajoute le client à la liste
                 listDevoir.add(devoir);
             }
@@ -117,5 +134,5 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         }
         return listDevoir;
     }
-    
+
 }

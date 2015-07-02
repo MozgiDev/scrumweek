@@ -32,9 +32,9 @@ public abstract class DAO_Template<T> {
     public DAO_Template(Connection conn) {
 
         try {
-            this.mongoClient = new MongoClient("localhost", 27017);
+            this.mongoClient = new MongoClient("172.16.1.20", 27017);
             db = mongoClient.getDB("test");
-         
+
             if (db.collectionExists("collection")) {
                 collection = db.getCollection("collection");
             } else {
@@ -89,7 +89,7 @@ public abstract class DAO_Template<T> {
      *
      */
     public abstract T findById(ObjectId id);
-    
+
     /**
      *
      * Méthode de recherche des informations
