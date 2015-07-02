@@ -5,6 +5,7 @@
  */
 package projetscrum;
 import View.*;
+import java.net.UnknownHostException;
 /**
  *
  * @author Jérôme
@@ -14,7 +15,7 @@ public class ProjetSCrum {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownHostException {
         
         IHM_ListerDevoir window = new IHM_ListerDevoir();
         window.setVisible(true);
