@@ -8,6 +8,7 @@ package Entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
@@ -26,13 +27,6 @@ public class Devoir {
         this.libelle = libelle;
         this.matiere = matiere;
         this.date = date;
-    }
-
-    public List<Rubrique> parseFromDbToList(String trucQuiVientDeMongoDb)
-    {
-        List<Rubrique> lstRubrique = new ArrayList<>();
-        
-        return lstRubrique;
     }
     
     public ObjectId getId() {
@@ -73,6 +67,44 @@ public class Devoir {
 
     public void setLstRubrique(List lstRubrique) {
         this.lstRubrique = lstRubrique;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.libelle);
+        hash = 53 * hash + Objects.hashCode(this.matiere);
+        hash = 53 * hash + Objects.hashCode(this.date);
+        hash = 53 * hash + Objects.hashCode(this.lstRubrique);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Devoir other = (Devoir) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.libelle, other.libelle)) {
+            return false;
+        }
+        if (!Objects.equals(this.matiere, other.matiere)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        if (!Objects.equals(this.lstRubrique, other.lstRubrique)) {
+            return false;
+        }
+        return true;
     }
     
     
