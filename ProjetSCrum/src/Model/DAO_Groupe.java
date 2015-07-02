@@ -49,35 +49,35 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
     @Override
     public boolean delete(Groupe obj) {
 
-        // L'id de notre enregistrement est de type ObjectId, un objet BSON sur 12 octet
-        ObjectId id = new ObjectId(obj.getId().toString());
-        // Creation de notre document BSON, auquel on ajoute l'id
-        BasicDBObject query = new BasicDBObject();
-        query.append("_id", id);
-        // On supprimer l'entree
-        collection.remove(query);
+//        // L'id de notre enregistrement est de type ObjectId, un objet BSON sur 12 octet
+//        ObjectId id = new ObjectId(obj.getId().toString());
+//        // Creation de notre document BSON, auquel on ajoute l'id
+//        BasicDBObject query = new BasicDBObject();
+//        query.append("_id", id);
+//        // On supprimer l'entree
+//        collection.remove(query);
 
         return true;
     }
 
     @Override
     public boolean update(Groupe oldGroupe, Groupe newGroupe) {
-        //Ceci contiendra l'objet à remplacer
-        BasicDBObject doc = null;
-
-        //on crée un nouvel objet à insérer pour remplacer celui existant
-        BasicDBObject newDoc = new BasicDBObject("Nom", newGroupe.getNom())
-                .append("Critere", newGroupe.getCritere())
-                .append("Eleve", newGroupe.getEleve());
-
-        //On crée les parametres de la requete
-        BasicDBObject query = new BasicDBObject();
-        query.put("Nom", oldGroupe.getNom());
-        query.put("Critere", oldGroupe.getCritere());
-        query.put("Eleve", oldGroupe.getCritere());
-
-        //On met à jour l'enregistrement
-        collection.update(query, newDoc);
+//        //Ceci contiendra l'objet à remplacer
+//        BasicDBObject doc = null;
+//
+//        //on crée un nouvel objet à insérer pour remplacer celui existant
+//        BasicDBObject newDoc = new BasicDBObject("Nom", newGroupe.getNom())
+//                .append("Critere", newGroupe.getCritere())
+//                .append("Eleve", newGroupe.getEleve());
+//
+//        //On crée les parametres de la requete
+//        BasicDBObject query = new BasicDBObject();
+//        query.put("Nom", oldGroupe.getNom());
+//        query.put("Critere", oldGroupe.getCritere());
+//        query.put("Eleve", oldGroupe.getCritere());
+//
+//        //On met à jour l'enregistrement
+//        collection.update(query, newDoc);
 
         return true;
     }
