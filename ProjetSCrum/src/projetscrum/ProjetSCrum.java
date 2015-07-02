@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package projetscrum;
-
+import View.*;
 /**
  *
  * @author Jérôme
@@ -15,7 +15,9 @@ public class ProjetSCrum {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        ListerDevoir window = new ListerDevoir();
+        window.setVisible(true);
     }
     
 }
