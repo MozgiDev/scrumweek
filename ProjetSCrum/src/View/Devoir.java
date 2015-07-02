@@ -110,7 +110,7 @@ public class Devoir extends javax.swing.JFrame {
 
     private void moisJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moisJCBActionPerformed
         // Mise a jour des excursions affichées
-        chargementExcursion();
+        
     }//GEN-LAST:event_moisJCBActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
