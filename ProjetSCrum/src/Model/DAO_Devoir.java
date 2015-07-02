@@ -108,7 +108,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 //On ajoute l'id de l'enregistrement
                 devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
-                devoir.setLstRubrique(devoir.parseFromDbToList((String)objet.get("lstRubrique")));
+                devoir.setLstRubrique((List<Devoir>)objet.get("lstRubrique"));
                 //On ajoute le client à la liste
                 listDevoir.add(devoir);
             }
