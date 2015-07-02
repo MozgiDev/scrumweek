@@ -44,6 +44,11 @@ public class ListerDevoir extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         bt_ajouter_devoir.setText("Ajouter un devoir");
+        bt_ajouter_devoir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_ajouter_devoirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +81,12 @@ public class ListerDevoir extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bt_ajouter_devoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ajouter_devoirActionPerformed
+        Devoir window = new Devoir();
+        window.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bt_ajouter_devoirActionPerformed
 
     /**
      * @param args the command line arguments
