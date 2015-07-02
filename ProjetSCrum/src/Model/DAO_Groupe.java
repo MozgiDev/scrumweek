@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Entity.Devoir;
 import Entity.Groupe;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
@@ -36,7 +37,8 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
          */
         BasicDBObject doc = new BasicDBObject("Nom", obj.getNom())
                 .append("Critere", obj.getCritere())
-                .append("Eleve", obj.getEleve());
+                .append("Eleve", obj.getEleve())
+                .append("Devoir", obj.getDevoir());
 
         /*
          * On insère dans la BDD
@@ -62,22 +64,24 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
 
     @Override
     public boolean update(Groupe oldGroupe, Groupe newGroupe) {
-//        //Ceci contiendra l'objet à remplacer
-//        BasicDBObject doc = null;
-//
-//        //on crée un nouvel objet à insérer pour remplacer celui existant
-//        BasicDBObject newDoc = new BasicDBObject("Nom", newGroupe.getNom())
-//                .append("Critere", newGroupe.getCritere())
-//                .append("Eleve", newGroupe.getEleve());
-//
-//        //On crée les parametres de la requete
-//        BasicDBObject query = new BasicDBObject();
-//        query.put("Nom", oldGroupe.getNom());
-//        query.put("Critere", oldGroupe.getCritere());
-//        query.put("Eleve", oldGroupe.getCritere());
-//
-//        //On met à jour l'enregistrement
-//        collection.update(query, newDoc);
+        //Ceci contiendra l'objet à remplacer
+        BasicDBObject doc = null;
+
+        //on crée un nouvel objet à insérer pour remplacer celui existant
+        BasicDBObject newDoc = new BasicDBObject("Nom", newGroupe.getNom())
+                .append("Critere", newGroupe.getCritere())
+                .append("Eleve", newGroupe.getEleve())
+                .append("Devoir", newGroupe.getDevoir());
+        
+        //On crée les parametres de la requete
+        BasicDBObject query = new BasicDBObject();
+        query.put("Nom", oldGroupe.getNom());
+        query.put("Critere", oldGroupe.getCritere());
+        query.put("Eleve", oldGroupe.getCritere());
+        query.put("Devoir", oldGroupe.getDevoir());
+
+        //On met à jour l'enregistrement
+        collection.update(query, newDoc);
 
         return true;
     }
@@ -100,6 +104,7 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
                 groupe.setNom((String) objet.get("Nom"));
                 groupe.setCritere((ArrayList<String>) objet.get("Critere"));
                 groupe.setEleve((ArrayList<String>) objet.get("Eleve"));
+                groupe.setDevoir((Devoir) objet.get("Devoir"));
                 groupe.setId((Integer) objet.get("_id"));
                 //On ajoute le client à la liste
                 listGroupe.add(groupe);
@@ -127,6 +132,7 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
                 groupe.setNom((String) objet.get("Nom"));
                 groupe.setCritere((ArrayList<String>) objet.get("Critere"));
                 groupe.setEleve((ArrayList<String>) objet.get("Eleve"));
+                groupe.setDevoir((Devoir) objet.get("Devoir"));
                 groupe.setId((Integer) objet.get("_id"));
                 //On ajoute le client à la liste
                 listGroupe.add(groupe);
