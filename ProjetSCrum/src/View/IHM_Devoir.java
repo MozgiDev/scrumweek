@@ -19,14 +19,14 @@ import org.jdatepicker.impl.UtilDateModel;
  *
  * @author FaivreQu
  */
-public class Devoir extends javax.swing.JFrame {
+public class IHM_Devoir extends javax.swing.JFrame {
 
     JDatePickerImpl datePicker;
 
     /**
      * Creates new form Devoir
      */
-    public Devoir() {
+    public IHM_Devoir() {
         initComponents();
 
         // DATE PICKER
@@ -38,7 +38,7 @@ public class Devoir extends javax.swing.JFrame {
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 // Don't know about the formatter, but there it is...
-        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        datePicker = new JDatePickerImpl(datePanel, new IHM_DateLabelFormatter());
         jPanel1.add(datePicker);
         datePicker.setSize(25, 25);
         datePicker.setVisible(true);
@@ -198,7 +198,7 @@ public class Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ListerDevoir window = new ListerDevoir();
+        IHM_ListerDevoir window = new IHM_ListerDevoir();
         this.setVisible(false);
         window.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -220,20 +220,21 @@ public class Devoir extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Devoir().setVisible(true);
+                new IHM_Devoir().setVisible(true);
             }
         });
     }

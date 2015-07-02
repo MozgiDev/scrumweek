@@ -13,18 +13,18 @@ import java.util.Date;
  *
  * @author Jérôme
  */
-public class ModifierDevoir extends javax.swing.JFrame {
+public class IHM_ModifierDevoir extends javax.swing.JFrame {
     
     protected Devoir currentDevoir;
     /**
      * Creates new form ModifierDevoir
      */
-    public ModifierDevoir() {
+    public IHM_ModifierDevoir() {
         initComponents();
         this.setVisible(true);     
     }
 
-    ModifierDevoir(Entity.Devoir devoir) {
+    IHM_ModifierDevoir(Entity.Devoir devoir) {
         initComponents();
         this.setVisible(true);
         currentDevoir = devoir;
@@ -133,7 +133,7 @@ public class ModifierDevoir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_quitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_quitterActionPerformed
-        ListerDevoir window = new ListerDevoir();
+        IHM_ListerDevoir window = new IHM_ListerDevoir();
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bt_quitterActionPerformed
@@ -166,20 +166,21 @@ public class ModifierDevoir extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModifierDevoir().setVisible(true);
+                new IHM_ModifierDevoir().setVisible(true);
             }
         });
     }
