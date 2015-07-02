@@ -146,7 +146,6 @@ public class ModifierDevoir extends javax.swing.JFrame {
         
         DAO_Devoir dao = new DAO_Devoir(null);
         Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
-        dao.create(devoir);
         dao.update(currentDevoir, devoir);
     }//GEN-LAST:event_bt_modifierActionPerformed
 
