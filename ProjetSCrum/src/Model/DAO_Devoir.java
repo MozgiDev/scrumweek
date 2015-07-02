@@ -62,7 +62,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         //On instancie la liste qui va contenir les clients retournés par la requête
         List<Devoir> listDevoir = new ArrayList<Devoir>();
 
-        BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$gte", filter));
+        BasicDBObject query = new BasicDBObject("_id", id);
         cursor = collection.find(query);        
 
         try {
@@ -76,7 +76,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                         objet.get("matiere").toString(),
                         (Date)objet.get("date"));
                 //On ajoute l'id de l'enregistrement
-                devoir.setId((int) objet.get("_id"));
+                devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
                 devoir.setLstRubrique(devoir.parseFromDbToList((String)objet.get("lstRubrique")));
                 //On ajoute le client à la liste
@@ -85,16 +85,13 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         } finally {
             cursor.close();
         }
-        return listDevoir; 
+        return listDevoir.get(0); 
     }
 
     @Override
     public List<Devoir> findAll() {
         //On instancie la liste qui va contenir les clients retournés par la requête
         List<Devoir> listDevoir = new ArrayList<Devoir>();
-
-        BasicDBObject query = new BasicDBObject("adresse", new BasicDBObject("$gte", filter));
-        cursor = collection.find(query);
         
         cursor = collection.find();
 
@@ -109,7 +106,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                         objet.get("matiere").toString(),
                         (Date)objet.get("date"));
                 //On ajoute l'id de l'enregistrement
-                devoir.setId((int) objet.get("_id"));
+                devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
                 devoir.setLstRubrique(devoir.parseFromDbToList((String)objet.get("lstRubrique")));
                 //On ajoute le client à la liste
