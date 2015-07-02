@@ -60,7 +60,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
     @Override
     public Devoir findById(ObjectId id) {
         //On instancie la liste qui va contenir les clients retournés par la requête
-        List<Devoir> listDevoir = new ArrayList<Devoir>();
+        List<Devoir> listDevoir = new ArrayList<>();
 
         BasicDBObject query = new BasicDBObject("_id", id);
         cursor = collection.find(query);        
@@ -91,7 +91,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
     @Override
     public List<Devoir> findAll() {
         //On instancie la liste qui va contenir les clients retournés par la requête
-        List<Devoir> listDevoir = new ArrayList<Devoir>();
+        List<Devoir> listDevoir = new ArrayList<>();
         
         cursor = collection.find();
 
