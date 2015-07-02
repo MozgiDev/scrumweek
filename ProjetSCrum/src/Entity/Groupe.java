@@ -16,15 +16,15 @@ public class Groupe
 {
 Integer id;
 String nom;
-ArrayList<String> critere;
+ArrayList<String> rubrique;
 ArrayList<String> eleve;
 Devoir devoir;
 
-    public Groupe(Integer id, String nom, ArrayList critere, ArrayList eleve, Devoir devoir) 
+    public Groupe(Integer id, String nom, ArrayList rubrique, ArrayList eleve, Devoir devoir) 
     {
         this.id = id;
         this.nom = nom;
-        this.critere = critere;
+        this.rubrique = rubrique;
         this.eleve = eleve;
         this.devoir = devoir;
     }
@@ -54,14 +54,14 @@ Devoir devoir;
         this.nom = nom;
     }
 
-    public ArrayList<String> getCritere() 
+    public ArrayList<String> getRubrique() 
     {
-        return critere;
+        return rubrique;
     }
 
-    public void setCritere(ArrayList<String> critere) 
+    public void setRubrique(ArrayList<String> rubrique) 
     {
-        this.critere = critere;
+        this.rubrique = rubrique;
     }
 
     public ArrayList<String> getEleve() 
@@ -87,7 +87,7 @@ Devoir devoir;
         int hash = 3;
         hash = 67 * hash + Objects.hashCode(this.id);
         hash = 67 * hash + Objects.hashCode(this.nom);
-        hash = 67 * hash + Objects.hashCode(this.critere);
+        hash = 67 * hash + Objects.hashCode(this.rubrique);
         hash = 67 * hash + Objects.hashCode(this.eleve);
         hash = 67 * hash + Objects.hashCode(this.devoir);
         return hash;
@@ -108,7 +108,7 @@ Devoir devoir;
         if (!Objects.equals(this.nom, other.nom)) {
             return false;
         }
-        if (!Objects.equals(this.critere, other.critere)) {
+        if (!Objects.equals(this.rubrique, other.rubrique)) {
             return false;
         }
         if (!Objects.equals(this.eleve, other.eleve)) {
@@ -119,7 +119,7 @@ Devoir devoir;
 
     @Override
     public String toString() {
-        return "Groupe{" + "id=" + id + ", nom=" + nom + ", critere=" + critere + ", eleve=" + eleve + ", devoir=" + devoir + '}';
+        return "Groupe{" + "id=" + id + ", nom=" + nom + ", critere=" + rubrique + ", eleve=" + eleve + ", devoir=" + devoir + '}';
     }
   
 }

@@ -37,7 +37,7 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
          *   On lui passe en paramètre les clés associé de ses valeurs
          */
         BasicDBObject doc = new BasicDBObject("Nom", obj.getNom())
-                .append("Critere", obj.getCritere())
+                .append("Rubrique", obj.getRubrique())
                 .append("Eleve", obj.getEleve())
                 .append("Devoir", obj.getDevoir());
 
@@ -70,15 +70,15 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
 
         //on crée un nouvel objet à insérer pour remplacer celui existant
         BasicDBObject newDoc = new BasicDBObject("Nom", newGroupe.getNom())
-                .append("Critere", newGroupe.getCritere())
+                .append("Rubrique", newGroupe.getRubrique())
                 .append("Eleve", newGroupe.getEleve())
                 .append("Devoir", newGroupe.getDevoir());
         
         //On crée les parametres de la requete
         BasicDBObject query = new BasicDBObject();
         query.put("Nom", oldGroupe.getNom());
-        query.put("Critere", oldGroupe.getCritere());
-        query.put("Eleve", oldGroupe.getCritere());
+        query.put("Rubrique", oldGroupe.getRubrique());
+        query.put("Eleve", oldGroupe.getEleve());
         query.put("Devoir", oldGroupe.getDevoir());
 
         //On met à jour l'enregistrement
@@ -103,7 +103,7 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
                 //On ajoute l'id de l'enregistrement
                 Groupe groupe = new Groupe();
                 groupe.setNom((String) objet.get("Nom"));
-                groupe.setCritere((ArrayList<String>) objet.get("Critere"));
+                groupe.setRubrique((ArrayList<String>) objet.get("Rubrique"));
                 groupe.setEleve((ArrayList<String>) objet.get("Eleve"));
                 groupe.setDevoir((Devoir) objet.get("Devoir"));
                 groupe.setId((Integer) objet.get("_id"));
@@ -131,7 +131,7 @@ public class DAO_Groupe extends DAO_Template<Groupe> {
                 //On ajoute l'id de l'enregistrement
                 Groupe groupe = new Groupe();
                 groupe.setNom((String) objet.get("Nom"));
-                groupe.setCritere((ArrayList<String>) objet.get("Critere"));
+                groupe.setRubrique((ArrayList<String>) objet.get("Rubrique"));
                 groupe.setEleve((ArrayList<String>) objet.get("Eleve"));
                 groupe.setDevoir((Devoir) objet.get("Devoir"));
                 groupe.setId((Integer) objet.get("_id"));
