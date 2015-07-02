@@ -7,6 +7,7 @@ package View;
 
 import Entity.Critere;
 import Entity.Rubrique;
+import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
@@ -24,8 +25,19 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
         //Instanciation du model de liste
         model = new DefaultListModel();
         initComponents();
-        //On met à jour la liste
-        updateList();
+    }
+    
+    private void addToList(Critere critere) {
+
+        //on ajoute l'element au model
+        model.addElement(critere);        
+        //On passe le model à la listBox
+        jList1.setModel(model);
+    }
+    
+    private List<Critere> getlistCritere()
+    {
+        return (List<Critere>) jList1.getModel();
     }
 
     /**
@@ -105,11 +117,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jList1.setModel(model);
         jScrollPane1.setViewportView(jList1);
 
         jButton3.setText("+");
