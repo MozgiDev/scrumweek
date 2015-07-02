@@ -9,12 +9,12 @@ package View;
  *
  * @author Quentin
  */
-public class RubriquesCriteres extends javax.swing.JFrame {
+public class IHM_RubriquesCriteres extends javax.swing.JFrame {
 
     /**
      * Creates new form RubriquesCriteres
      */
-    public RubriquesCriteres() {
+    public IHM_RubriquesCriteres() {
         initComponents();
     }
 
@@ -277,20 +277,21 @@ public class RubriquesCriteres extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RubriquesCriteres().setVisible(true);
+                new IHM_RubriquesCriteres().setVisible(true);
             }
         });
     }

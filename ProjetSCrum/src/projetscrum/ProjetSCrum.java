@@ -16,7 +16,7 @@ public class ProjetSCrum {
      */
     public static void main(String[] args) {
         
-        ListerDevoir window = new ListerDevoir();
+        IHM_ListerDevoir window = new IHM_ListerDevoir();
         window.setVisible(true);
     }
     
