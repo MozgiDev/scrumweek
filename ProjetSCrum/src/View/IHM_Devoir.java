@@ -5,8 +5,12 @@
  */
 package View;
 
+import Entity.Matiere;
 import Model.DAO_Devoir;
+import Model.DAO_Matiere;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.jdatepicker.impl.JDatePickerImpl;
 
 /**
@@ -22,6 +26,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
      */
     public IHM_Devoir() {
         initComponents();
+        updateMatiere();
 
      
     }
@@ -204,6 +209,16 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 new IHM_Devoir().setVisible(true);
             }
         });
+    }
+    
+    public void updateMatiere() {
+        matiereDevoir.removeAllItems();
+        DAO_Matiere dao = new DAO_Matiere(null);
+        List<Matiere> liste = new ArrayList<Matiere>();
+        liste = dao.findAll();
+        for (Matiere matiere : liste) {
+            matiereDevoir.addItem(matiere.toString());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

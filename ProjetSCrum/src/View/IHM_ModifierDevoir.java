@@ -6,8 +6,12 @@
 package View;
 
 import Entity.Devoir;
+import Entity.Matiere;
 import Model.DAO_Devoir;
+import Model.DAO_Matiere;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -21,6 +25,7 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
      */
     public IHM_ModifierDevoir() {
         initComponents();
+        updateMatiere();
         this.setVisible(true);     
     }
 
@@ -186,6 +191,17 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void updateMatiere() {
+        matiereDevoir.removeAllItems();
+        DAO_Matiere dao = new DAO_Matiere(null);
+        List<Matiere> liste = new ArrayList<Matiere>();
+        liste = dao.findAll();
+        for (Matiere matiere : liste) {
+            matiereDevoir.addItem(matiere.toString());
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_modifier;
