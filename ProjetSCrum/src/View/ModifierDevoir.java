@@ -14,24 +14,24 @@ import java.util.Date;
  * @author Jérôme
  */
 public class ModifierDevoir extends javax.swing.JFrame {
-
+    
+    protected Devoir currentDevoir;
     /**
      * Creates new form ModifierDevoir
      */
     public ModifierDevoir() {
         initComponents();
-        
-        // Apeller le find by id pour avoir le devoir
-        // Et remplir les champs avec les valeurs du devoir
-      
+        this.setVisible(true);     
     }
 
     ModifierDevoir(Entity.Devoir devoir) {
         initComponents();
         this.setVisible(true);
+        currentDevoir = devoir;
         
         matiereDevoir.setSelectedItem(devoir.getMatiere());
         txt_nomDevoir.setText(devoir.getLibelle());
+        //WARNING mettre la date
     }
 
     /**
@@ -147,7 +147,7 @@ public class ModifierDevoir extends javax.swing.JFrame {
         DAO_Devoir dao = new DAO_Devoir(null);
         Entity.Devoir devoir = new Entity.Devoir(libelle, matiere, selectedDate);
         dao.create(devoir);
-        dao.update(devoir, devoir);
+        dao.update(currentDevoir, devoir);
     }//GEN-LAST:event_bt_modifierActionPerformed
 
     /**
