@@ -60,7 +60,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
 
         jLabel2.setText("Titre du devoir");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 - Titre de la rubrique 1", "2 - Titre de la rubrique 2", "3 - Titre de la rubrique 3", "4 - Titre de la rubrique 4", "5 - Titre de la rubrique 5" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 
         jLabel3.setText("Ordre de la rubrique");
 
@@ -148,8 +148,8 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addGap(63, 63, 63)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox1, 0, 174, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)))))
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
