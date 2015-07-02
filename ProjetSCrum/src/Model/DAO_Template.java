@@ -33,7 +33,7 @@ public abstract class DAO_Template<T> {
 
         try {
             this.mongoClient = new MongoClient("localhost", 27017);
-            db = mongoClient.getDB("testDB");
+            db = mongoClient.getDB("test");
          
             if (db.collectionExists("collection")) {
                 collection = db.getCollection("collection");

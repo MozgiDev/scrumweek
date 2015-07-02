@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.DAO_Devoir;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
@@ -27,7 +28,7 @@ public class Devoir extends javax.swing.JFrame {
         UtilDateModel model = new UtilDateModel();
         model.setDate(20,04,2014);
 // Need this...
-Properties p = new Properties();
+        Properties p = new Properties();
 p.put("text.today", "Today");
 p.put("text.month", "Month");
 p.put("text.year", "Year");
@@ -185,9 +186,11 @@ datePicker.setVisible(true);
         
         String matiere = (String) matiereDevoir.getSelectedItem();
         
-        Calendar selectedValue = (Calendar) datePicker.getModel().getValue();
-        Date selectedDate = selectedValue.getTime();
-
+        Date selectedDate = (Date) datePicker.getModel().getValue();
+        
+        DAO_Devoir dao = new DAO_Devoir(null);
+        Entity.Devoir devoir = new Entity.Devoir(text, matiere, selectedDate);
+        dao.create(devoir);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
