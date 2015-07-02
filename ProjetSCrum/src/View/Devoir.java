@@ -5,6 +5,8 @@
  */
 package View;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import javax.swing.JFrame;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -16,7 +18,7 @@ import org.jdatepicker.impl.UtilDateModel;
  * @author FaivreQu
  */
 public class Devoir extends javax.swing.JFrame {
-
+    JDatePickerImpl datePicker;
     /**
      * Creates new form Devoir
      */
@@ -31,10 +33,12 @@ p.put("text.month", "Month");
 p.put("text.year", "Year");
 JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 // Don't know about the formatter, but there it is...
-JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 jInternalFrame1.add(datePicker);
 datePicker.setSize(25, 25);
 datePicker.setVisible(true);
+
+
     }
 
     /**
@@ -49,9 +53,9 @@ datePicker.setVisible(true);
         jFrame1 = new javax.swing.JFrame();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        moisJCB = new javax.swing.JComboBox();
+        matiereDevoir = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        numExcurJTF = new javax.swing.JTextField();
+        titreDevoir = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -75,10 +79,10 @@ datePicker.setVisible(true);
 
         jLabel1.setText("Nom du devoir : ");
 
-        moisJCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Java", "CGI", "Mod", "SCRUM", "" }));
-        moisJCB.addActionListener(new java.awt.event.ActionListener() {
+        matiereDevoir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Java", "CGI", "Mod", "SCRUM", "" }));
+        matiereDevoir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moisJCBActionPerformed(evt);
+                matiereDevoirActionPerformed(evt);
             }
         });
 
@@ -110,7 +114,7 @@ datePicker.setVisible(true);
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 8, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,11 +130,11 @@ datePicker.setVisible(true);
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(moisJCB, 0, 279, Short.MAX_VALUE))
+                        .addComponent(matiereDevoir, 0, 279, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(numExcurJTF))
+                        .addComponent(titreDevoir))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -149,17 +153,19 @@ datePicker.setVisible(true);
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(moisJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(matiereDevoir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numExcurJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(titreDevoir, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 61, Short.MAX_VALUE))
+                    .addComponent(jInternalFrame1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -169,13 +175,20 @@ datePicker.setVisible(true);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void moisJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moisJCBActionPerformed
+    private void matiereDevoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matiereDevoirActionPerformed
         // Mise a jour des excursions affichées
         
-    }//GEN-LAST:event_moisJCBActionPerformed
+    }//GEN-LAST:event_matiereDevoirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String text = titreDevoir.getText();
+        
+        String matiere = (String) matiereDevoir.getSelectedItem();
+        
+        Calendar selectedValue = (Calendar) datePicker.getModel().getValue();
+        Date selectedDate = selectedValue.getTime();
+
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -228,7 +241,7 @@ datePicker.setVisible(true);
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JComboBox moisJCB;
-    private javax.swing.JTextField numExcurJTF;
+    private javax.swing.JComboBox matiereDevoir;
+    private javax.swing.JTextField titreDevoir;
     // End of variables declaration//GEN-END:variables
 }
