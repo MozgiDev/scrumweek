@@ -6,11 +6,8 @@
 package Model;
 
 import Entity.Groupe;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import java.sql.Connection;
 import java.util.ArrayList;
