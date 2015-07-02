@@ -88,7 +88,9 @@ public class Rubrique {
         }
         return true;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return libelle;
+    }
 }

@@ -258,7 +258,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (!jTextField2.getText().equals("")) {
             String libelle = jTextField2.getText();
-            int poids = Integer.parseInt(jTextField2.getSelectedText());
+            int poids = Integer.parseInt(jComboBox2.getSelectedItem().toString());
             Critere critere = new Critere(libelle, poids);
             addToList(critere);
             
