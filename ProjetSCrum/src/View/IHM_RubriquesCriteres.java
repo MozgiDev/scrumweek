@@ -7,6 +7,7 @@ package View;
 
 import Entity.Critere;
 import Entity.Rubrique;
+import java.util.List;
 import javax.swing.DefaultListModel;
 
 /**
@@ -24,8 +25,24 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
         //Instanciation du model de liste
         model = new DefaultListModel();
         initComponents();
+<<<<<<< HEAD
         //On met à jour la liste
         //updateList();
+=======
+    }
+    
+    private void addToList(Critere critere) {
+
+        //on ajoute l'element au model
+        model.addElement(critere);        
+        //On passe le model à la listBox
+        jList1.setModel(model);
+    }
+    
+    private List<Critere> getlistCritere()
+    {
+        return (List<Critere>) jList1.getModel();
+>>>>>>> 54d996e7a084f84caff59ecec001d35975abf738
     }
 
     /**
@@ -54,6 +71,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,17 +123,20 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jList1.setModel(model);
         jScrollPane1.setViewportView(jList1);
 
         jButton3.setText("+");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("-");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -159,11 +180,13 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton4))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -197,7 +220,8 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -215,12 +239,15 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!jTextField1.getText().equals("")){
-            
+        if (!jTextField1.getText().equals("")
+                && jList1.getModel().getSize() != 0)
+        {
+            Rubrique rubrique = new Rubrique();
+            rubrique.setLibelle(jTextField1.getText());
+            rubrique.setLstCritere(getlistCritere());
         }
         
-        Rubrique rubrique = new Rubrique();
-        rubrique.setLibelle(null);
+
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -238,8 +265,19 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
             String libelle = jTextField2.getText();
             int poids = Integer.parseInt(jTextField2.getSelectedText());
             Critere critere = new Critere(libelle, poids);
+            addToList(critere);
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (!jList1.isSelectionEmpty()) {
+            int index = jList1.getSelectedIndex();
+            model = (DefaultListModel)jList1.getModel();
+            model.remove(index);
+            jList1.setModel(model);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +319,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
