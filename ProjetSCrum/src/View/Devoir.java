@@ -6,6 +6,7 @@
 package View;
 
 import java.util.Properties;
+import javax.swing.JFrame;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -22,16 +23,18 @@ public class Devoir extends javax.swing.JFrame {
     public Devoir() {
         initComponents();
         UtilDateModel model = new UtilDateModel();
-//model.setDate(20,04,2014);
+        model.setDate(20,04,2014);
 // Need this...
 Properties p = new Properties();
-p.put("text.today", "Aujourd'hui");
-p.put("text.month", "Mois");
-p.put("text.year", "Annee");
+p.put("text.today", "Today");
+p.put("text.month", "Month");
+p.put("text.year", "Year");
 JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 // Don't know about the formatter, but there it is...
 JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 jInternalFrame1.add(datePicker);
+datePicker.setSize(25, 25);
+datePicker.setVisible(true);
     }
 
     /**
@@ -43,6 +46,7 @@ jInternalFrame1.add(datePicker);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         moisJCB = new javax.swing.JComboBox();
@@ -52,6 +56,17 @@ jInternalFrame1.add(datePicker);
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jInternalFrame1 = new javax.swing.JInternalFrame();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,6 +222,7 @@ jInternalFrame1.add(datePicker);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
