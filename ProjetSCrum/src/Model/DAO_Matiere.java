@@ -5,7 +5,6 @@
  */
 package Model;
 
-import Entity.Devoir;
 import Entity.Matiere;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.Cursor;
@@ -13,9 +12,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import static javafx.scene.Cursor.cursor;
 import org.bson.types.ObjectId;
 
 /**
@@ -24,8 +21,8 @@ import org.bson.types.ObjectId;
  */
 public class DAO_Matiere extends DAO_Template<Matiere> {
 
-    DBCollection collection;
-    Cursor cursor = null;
+    protected DBCollection collection;
+    protected Cursor cursor = null;
 
     public DAO_Matiere(Connection conn) {
         super(conn);
