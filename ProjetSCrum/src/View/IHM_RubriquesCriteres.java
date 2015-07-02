@@ -25,10 +25,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
         //Instanciation du model de liste
         model = new DefaultListModel();
         initComponents();
-<<<<<<< HEAD
-        //On met à jour la liste
-        //updateList();
-=======
+
     }
     
     private void addToList(Critere critere) {
@@ -42,7 +39,6 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
     private List<Critere> getlistCritere()
     {
         return (List<Critere>) jList1.getModel();
->>>>>>> 54d996e7a084f84caff59ecec001d35975abf738
     }
 
     /**
