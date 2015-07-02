@@ -5,16 +5,24 @@
  */
 package Entity;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author kohadon
  */
 public class Etudiant {
-    Integer id;
+    ObjectId id;
     String prenom, nom, classe;
 
-    public Etudiant(Integer id, String prenom, String nom, String classe) {
+    public Etudiant(ObjectId id, String prenom, String nom, String classe) {
         this.id = id;
+        this.prenom = prenom;
+        this.nom = nom;
+        this.classe = classe;
+    }
+    
+    public Etudiant(String prenom, String nom, String classe) {
         this.prenom = prenom;
         this.nom = nom;
         this.classe = classe;
@@ -27,11 +35,11 @@ public class Etudiant {
         this.classe = null;        
     }
 
-    public Integer getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
