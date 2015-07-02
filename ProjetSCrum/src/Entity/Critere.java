@@ -9,6 +9,6 @@ package Entity;
  *
  * @author admin
  */
-public class Matiere {
+public class Critere {
     
 }

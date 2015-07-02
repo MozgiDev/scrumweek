@@ -87,5 +87,14 @@ public abstract class DAO_Template<T> {
      * @return T
      *
      */
-    public abstract List<T> find();
+    public abstract List<T> findById(int id);
+    
+    /**
+     *
+     * Méthode de recherche des informations
+     *
+     * @return T
+     *
+     */
+    public abstract List<T> findAll();
 }
