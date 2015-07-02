@@ -35,31 +35,28 @@ public class Etudiant {
         this.id = id;
     }
 
-    public String getFirstName() {
+    public String getPrenom() {
         return prenom;
     }
 
-    public void setFirstName(String prenom) {
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
-    public String getLastName() {
+    public String getNom() {
         return nom;
     }
 
-    public void setLastName(String nom) {
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public String getClassName() {
+    public String getClasse() {
         return classe;
     }
 
-    public void setClassName(String classe) {
+    public void setClasse(String classe) {
         this.classe = classe;
     }
-    
-    
-    
-    
+        
 }
