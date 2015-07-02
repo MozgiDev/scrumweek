@@ -106,6 +106,9 @@ public class Devoir {
         }
         return true;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return libelle + " - " + matiere + " - " + date;
+    }        
 }
