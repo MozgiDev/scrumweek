@@ -119,7 +119,7 @@ Devoir devoir;
 
     @Override
     public String toString() {
-        return "Groupe{" + "id=" + id + ", nom=" + nom + ", critere=" + rubrique + ", eleve=" + eleve + ", devoir=" + devoir + '}';
+        return "Groupe{" + "id=" + id + ", nom=" + nom + ", rubrique=" + rubrique + ", eleve=" + eleve + ", devoir=" + devoir + '}';
     }
   
 }
