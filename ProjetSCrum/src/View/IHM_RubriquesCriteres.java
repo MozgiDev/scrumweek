@@ -7,6 +7,7 @@ package View;
 
 import Entity.Critere;
 import Entity.Rubrique;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -14,11 +15,17 @@ import Entity.Rubrique;
  */
 public class IHM_RubriquesCriteres extends javax.swing.JFrame {
 
+    private DefaultListModel model = null;
+    
     /**
      * Creates new form RubriquesCriteres
      */
     public IHM_RubriquesCriteres() {
+        //Instanciation du model de liste
+        model = new DefaultListModel();
         initComponents();
+        //On met à jour la liste
+        updateList();
     }
 
     /**
