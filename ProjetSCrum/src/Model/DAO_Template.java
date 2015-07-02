@@ -87,7 +87,7 @@ public abstract class DAO_Template<T> {
      * @return T
      *
      */
-    public abstract List<T> findById(int id);
+    public abstract T findById(int id);
     
     /**
      *
