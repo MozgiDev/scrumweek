@@ -18,7 +18,7 @@ public class Devoir {
     private String libelle;
     private String matiere;
     private Date date;
-    private List<Matiere> lstMatiere;
+    private List<Critere> lstCritere;
 
     public Devoir(String libelle, String matiere, Date date) {
         this.libelle = libelle;
@@ -58,12 +58,12 @@ public class Devoir {
         this.date = date;
     }
 
-    public List getLstMatiere() {
-        return lstMatiere;
+    public List getLstCritere() {
+        return lstCritere;
     }
 
-    public void setLstMatiere(List lstMatiere) {
-        this.lstMatiere = lstMatiere;
+    public void setLstCritere(List lstCritere) {
+        this.lstCritere = lstCritere;
     }
     
     
