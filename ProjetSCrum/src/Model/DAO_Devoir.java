@@ -11,7 +11,9 @@ import com.mongodb.Cursor;
 import com.mongodb.DBObject;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -56,8 +58,34 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
     }
 
     @Override
-    public Devoir findById(int id) {
-         
+    public Devoir findById(ObjectId id) {
+        //On instancie la liste qui va contenir les clients retournés par la requête
+        List<Devoir> listDevoir = new ArrayList<Devoir>();
+
+        BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$gte", filter));
+        cursor = collection.find(query);        
+
+        try {
+            //Pour chaque enregistrement trouvé
+            while (cursor.hasNext()) {
+                //On instancie un objet
+                DBObject objet = cursor.next();
+                //On le cast en client en rentrant les parametres
+                Devoir devoir = new Devoir(
+                        objet.get("libelle").toString(),
+                        objet.get("matiere").toString(),
+                        (Date)objet.get("date"));
+                //On ajoute l'id de l'enregistrement
+                devoir.setId((int) objet.get("_id"));
+                //On ajoute la liste des Rubriques
+                devoir.setLstRubrique(devoir.parseFromDbToList((String)objet.get("lstRubrique")));
+                //On ajoute le client à la liste
+                listDevoir.add(devoir);
+            }
+        } finally {
+            cursor.close();
+        }
+        return listDevoir; 
     }
 
     @Override
@@ -65,6 +93,9 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         //On instancie la liste qui va contenir les clients retournés par la requête
         List<Devoir> listDevoir = new ArrayList<Devoir>();
 
+        BasicDBObject query = new BasicDBObject("adresse", new BasicDBObject("$gte", filter));
+        cursor = collection.find(query);
+        
         cursor = collection.find();
 
         try {
@@ -73,23 +104,20 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 //On instancie un objet
                 DBObject objet = cursor.next();
                 //On le cast en client en rentrant les parametres
-                Devoir client = new Devoir(
+                Devoir devoir = new Devoir(
                         objet.get("libelle").toString(),
                         objet.get("matiere").toString(),
-                        objet.get("date").toString());
+                        (Date)objet.get("date"));
                 //On ajoute l'id de l'enregistrement
-                client.setId(objet.get("_id").toString());
+                devoir.setId((int) objet.get("_id"));
                 //On ajoute la liste des Rubriques
-                client.setLstRubrique(objet.get("lstRubrique").);
+                devoir.setLstRubrique(devoir.parseFromDbToList((String)objet.get("lstRubrique")));
                 //On ajoute le client à la liste
-                listClient.add(client);
+                listDevoir.add(devoir);
             }
         } finally {
             cursor.close();
         }
-        return listClient;
+        return listDevoir;
     }
-
-    
-    
 }

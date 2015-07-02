@@ -8,6 +8,7 @@ package Entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class Devoir {
     
-    private int id;
+    private ObjectId id;
     private String libelle;
     private String matiere;
     private Date date;
@@ -34,11 +35,11 @@ public class Devoir {
         return lstRubrique;
     }
     
-    public int getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

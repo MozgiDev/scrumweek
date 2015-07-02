@@ -16,6 +16,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -87,7 +88,7 @@ public abstract class DAO_Template<T> {
      * @return T
      *
      */
-    public abstract T findById(int id);
+    public abstract T findById(ObjectId id);
     
     /**
      *
