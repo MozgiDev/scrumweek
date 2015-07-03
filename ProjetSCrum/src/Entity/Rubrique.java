@@ -5,6 +5,8 @@
  */
 package Entity;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +18,9 @@ import org.bson.types.ObjectId;
  *
  * @author admin
  */
-public class Rubrique implements Serializable {
-    private static final long serialVersionUID = 2105061907470199594L;
+
+public class Rubrique {
+
     private ObjectId id;
     private String libelle;
     private List<Critere> lstCritere;
@@ -53,12 +56,24 @@ public class Rubrique implements Serializable {
         this.libelle = libelle;
     }    
     
-    public List<Critere> getLstCritere() {
+   public List<Critere> getLstCritere() {
         return lstCritere;
     }
 
     public void setLstCritere(List<Critere> lstCritere) {
         this.lstCritere = lstCritere;
+    }
+        public BasicDBList mapBddCritere() {
+        BasicDBList result = new BasicDBList();
+        for (Critere critere : lstCritere) {
+            BasicDBObject dbRubriques = new BasicDBObject();
+            dbRubriques.append("_id", critere.getId());
+            dbRubriques.append("libelle", critere.getLibelle());
+            dbRubriques.append("poid", critere.getPoid());
+            result.add(dbRubriques);
+        }
+
+        return result;
     }
 
     @Override
@@ -66,7 +81,7 @@ public class Rubrique implements Serializable {
         int hash = 7;
         hash = 79 * hash + Objects.hashCode(this.id);
         hash = 79 * hash + Objects.hashCode(this.libelle);
-        hash = 79 * hash + Objects.hashCode(this.lstCritere);
+//        hash = 79 * hash + Objects.hashCode(this.lstCritere);
         return hash;
     }
 
@@ -85,9 +100,9 @@ public class Rubrique implements Serializable {
         if (!Objects.equals(this.libelle, other.libelle)) {
             return false;
         }
-        if (!Objects.equals(this.lstCritere, other.lstCritere)) {
-            return false;
-        }
+//        if (!Objects.equals(this.lstCritere, other.lstCritere)) {
+  //          return false;
+    //    }
         return true;
     }
 

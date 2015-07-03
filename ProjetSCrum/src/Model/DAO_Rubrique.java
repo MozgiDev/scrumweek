@@ -35,7 +35,7 @@ public class DAO_Rubrique extends DAO_Template<Rubrique> {
          *   On lui passe en paramètre les clés associé de ses valeurs
          */
         BasicDBObject doc = new BasicDBObject("libelle", obj.getLibelle())
-                .append("lstRubrique", obj.getLstCritere());
+                .append("lstRubrique", obj.mapBddCritere());
         
         /*
          * On insère dans la BDD
@@ -103,6 +103,7 @@ public class DAO_Rubrique extends DAO_Template<Rubrique> {
                 rubrique.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
                 rubrique.setLstCritere(rubrique.parseFromDbToList((String)objet.get("lstRubrique")));
+                
                 //On ajoute le client à la liste
       
                 listRubrique.add(rubrique);
