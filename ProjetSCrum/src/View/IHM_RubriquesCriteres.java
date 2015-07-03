@@ -20,11 +20,13 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
 
     private DefaultListModel model = null;
     private DefaultComboBoxModel cbModel = null;
+    private IHM_Devoir IHM_DevoirPapa = null;
     
     /**
      * Creates new form RubriquesCriteres
      */
-    public IHM_RubriquesCriteres() {
+    public IHM_RubriquesCriteres(IHM_Devoir pIHM_DevoirPapa) {
+        IHM_DevoirPapa = pIHM_DevoirPapa;
         //Instanciation du model de liste
         model = new DefaultListModel();
         cbModel = new DefaultComboBoxModel();
@@ -226,6 +228,10 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
             Rubrique rubrique = new Rubrique();
             rubrique.setLibelle(jTextField1.getText());
             rubrique.setLstCritere(getlistCritere());
+            
+            IHM_DevoirPapa.devoir.addToListRubrique(rubrique);
+            
+            this.setVisible(false);
         }
         else
         {
@@ -268,41 +274,6 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IHM_RubriquesCriteres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IHM_RubriquesCriteres().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

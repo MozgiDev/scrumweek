@@ -49,8 +49,8 @@ public class Rubrique {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
-    }
-
+    }    
+    
     public List<Critere> getLstCritere() {
         return lstCritere;
     }

@@ -65,7 +65,11 @@ public class Devoir {
     public List getLstRubrique() {
         return lstRubrique;
     }
-
+    public void addToListRubrique(Rubrique rub)
+    {
+        lstRubrique.add(rub);
+    }
+    
     public void setLstRubrique(List lstRubrique) {
         this.lstRubrique = lstRubrique;
     }
