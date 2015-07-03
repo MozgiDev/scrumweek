@@ -223,6 +223,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             modeljList2.addElement(jList1.getSelectedValuesList().get(i));
         }
         
+        //TODO Iterator it = jList1.getModel().
+        
         for (int i = 0; i < jList1.getSelectedIndices().length; i++) {
             int indice = jList1.getSelectedIndices()[i];
             jList1.remove(indice);
