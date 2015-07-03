@@ -28,11 +28,14 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     private JDatePickerImpl datePicker;
     protected Devoir devoir;
-
+    protected IHM_RubriquesCriteres IHM_Rubrique = null;
+    
     /**
      * Creates new form Devoir
      */
     public IHM_Devoir(Entity.Devoir pDevoir) {
+        IHM_Rubrique = new IHM_RubriquesCriteres(this);
+        
         try {
             initComponents();
             updateMatiere();
@@ -271,9 +274,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-           IHM_RubriquesCriteres window = new IHM_RubriquesCriteres();
-           
-           window.setVisible(true);
+                      
+           IHM_Rubrique.setVisible(true);
            
            
     }//GEN-LAST:event_jButton3ActionPerformed
