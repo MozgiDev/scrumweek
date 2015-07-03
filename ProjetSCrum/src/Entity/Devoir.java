@@ -23,7 +23,7 @@ public class Devoir implements Serializable{
     private String libelle;
     private String matiere;
     private Date date;
-    private List<Rubrique> lstRubrique;
+    private transient List<Rubrique> lstRubrique;
 
     public Devoir(String libelle, String matiere, Date date) {
         

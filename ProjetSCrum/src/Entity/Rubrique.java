@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import org.bson.types.ObjectId;
  *
  * @author admin
  */
-public class Rubrique {
+public class Rubrique implements Serializable {
     private ObjectId id;
     private String libelle;
     private List<Critere> lstCritere;

@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,8 +14,9 @@ import java.util.Objects;
  *
  * @author Marian
  */
-public class Critere {
+public class Critere implements Serializable {
 
+    static final long serialVersionUID = 43L;
     private int id;
     private String libelle;
     protected int poid;
