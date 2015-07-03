@@ -81,7 +81,6 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
 
         jLabel4.setText("Titre de la rubrique");
 
-        jTextField1.setText("Titre de la rubrique");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -92,7 +91,6 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
 
         jLabel6.setText("Critère");
 
-        jTextField2.setText("Critère 1");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
