@@ -18,7 +18,9 @@ import org.bson.types.ObjectId;
  *
  * @author admin
  */
+
 public class Rubrique {
+
     private ObjectId id;
     private String libelle;
     private List<Critere> lstCritere;

@@ -40,6 +40,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 .append("date", obj.getDate())
                 .append("lstRubrique", obj.mapBddRubriques());
 
+        
         /*
          * On insère dans la BDD
          */

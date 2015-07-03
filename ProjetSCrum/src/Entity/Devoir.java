@@ -19,8 +19,8 @@ import org.bson.types.ObjectId;
  *
  * @author admin
  */
-public class Devoir {
 
+public class Devoir {
     private ObjectId id;
     private String libelle;
     private String matiere;
