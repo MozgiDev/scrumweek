@@ -19,6 +19,7 @@ import org.bson.types.ObjectId;
  */
 public class Devoir implements Serializable{
     
+    private static final long serialVersionUID = 2105061907470199595L;
     private ObjectId id;
     private String libelle;
     private String matiere;

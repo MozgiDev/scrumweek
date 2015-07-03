@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class Critere implements Serializable {
 
-    static final long serialVersionUID = 43L;
+    private static final long serialVersionUID = 2105061907470199592L;
     private int id;
     private String libelle;
     protected int poid;
