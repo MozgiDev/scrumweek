@@ -5,7 +5,9 @@
  */
 package View;
 
+import Entity.Devoir;
 import Entity.Matiere;
+import Entity.Rubrique;
 import Model.DAO_Devoir;
 import Model.DAO_Matiere;
 import java.net.UnknownHostException;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import org.jdatepicker.impl.JDatePickerImpl;
 
@@ -24,14 +27,33 @@ import org.jdatepicker.impl.JDatePickerImpl;
 public class IHM_Devoir extends javax.swing.JFrame {
 
     JDatePickerImpl datePicker;
+     protected Devoir currentDevoir;
 
     /**
      * Creates new form Devoir
      */
-    public IHM_Devoir() {
+    public IHM_Devoir(Entity.Devoir devoir) {
         try {
             initComponents();
             updateMatiere();
+            
+            //si on est en modification, on charge la page de modification
+        if (!devoir.equals(null)) {
+            
+                    
+        this.setVisible(true);
+        
+        
+        currentDevoir = devoir;
+
+        matiereDevoir.setSelectedItem(devoir.getMatiere());
+        titreDevoir.setText(devoir.getLibelle());
+        jXDatePicker1.setDate(devoir.getDate());
+        jList1.setModel((DefaultListModel)devoir.getLstRubrique());
+            
+        } else {
+            
+        }
             
             
             
@@ -138,31 +160,29 @@ public class IHM_Devoir extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(matiereDevoir, 0, 279, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jButton2))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titreDevoir)
-                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton4))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jButton2))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(matiereDevoir, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(titreDevoir)
+                            .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -202,7 +222,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void matiereDevoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matiereDevoirActionPerformed
-        // Mise a jour des excursions affichées
+        // TODO
 
     }//GEN-LAST:event_matiereDevoirActionPerformed
 
@@ -227,6 +247,14 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         }
 
+        IHM_ListerDevoir window;
+        try {
+            window = new IHM_ListerDevoir();
+            this.setVisible(false);
+            window.setVisible(true);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -244,6 +272,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
            IHM_RubriquesCriteres window = new IHM_RubriquesCriteres();
            
            window.setVisible(true);
+           
+           
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -281,7 +311,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_Devoir().setVisible(true);
+                new IHM_Devoir(null).setVisible(true);
             }
         });
     }

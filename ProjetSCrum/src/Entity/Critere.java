@@ -17,8 +17,11 @@ public class Critere {
 
     private int id;
     private String libelle;
-    private int poid;
+    protected int poid;
 
+    public Critere() {
+    }
+    
     public Critere(String libelle, int poid) {
         this.libelle = libelle;
         this.poid = poid;
@@ -78,58 +81,10 @@ public class Critere {
         return true;
     }
 
-    public List<String> getAnnotation() {
-        List<String> lstAnnotation = new ArrayList<String>();
-        String ann[] = Annotation.getAnnotation(this.poid);
-        for (int i = 0; i < ann.length; i++) {
-            lstAnnotation.add(ann[i]);
-        }
-        return lstAnnotation;
-    }
-
     @Override
     public String toString() {
         return libelle + " - " + String.valueOf(poid);
     }
 
-    public static class Annotation {
-
-        //sigle + apreciation
-
-        private static String appreciation[] = {
-            "N - Non Présent",
-            "TI - Trés Insufisant",
-            "I - Insufisant",
-            "P - Passable",
-            "C - Correct",
-            "AB - Assez Bien",
-            "B - Bien",
-            "TB - Très Bien",
-            "Sup - Supace les attends"};
-        private static String appreciationForPoid1[] = {
-            "N - Non Présent",
-            "I - Insufisant",
-            "C - Correct",
-            "B - Bien",
-            "TB - Très Bien"};
-
-        private static Double notePerAnnotAndPoid[][] = {
-            {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-            {-1., 0.25, 0.25, 0.5, 0.5, 0.75, 1., 1., 2.},
-            {0.25, 0.5, 0.5, 1., 1.25, 1.5, 2., 2.5, 5.},
-            {-1., 0.75, 1., 1.5, 2., 2.25, 3., 4., 8.},
-            {0.5, 1., 1.5, 2., 2.5, 3., 4., 5., 10.},
-            {-1., 1.25, 1.75, 2.5, 3., 3.75, 5., 6., 12.},
-            {0.75, 1.5, 2.25, 3., 3.75, 4.5, 6., 7.5, 15.},
-            {1., 1.75, 2.75, 3.5, 4.5, 5.25, 7., 9., 18.},
-            {-1., 2., 3., 4., 5., 6., 8., 10., 20.}};
-
-        public static String[] getAnnotation(int poid) {
-            if (poid == 1) {
-                return appreciationForPoid1;
-            } else {
-                return appreciation;
-            }
-        }
-    }
+   
 }
