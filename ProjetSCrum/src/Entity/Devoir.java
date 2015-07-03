@@ -85,7 +85,7 @@ public class Devoir {
             BasicDBObject dbRubriques = new BasicDBObject();
             dbRubriques.append("_id", rubrique.getId());
             dbRubriques.append("libelle", rubrique.getLibelle());
-            dbRubriques.append("lstRubrique", rubrique.mapBddCritere());
+            dbRubriques.append("lstCritere", rubrique.mapBddCritere());
             result.add(dbRubriques);
         }
 
