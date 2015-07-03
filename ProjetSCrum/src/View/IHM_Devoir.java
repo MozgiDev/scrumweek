@@ -30,13 +30,16 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     private JDatePickerImpl datePicker;
     protected Devoir devoir;
+    protected Devoir newDevoir;
     protected IHM_RubriquesCriteres IHM_Rubrique = null;
+    private boolean isCreation;
     
     /**
      * Creates new form Devoir
      */
     public IHM_Devoir(Entity.Devoir pDevoir) {
         
+        newDevoir = new Devoir();
         
         try {
             initComponents();
@@ -45,6 +48,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         //si on est en modification, on charge la page de modification
         if (pDevoir != null) {
         jButton1.setText("Modifier");
+        isCreation = false;
                     
         this.setVisible(true);
         
@@ -69,7 +73,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         
         //Si on est en création d'un nouveau devoir
         } else {
-            
+            isCreation = true;
             jButton1.setText("Créer");
           
             devoir = new Devoir();
@@ -96,7 +100,11 @@ public class IHM_Devoir extends javax.swing.JFrame {
         listModel.addElement(rub);
         
         jList1.setModel(listModel);
-        devoir.addToListRubrique(rub);
+        
+        if(isCreation)
+            devoir.addToListRubrique(rub);
+        else
+            newDevoir.addToListRubrique(rub);
         
         
     }
@@ -187,6 +195,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
             }
         });
 
+        jXDatePicker1.setDate(new Date());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,12 +277,17 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_matiereDevoirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+             if (isCreation){
         String text = titreDevoir.getText();
 
         String matiere = (String) matiereDevoir.getSelectedItem();
 
+        
         Date selectedDate = jXDatePicker1.getDate();
 
+       
+        
         if (text == "" || matiere == "" || selectedDate == null) {
             JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
             } else {
@@ -288,13 +303,42 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 dao.create(devoir);
             } catch (UnknownHostException ex) {
                 Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
 
         }
 
        
         this.setVisible(false);
-          
+        }   
+             }else{
+             
+        String matiere = (String) matiereDevoir.getSelectedItem();
+        String libelle = titreDevoir.getText();
+        Date selectedDate = jXDatePicker1.getDate();
+        
+        
+        
+        newDevoir.setLibelle(libelle);
+        newDevoir.setMatiere(matiere);
+        newDevoir.setDate(selectedDate);
+     
+
+        if (matiere == "" || libelle == "" || selectedDate == null) {
+            JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
+        } else {
+            DAO_Devoir dao;
+            try {
+                dao = new DAO_Devoir(null);
+                dao.update(devoir, newDevoir);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        this.setVisible(false);
+        }
+        
+                   
+             
+             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
