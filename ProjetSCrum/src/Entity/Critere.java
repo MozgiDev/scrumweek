@@ -14,9 +14,8 @@ import java.util.Objects;
  *
  * @author Marian
  */
-public class Critere implements Serializable {
+public class Critere {
 
-    private static final long serialVersionUID = 2105061907470199592L;
     private int id;
     private String libelle;
     protected int poid;
