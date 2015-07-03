@@ -1,0 +1,22 @@
+<ion-view view-title="{{rubrique.libelle}}">
+    <ion-content class="padding">
+
+        <div class="list card" ng-repeat="critere in criteres">
+            <div class="item item-body">
+                <div>
+                    <b>{{ critere.libelle }}</b>
+
+                    <div class="on-right">
+                        <select>
+                            <option>Bien</option>
+                            <option>Insufisant</option>
+                        </select>
+                        <span>/ {{ critere.poids }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>
