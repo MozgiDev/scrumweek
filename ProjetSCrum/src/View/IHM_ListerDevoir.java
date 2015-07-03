@@ -5,6 +5,7 @@
  */
 package View;
 
+import Entity.Devoir;
 import Model.DAO_Devoir;
 import Model.DAO_Template;
 import java.net.UnknownHostException;
@@ -22,6 +23,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
 
     private DefaultListModel model = null;
     public List<Entity.Devoir> listeDevoir;
+    protected Devoir devoir = null;
     /**
      * Creates new form ListerDevoir
      */
@@ -127,7 +129,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         Integer index = jList1.getSelectedIndex();
-        Entity.Devoir devoir = listeDevoir.get(index);
+        devoir = listeDevoir.get(index);
         
         
         IHM_Devoir modifDevoir = new IHM_Devoir(devoir);

@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,7 @@ import org.bson.types.ObjectId;
  *
  * @author admin
  */
-public class Devoir {
+public class Devoir implements Serializable{
     
     private ObjectId id;
     private String libelle;

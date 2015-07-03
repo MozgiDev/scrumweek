@@ -42,9 +42,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
             initComponents();
             updateMatiere();
             
-            //si on est en modification, on charge la page de modification
+        //si on est en modification, on charge la page de modification
         if (pDevoir != null) {
-            
+        jButton1.setText("Modifier");
                     
         this.setVisible(true);
         
@@ -63,8 +63,10 @@ public class IHM_Devoir extends javax.swing.JFrame {
         }
         jList1.setModel(listeModel);
         
+        //Si on est en création d'un nouveau devoir
         } else {
             
+            jButton1.setText("Créer");
             devoir = new Devoir();
             
         }
@@ -90,6 +92,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
         
         jList1.setModel(listModel);
         devoir.addToListRubrique(rub);
+        
+        
     }
     
     /**
@@ -270,7 +274,12 @@ public class IHM_Devoir extends javax.swing.JFrame {
             DAO_Devoir dao;
             try {
                 dao = new DAO_Devoir(null);
-                Entity.Devoir devoir = new Entity.Devoir(text, matiere, selectedDate);
+                //Entity.Devoir devoir = new Entity.Devoir(text, matiere, selectedDate);
+                
+                this.devoir.setLibelle(text);
+                this.devoir.setMatiere(matiere);
+                this.devoir.setDate(selectedDate);
+                
                 dao.create(devoir);
             } catch (UnknownHostException ex) {
                 Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,8 +311,6 @@ public class IHM_Devoir extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
            IHM_Rubrique = new IHM_RubriquesCriteres(this);  
            IHM_Rubrique.setVisible(true);
-           
-           
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
