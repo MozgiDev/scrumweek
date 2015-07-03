@@ -315,14 +315,6 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         }
 
-        IHM_ListerDevoir window;
-        try {
-            window = new IHM_ListerDevoir();
-            this.setVisible(false);
-            window.setVisible(true);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         try {
             IHM_ListerDevoir.updateListeDevoir();
@@ -355,6 +347,13 @@ public class IHM_Devoir extends javax.swing.JFrame {
             } catch (UnknownHostException ex) {
                 Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            try {
+            IHM_ListerDevoir.updateListeDevoir();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
         this.setVisible(false);
         }
         
