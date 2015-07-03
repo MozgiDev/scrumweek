@@ -7,6 +7,7 @@ package View;
 
 import Model.DAO_Devoir;
 import Model.DAO_Etudiant;
+import java.awt.Component;
 import static java.lang.System.out;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -102,6 +103,11 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -216,21 +222,12 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         for (int i = 0; i < jList1.getSelectedValuesList().size(); i++) {
             modeljList2.addElement(jList1.getSelectedValuesList().get(i));
         }
-
-        out.println("length= " + jList1.getSelectedIndices().length);
-
-        for (int i = 0; i <= jList1.getSelectedIndices().length; i++) {
-            out.println("length in for= " + jList1.getSelectedIndices().length);
-            out.println("i= " + i);
-            out.println("indice= " + jList1.getSelectedIndices()[i]);
-            int j = jList1.getSelectedIndices()[i];
-                modeljList1.remove(j);
-            if (i>0) {
-                modeljList1.remove(j+2);
-            }
-    
+        
+        for (int i = 0; i < jList1.getSelectedIndices().length; i++) {
+            int indice = jList1.getSelectedIndices()[i];
+            jList1.remove(indice);
         }
-        out.println("_______________________________");
+        
         jList2.setModel(modeljList2);
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -244,6 +241,10 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         }
         jList1.setModel(modeljList1);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

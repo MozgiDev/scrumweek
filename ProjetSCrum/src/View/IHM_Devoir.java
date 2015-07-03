@@ -32,14 +32,22 @@ public class IHM_Devoir extends javax.swing.JFrame {
     protected Devoir devoir;
     protected Devoir newDevoir;
     protected IHM_RubriquesCriteres IHM_Rubrique = null;
+
     private boolean isCreation;
+
+    protected IHM_ListerDevoir IHM_ListerDevoir = null;
+
     
     /**
      * Creates new form Devoir
      */
-    public IHM_Devoir(Entity.Devoir pDevoir) {
+    public IHM_Devoir(Entity.Devoir pDevoir, IHM_ListerDevoir pIHM_ListerDevoir) {
         
+
         newDevoir = new Devoir();
+
+        IHM_ListerDevoir = pIHM_ListerDevoir;
+
         
         try {
             initComponents();
@@ -307,6 +315,20 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         }
 
+        IHM_ListerDevoir window;
+        try {
+            window = new IHM_ListerDevoir();
+            this.setVisible(false);
+            window.setVisible(true);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            IHM_ListerDevoir.updateListeDevoir();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
         this.setVisible(false);
         }   
@@ -356,41 +378,6 @@ public class IHM_Devoir extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IHM_Devoir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IHM_Devoir(null).setVisible(true);
-            }
-        });
-    }
 
     public void updateMatiere() throws UnknownHostException {
         matiereDevoir.removeAllItems();

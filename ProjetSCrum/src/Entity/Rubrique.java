@@ -17,6 +17,7 @@ import org.bson.types.ObjectId;
  * @author admin
  */
 public class Rubrique implements Serializable {
+    private static final long serialVersionUID = 2105061907470199594L;
     private ObjectId id;
     private String libelle;
     private List<Critere> lstCritere;
