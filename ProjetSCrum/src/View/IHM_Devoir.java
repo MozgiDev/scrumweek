@@ -277,7 +277,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         if (text == "" || matiere == "" || selectedDate == null) {
             JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
-        } else {
+            } else {
             DAO_Devoir dao;
             try {
                 dao = new DAO_Devoir(null);
@@ -294,6 +294,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         }
 
+<<<<<<< HEAD
         IHM_ListerDevoir window;
         try {
             window = new IHM_ListerDevoir();
@@ -308,17 +309,17 @@ public class IHM_Devoir extends javax.swing.JFrame {
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
         }
+=======
+       
+        this.setVisible(false);
+          
+>>>>>>> 945022a4b8b2f978fe9febbf570583509848fb7b
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IHM_ListerDevoir window;
-        try {
-            window = new IHM_ListerDevoir();
+        
             this.setVisible(false);
-            window.setVisible(true);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
-        }
+          
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
