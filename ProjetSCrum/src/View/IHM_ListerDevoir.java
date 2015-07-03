@@ -116,7 +116,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_ajouter_devoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ajouter_devoirActionPerformed
-        IHM_Devoir window = new IHM_Devoir();
+        IHM_Devoir window = new IHM_Devoir(null);
         window.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bt_ajouter_devoirActionPerformed
@@ -124,7 +124,10 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         Integer index = jList1.getSelectedIndex();
         Entity.Devoir devoir = listeDevoir.get(index);
-        IHM_ModifierDevoir modifDevoir = new IHM_ModifierDevoir(devoir);
+        
+        
+        IHM_Devoir modifDevoir = new IHM_Devoir(devoir);
+        
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged

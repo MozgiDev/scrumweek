@@ -38,7 +38,12 @@ public class IHM_ModifierDevoir extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         currentDevoir = devoir;
-
+        
+        String matiere = (String) matiereDevoir.getSelectedItem();
+        String libelle = txt_nomDevoir.getText();
+        Date selectedDate = jXDatePicker1.getDate();
+        
+        
         matiereDevoir.setSelectedItem(devoir.getMatiere());
         txt_nomDevoir.setText(devoir.getLibelle());
         jXDatePicker1.setDate(devoir.getDate());
