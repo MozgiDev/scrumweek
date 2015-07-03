@@ -55,6 +55,10 @@ public class IHM_Devoir extends javax.swing.JFrame {
         titreDevoir.setText(devoir.getLibelle());
         jXDatePicker1.setDate(devoir.getDate());
         
+        jLabel3.setText("Modification d'un devoir");
+        jButton1.setText("Modifier");
+        
+        
         Iterator it = devoir.getLstRubrique().iterator();
         DefaultListModel listeModel = new DefaultListModel();
         while(it.hasNext())
@@ -67,8 +71,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
         } else {
             
             jButton1.setText("Créer");
+          
             devoir = new Devoir();
-            
+           
         }
             
             
@@ -132,7 +137,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel3.setText("Création devoir : ");
@@ -157,7 +162,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Quitter");
+        jButton2.setText("Annuler");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
