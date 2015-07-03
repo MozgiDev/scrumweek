@@ -7,6 +7,7 @@ package View;
 
 import Entity.Critere;
 import Entity.Rubrique;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -60,12 +61,14 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
     
     private List<Critere> getlistCritere()
     {
+        List<Critere> lstCritere = new ArrayList<Critere>();
+        
         for(int i = 0; i < jList1.getModel().getSize(); i++)
         {
-            jList1.getModel().
+            lstCritere.add((Critere) jList1.getModel().getElementAt(i));
         }
         
-        return (List<Critere>) jList1;
+        return lstCritere;
     }
 
     /**
@@ -234,7 +237,7 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
             rubrique.setLibelle(jTextField1.getText());
             rubrique.setLstCritere(getlistCritere());
             
-            IHM_DevoirPapa.devoir.addToListRubrique(rubrique);
+            IHM_DevoirPapa.addToListRubrique(rubrique);
             
             this.setVisible(false);
         }

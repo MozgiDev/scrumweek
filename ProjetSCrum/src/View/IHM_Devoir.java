@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import org.jdatepicker.impl.JDatePickerImpl;
 
 /**
@@ -68,6 +69,21 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     }
 
+    protected void addToListRubrique(Rubrique rub)
+    {
+        ListModel model = jList1.getModel();
+        DefaultListModel listModel = new DefaultListModel();
+        
+        for(int i = 0; i < model.getSize(); i++)
+        {
+            listModel.addElement(model.getElementAt(i));
+        }
+        listModel.addElement(rub);
+        
+        jList1.setModel(listModel);
+        devoir.addToListRubrique(rub);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

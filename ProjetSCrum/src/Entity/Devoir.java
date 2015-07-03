@@ -25,6 +25,8 @@ public class Devoir {
     private List<Rubrique> lstRubrique;
 
     public Devoir(String libelle, String matiere, Date date) {
+        
+        lstRubrique = new ArrayList<Rubrique>();
         this.libelle = libelle;
         this.matiere = matiere;
         this.date = date;
@@ -32,7 +34,7 @@ public class Devoir {
     
     public Devoir()
     {
-        
+        lstRubrique = new ArrayList<Rubrique>();
     }
     
     public ObjectId getId() {
