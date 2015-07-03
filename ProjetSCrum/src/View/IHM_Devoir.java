@@ -5,7 +5,9 @@
  */
 package View;
 
+import Entity.Devoir;
 import Entity.Matiere;
+import Entity.Rubrique;
 import Model.DAO_Devoir;
 import Model.DAO_Matiere;
 import java.net.UnknownHostException;
@@ -14,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import org.jdatepicker.impl.JDatePickerImpl;
 
@@ -24,14 +27,33 @@ import org.jdatepicker.impl.JDatePickerImpl;
 public class IHM_Devoir extends javax.swing.JFrame {
 
     JDatePickerImpl datePicker;
+     protected Devoir currentDevoir;
 
     /**
      * Creates new form Devoir
      */
-    public IHM_Devoir() {
+    public IHM_Devoir(Entity.Devoir devoir) {
         try {
             initComponents();
             updateMatiere();
+            
+            //si on est en modification, on charge la page de modification
+        if (!devoir.equals(null)) {
+            
+                    
+        this.setVisible(true);
+        
+        
+        currentDevoir = devoir;
+
+        matiereDevoir.setSelectedItem(devoir.getMatiere());
+        titreDevoir.setText(devoir.getLibelle());
+        jXDatePicker1.setDate(devoir.getDate());
+        jList1.setModel((DefaultListModel)devoir.getLstRubrique());
+            
+        } else {
+            
+        }
             
             
             
@@ -195,7 +217,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void matiereDevoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matiereDevoirActionPerformed
-        // Mise a jour des excursions affichées
+        // TODO
 
     }//GEN-LAST:event_matiereDevoirActionPerformed
 
@@ -280,7 +302,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_Devoir().setVisible(true);
+                new IHM_Devoir(null).setVisible(true);
             }
         });
     }
