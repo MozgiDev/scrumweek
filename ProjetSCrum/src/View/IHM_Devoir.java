@@ -13,6 +13,7 @@ import Model.DAO_Matiere;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,14 +36,14 @@ public class IHM_Devoir extends javax.swing.JFrame {
      * Creates new form Devoir
      */
     public IHM_Devoir(Entity.Devoir pDevoir) {
-        IHM_Rubrique = new IHM_RubriquesCriteres(this);
+        
         
         try {
             initComponents();
             updateMatiere();
             
             //si on est en modification, on charge la page de modification
-        if (devoir != null) {
+        if (pDevoir != null) {
             
                     
         this.setVisible(true);
@@ -53,8 +54,15 @@ public class IHM_Devoir extends javax.swing.JFrame {
         matiereDevoir.setSelectedItem(devoir.getMatiere());
         titreDevoir.setText(devoir.getLibelle());
         jXDatePicker1.setDate(devoir.getDate());
-        jList1.setModel((DefaultListModel)devoir.getLstRubrique());
-            
+        
+        Iterator it = devoir.getLstRubrique().iterator();
+        DefaultListModel listeModel = new DefaultListModel();
+        while(it.hasNext())
+        {
+            listeModel.addElement(it);
+        }
+        jList1.setModel(listeModel);
+        
         } else {
             
             devoir = new Devoir();
@@ -68,7 +76,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         }
 
     }
-
+    
     protected void addToListRubrique(Rubrique rub)
     {
         ListModel model = jList1.getModel();
@@ -234,7 +242,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -292,7 +300,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-                      
+           IHM_Rubrique = new IHM_RubriquesCriteres(this);  
            IHM_Rubrique.setVisible(true);
            
            
