@@ -294,7 +294,6 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         }
 
-<<<<<<< HEAD
         IHM_ListerDevoir window;
         try {
             window = new IHM_ListerDevoir();
@@ -309,11 +308,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
         }
-=======
        
         this.setVisible(false);
           
->>>>>>> 945022a4b8b2f978fe9febbf570583509848fb7b
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
