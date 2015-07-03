@@ -41,7 +41,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
             updateMatiere();
             
             //si on est en modification, on charge la page de modification
-        if (!devoir.equals(null)) {
+        if (devoir != null) {
             
                     
         this.setVisible(true);
@@ -55,6 +55,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
         jList1.setModel((DefaultListModel)devoir.getLstRubrique());
             
         } else {
+            
+            devoir = new Devoir();
             
         }
             

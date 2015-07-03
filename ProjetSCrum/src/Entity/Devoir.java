@@ -30,6 +30,11 @@ public class Devoir {
         this.date = date;
     }
     
+    public Devoir()
+    {
+        
+    }
+    
     public ObjectId getId() {
         return id;
     }

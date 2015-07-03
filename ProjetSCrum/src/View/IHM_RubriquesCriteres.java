@@ -60,7 +60,12 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
     
     private List<Critere> getlistCritere()
     {
-        return (List<Critere>) jList1.getModel();
+        for(int i = 0; i < jList1.getModel().getSize(); i++)
+        {
+            jList1.getModel().
+        }
+        
+        return (List<Critere>) jList1;
     }
 
     /**
