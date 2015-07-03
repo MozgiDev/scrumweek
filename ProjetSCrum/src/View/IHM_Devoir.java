@@ -26,13 +26,13 @@ import org.jdatepicker.impl.JDatePickerImpl;
  */
 public class IHM_Devoir extends javax.swing.JFrame {
 
-    JDatePickerImpl datePicker;
-     protected Devoir currentDevoir;
+    private JDatePickerImpl datePicker;
+    protected Devoir devoir;
 
     /**
      * Creates new form Devoir
      */
-    public IHM_Devoir(Entity.Devoir devoir) {
+    public IHM_Devoir(Entity.Devoir pDevoir) {
         try {
             initComponents();
             updateMatiere();
@@ -44,7 +44,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         this.setVisible(true);
         
         
-        currentDevoir = devoir;
+        devoir = pDevoir;
 
         matiereDevoir.setSelectedItem(devoir.getMatiere());
         titreDevoir.setText(devoir.getLibelle());
@@ -117,7 +117,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         jLabel4.setText("Date du devoir : ");
 
-        jButton1.setText("Créer");
+        jButton1.setText("Valider");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
