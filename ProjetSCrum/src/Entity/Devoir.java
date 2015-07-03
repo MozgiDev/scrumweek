@@ -5,6 +5,8 @@
  */
 package Entity;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -17,8 +19,8 @@ import org.bson.types.ObjectId;
  *
  * @author admin
  */
-public class Devoir implements Serializable{
-    
+public class Devoir {
+
     private ObjectId id;
     private String libelle;
     private String matiere;
@@ -26,18 +28,17 @@ public class Devoir implements Serializable{
     private transient List<Rubrique> lstRubrique;
 
     public Devoir(String libelle, String matiere, Date date) {
-        
+
         lstRubrique = new ArrayList<Rubrique>();
         this.libelle = libelle;
         this.matiere = matiere;
         this.date = date;
     }
-    
-    public Devoir()
-    {
+
+    public Devoir() {
         lstRubrique = new ArrayList<Rubrique>();
     }
-    
+
     public ObjectId getId() {
         return id;
     }
@@ -73,11 +74,24 @@ public class Devoir implements Serializable{
     public List getLstRubrique() {
         return lstRubrique;
     }
-    public void addToListRubrique(Rubrique rub)
-    {
+
+    public void addToListRubrique(Rubrique rub) {
         lstRubrique.add(rub);
     }
-    
+
+    public BasicDBList mapBddRubriques() {
+        BasicDBList result = new BasicDBList();
+        for (Rubrique rubrique : lstRubrique) {
+            BasicDBObject dbRubriques = new BasicDBObject();
+            dbRubriques.append("_id", rubrique.getId());
+            dbRubriques.append("libelle", rubrique.getLibelle());
+            dbRubriques.append("lstRubrique", rubrique.mapBddCritere());
+            result.add(dbRubriques);
+        }
+
+        return result;
+    }
+
     public void setLstRubrique(List lstRubrique) {
         this.lstRubrique = lstRubrique;
     }
@@ -122,6 +136,6 @@ public class Devoir implements Serializable{
 
     @Override
     public String toString() {
-        return libelle + " - " + matiere + " - " + DateFormat.getDateInstance( DateFormat.MEDIUM ).format(date);
-    }        
+        return libelle + " - " + matiere + " - " + DateFormat.getDateInstance(DateFormat.MEDIUM).format(date);
+    }
 }

@@ -38,7 +38,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         BasicDBObject doc = new BasicDBObject("libelle", obj.getLibelle())
                 .append("matiere", obj.getMatiere())
                 .append("date", obj.getDate())
-                .append("lstRubrique", obj.getLstRubrique());
+                .append("lstRubrique", obj.mapBddRubriques());
 
         /*
          * On insère dans la BDD
