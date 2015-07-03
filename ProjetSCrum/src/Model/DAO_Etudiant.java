@@ -7,6 +7,7 @@ package Model;
 
 import Entity.Etudiant;
 import com.mongodb.BasicDBObject;
+import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
 import java.net.UnknownHostException;
@@ -19,12 +20,18 @@ import org.bson.types.ObjectId;
  *
  * @author kohadon
  */
-public class DAO_Etudiant extends DAO_Template<Etudiant>{
+public class DAO_Etudiant extends DAO_Template<Etudiant> {
 
     Cursor cursor;
+
     public DAO_Etudiant(Connection conn) throws UnknownHostException {
         super(conn);
-        cursor = null;
+        if (db.collectionExists("etudiant")) {
+            collection = db.getCollection("etudiant");
+        } else {
+            DBObject options = BasicDBObjectBuilder.start().add("capped", false).add("size", 2000000000l).get();
+            collection = db.createCollection("etudiant", options);
+        }
     }
 
     @Override
@@ -72,7 +79,7 @@ public class DAO_Etudiant extends DAO_Template<Etudiant>{
                         objet.get("nom").toString(),
                         objet.get("classe").toString()
                 );
-                
+
                 //On ajoute l'id de l'enregistrement
                 etudiant.setId((ObjectId) objet.get("_id"));
                 //On ajoute le client à la liste
@@ -86,11 +93,11 @@ public class DAO_Etudiant extends DAO_Template<Etudiant>{
 
     @Override
     public Etudiant findById(ObjectId id) {
-                //On instancie la liste qui va contenir les clients retournés par la requête
+        //On instancie la liste qui va contenir les clients retournés par la requête
         List<Etudiant> listEtudiant = new ArrayList<>();
 
         BasicDBObject query = new BasicDBObject("_id", id);
-        cursor = collection.find(query);        
+        cursor = collection.find(query);
 
         try {
             //Pour chaque enregistrement trouvé
@@ -112,6 +119,6 @@ public class DAO_Etudiant extends DAO_Template<Etudiant>{
         } finally {
             cursor.close();
         }
-        return listEtudiant.get(0); 
+        return listEtudiant.get(0);
     }
 }

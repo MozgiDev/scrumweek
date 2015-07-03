@@ -5,7 +5,17 @@
  */
 package View;
 
-import javax.swing.*;
+import Model.DAO_Devoir;
+import Model.DAO_Etudiant;
+import static java.lang.System.out;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
 /**
  *
@@ -13,11 +23,30 @@ import javax.swing.*;
  */
 public class IHM_CreationGroupe extends javax.swing.JFrame {
 
+    private DefaultListModel modeljList1 = null;
+    private DefaultListModel modeljList2 = null;
+    public List<Entity.Etudiant> listeEtudiant;
+
     /**
      * Creates new form IHM_CreationGroupe
      */
-    public IHM_CreationGroupe() {
+    public IHM_CreationGroupe() throws UnknownHostException {
         initComponents();
+        modeljList1 = new DefaultListModel();
+        modeljList2 = new DefaultListModel();
+        updateListeEtudiant();
+
+    }
+
+    public void updateListeEtudiant() throws UnknownHostException {
+        listeEtudiant = new ArrayList<Entity.Etudiant>();
+        DAO_Etudiant dao = new DAO_Etudiant(null);
+        listeEtudiant = dao.findAll();
+        modeljList1.clear();
+        for (int i = 0; i < listeEtudiant.size(); i++) {
+            modeljList1.addElement(listeEtudiant.get(i));
+        }
+        jList1.setModel(modeljList1);
     }
 
     /**
@@ -54,6 +83,11 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         jButton1.setText(">");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -65,6 +99,11 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         jLabel4.setText("Elèves du groupe");
 
         jButton2.setText("<");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setText("OK");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +184,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -155,7 +194,12 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        if (!jTextField1.getText().equals("")) {
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez entrer un nom à votre groupe, et y intégrer au moins un élève.");
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -163,13 +207,48 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-/**
- * @param args the command line arguments
- */
-public static void main(String args[]) {
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        //DefaultListModel model2 = new DefaultListModel();
+        for (int i = 0; i < jList1.getSelectedValuesList().size(); i++) {
+            modeljList2.addElement(jList1.getSelectedValuesList().get(i));
+        }
+
+        out.println("length= " + jList1.getSelectedIndices().length);
+
+        for (int i = 0; i <= jList1.getSelectedIndices().length; i++) {
+            out.println("length in for= " + jList1.getSelectedIndices().length);
+            out.println("i= " + i);
+            out.println("indice= " + jList1.getSelectedIndices()[i]);
+            int j = jList1.getSelectedIndices()[i];
+                modeljList1.remove(j);
+            if (i>0) {
+                modeljList1.remove(j+2);
+            }
+    
+        }
+        out.println("_______________________________");
+        jList2.setModel(modeljList2);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        for (int i = 0; i < jList2.getSelectedValuesList().size(); i++) {
+            modeljList1.addElement(jList2.getSelectedValuesList().get(i));
+        }
+
+        for (int i = 0; i < jList2.getSelectedIndices().length; i++) {
+            modeljList1.remove(jList2.getSelectedIndices()[i]);
+        }
+        jList1.setModel(modeljList1);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -180,39 +259,32 @@ public static void main(String args[]) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
-
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(IHM_CreationGroupe.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM_CreationGroupe().setVisible(true);
+                try {
+                    new IHM_CreationGroupe().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(IHM_CreationGroupe.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

@@ -66,5 +66,12 @@ public class Etudiant {
     public void setClasse(String classe) {
         this.classe = classe;
     }
+
+    @Override
+    public String toString() {
+        return prenom + ", " + nom;
+    }
+    
+    
         
 }
