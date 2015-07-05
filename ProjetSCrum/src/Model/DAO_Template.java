@@ -30,23 +30,27 @@ public abstract class DAO_Template<T> {
     protected DBCollection collection;
 
     public DAO_Template(Connection conn) throws UnknownHostException {
+        // Enable MongoDB logging in general
+        System.setProperty("DEBUG.MONGO", "true");
+
+        // Enable DB operation tracing
+        System.setProperty("DB.TRACE", "true");
 
        // try {
-            //this.mongoClient = new MongoClient("172.16.1.20", 27017);
-            this.mongoClient = new MongoClient("127.0.0.1", 27017);
-            db = mongoClient.getDB("test");
+        //this.mongoClient = new MongoClient("172.16.1.20", 27017);
+        this.mongoClient = new MongoClient("127.0.0.1", 27017);
+        db = mongoClient.getDB("test");
 
-            if (db.collectionExists("collection")) {
-                collection = db.getCollection("collection");
-            } else {
-                DBObject options = BasicDBObjectBuilder.start().add("capped", false).add("size", 2000000000l).get();
-                collection = db.createCollection("collection", options);
-            }
+        if (db.collectionExists("collection")) {
+            collection = db.getCollection("collection");
+        } else {
+            DBObject options = BasicDBObjectBuilder.start().add("capped", false).add("size", 2000000000l).get();
+            collection = db.createCollection("collection", options);
+        }
 
        // } catch (Exception ex) {
-         //   Logger.getLogger(DAO_Template.class.getName()).log(Level.SEVERE, null, ex);
+        //   Logger.getLogger(DAO_Template.class.getName()).log(Level.SEVERE, null, ex);
         //}
-
     }
 
     /**

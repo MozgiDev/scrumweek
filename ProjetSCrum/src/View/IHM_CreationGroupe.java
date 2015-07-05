@@ -215,7 +215,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
                 lstEdudiant.add(unEtudiant);
             }
             Groupe grp = new Groupe(jTextField1.getText().toString(),lstEdudiant);
-            List<Groupe> lstGroupe = new ArrayList<Groupe>();
+            List<Groupe> lstGroupe = new ArrayList<Groupe>(); //a debug
             lstGroupe.add(grp);
             IHM_DevoirPapa.newDevoir.setLstGroupe(lstGroupe);
             this.setVisible(false);

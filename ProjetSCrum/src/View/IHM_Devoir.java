@@ -58,8 +58,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 jButton1.setText("Modifier");
                 jButton5.setVisible(true);
                 isCreation = false;
-                //this.setVisible(true);
-                devoir = pDevoir;
+
+                
+                devoir = new Devoir(pDevoir);
                 newDevoir = new Devoir(pDevoir);
                 
                 matiereDevoir.setSelectedItem(devoir.getMatiere());
@@ -96,11 +97,13 @@ public class IHM_Devoir extends javax.swing.JFrame {
         listModel.addElement(rub);
 
         jList1.setModel(listModel);
-
+        out.println("lol");
         if (isCreation) {
             newDevoir.addToListRubrique(rub);
+            out.println("lol1");
         } else {
             newDevoir.addToListRubrique(rub);
+            out.println("lol2");
         }
     }
 
@@ -316,8 +319,6 @@ public class IHM_Devoir extends javax.swing.JFrame {
                     this.newDevoir.setLibelle(titreDevoir.getText());
                     this.newDevoir.setMatiere((String) matiereDevoir.getSelectedItem());
                     this.newDevoir.setDate(jXDatePicker1.getDate());
-                    out.println("old: " + devoir.getLibelle());
-                    out.println("new: " + newDevoir.getLibelle());
 
                     dao.update(devoir, newDevoir);
                 }

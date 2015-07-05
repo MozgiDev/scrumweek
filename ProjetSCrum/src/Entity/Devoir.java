@@ -115,6 +115,9 @@ public class Devoir {
     public void addToListRubrique(Rubrique rub) {
         lstRubrique.add(rub);
     }
+    public void addToListGroupe(Groupe grp) {
+        lstGroupe.add(grp);
+    }
 
     public List<Groupe> getLstGroupe() {
         return lstGroupe;

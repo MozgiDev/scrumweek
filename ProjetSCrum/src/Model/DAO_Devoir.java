@@ -7,12 +7,13 @@ package Model;
 
 import Entity.Critere;
 import Entity.Devoir;
+import Entity.Etudiant;
+import Entity.Groupe;
 import Entity.Rubrique;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import static java.lang.System.out;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -72,18 +73,14 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 .append("date", newDevoir.getDate())
                 .append("lstRubrique", newDevoir.mapBddRubriques())
                 .append("lstGroupe", newDevoir.mapBddGroupes());
+
         //On crée les parametres de la requete
         BasicDBObject query = new BasicDBObject();
-        query.put("_id", oldDevoir.getId());
         query.put("libelle", oldDevoir.getLibelle());
         query.put("matiere", oldDevoir.getMatiere());
         query.put("date", oldDevoir.getDate());
-        query.put("lstRubrique", oldDevoir.mapBddRubriques());
-        query.put("lstGroupe", oldDevoir.mapBddGroupes());
+
         //On met à jour l'enregistrement
-        out.println("lol");
-        out.println("old: "+oldDevoir.getLibelle());
-        out.println("new: "+newDevoir.getLibelle());
         collection.update(query, newDoc);
 
         return true;
@@ -141,10 +138,11 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
 
-                BasicDBList listBDRubrique = (BasicDBList) objet.get("lstRubrique");
-                Iterator itListBDRubrique = listBDRubrique.iterator();
-
                 List<Rubrique> lstRubrique = new ArrayList<Rubrique>();
+                BasicDBList listBDRubrique = (BasicDBList) objet.get("lstRubrique");
+                
+                if(listBDRubrique != null){
+                Iterator itListBDRubrique = listBDRubrique.iterator();
 
                 while (itListBDRubrique.hasNext()) {
                     List<Critere> lstCritere = new ArrayList<Critere>();
@@ -164,7 +162,33 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                             lstCritere);
                     lstRubrique.add(uneRubrique);
                 }
-                devoir.setLstRubrique(lstRubrique);
+                devoir.setLstRubrique(lstRubrique);//ajout list Rubrique
+
+                List<Groupe> lstGroupe = new ArrayList<Groupe>();
+                BasicDBList listBDGroupe = (BasicDBList) objet.get("lstGroupe");
+                Iterator itListBDGroupe = listBDGroupe.iterator();
+
+                while (itListBDGroupe.hasNext()) {
+                    List<Etudiant> lstEtudiant = new ArrayList<Etudiant>();
+                    BasicDBObject objectEtudiant = (BasicDBObject) itListBDGroupe.next();
+                    BasicDBList listBDEtudiant = (BasicDBList) objectEtudiant.get("lstEtudiant");
+                    Iterator itListBDEtudiant = listBDEtudiant.iterator();
+                    while (itListBDEtudiant.hasNext()) {//On ajoute la liste des Critere
+                        BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDEtudiant.next();
+                        Etudiant unEtudiant = new Etudiant(
+                                aDBObjectCritere.get("nom").toString(),
+                                aDBObjectCritere.get("prenom").toString(),
+                                aDBObjectCritere.get("classe").toString());
+
+                        lstEtudiant.add(unEtudiant);
+                    }
+                    Groupe unGroupe = new Groupe(
+                            objectEtudiant.get("libelle").toString(),
+                            lstEtudiant);
+                    lstGroupe.add(unGroupe);
+                }
+                devoir.setLstGroupe(lstGroupe);
+                }
                 //On ajoute le client à la liste
                 listDevoir.add(devoir);
             }

@@ -26,7 +26,7 @@ List<Etudiant> lstEtudiant;
 
     public Groupe() 
     {
-        
+        lstEtudiant = new ArrayList<Etudiant>();
     }
 
     public Groupe(String libelle, List<Etudiant> lstEtudiant) {
