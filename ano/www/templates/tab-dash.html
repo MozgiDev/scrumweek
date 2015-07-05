@@ -1,0 +1,28 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider">Devoir du jour</div>
+      <div class="item item-body">
+        <div>
+          {{devoir.libelle}}
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Choix du groupe &agrave; noter</div>
+      <div class="item item-body">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Choix du groupe
+          </div>
+          <select ng-options="groupe as groupe.libelle for groupe in groupes"
+                  ng-model="cbx.groupe"
+                  ng-change="updateGroupe()">
+
+          </select>
+        </label>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

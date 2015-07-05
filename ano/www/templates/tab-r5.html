@@ -1,0 +1,128 @@
+<ion-view view-title="{{rubrique.libelle}}">
+    <ion-content class="padding">
+
+        <div class="list card" ng-if="criteres[0]">
+            <div class="item item-body">
+                <div>
+                    <b>{{ criteres[0].libelle }}</b>
+
+                    <div class="on-right cbxCritere0" ng-if="criteres[0].poid > 1">
+                        <select ng-options="app as app.value for app in appreciationsFull.lstAppreciation"
+                                ng-model="cbx.appreciation0"
+                                ng-change="updateNote0({{criteres[0]}})">
+                        </select>
+                        <span>/ {{ criteres[0].poid }}</span>
+                    </div>
+
+                    <div class="on-right cbxCritere0" ng-if="criteres[0].poid == 1">
+                        <select ng-options="app as app.value for app in appreciations1.lstAppreciation"
+                                ng-model="cbx.appreciation0"
+                                ng-change="updateNote0({{criteres[0]}})">
+                        </select>
+                        <span>/ {{ criteres[0].poid }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list card" ng-if="criteres[1]">
+            <div class="item item-body">
+                <div>
+                    <b>{{ criteres[1].libelle }}</b>
+
+                    <div class="on-right cbxCritere1" ng-if="criteres[1].poid > 1">
+                        <select ng-options="app as app.value for app in appreciationsFull.lstAppreciation"
+                                ng-model="cbx.appreciation1"
+                                ng-change="updateNote1({{criteres[1]}})">
+                        </select>
+                        <span>/ {{ criteres[1].poid }}</span>
+                    </div>
+
+                    <div class="on-right cbxCritere1" ng-if="criteres[1].poid == 1">
+                        <select ng-options="app as app.value for app in appreciations1.lstAppreciation"
+                                ng-model="cbx.appreciation1"
+                                ng-change="updateNote1({{criteres[1]}})">
+                        </select>
+                        <span>/ {{ criteres[1].poid }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list card" ng-if="criteres[2]">
+            <div class="item item-body">
+                <div>
+                    <b>{{ criteres[2].libelle }}</b>
+
+                    <div class="on-right cbxCritere2" ng-if="criteres[2].poid > 1">
+                        <select ng-options="app as app.value for app in appreciationsFull.lstAppreciation"
+                                ng-model="cbx.appreciation2"
+                                ng-change="updateNote2({{criteres[2]}})">
+                        </select>
+                        <span>/ {{ criteres[2].poid }}</span>
+                    </div>
+
+                    <div class="on-right {{cbxCritere2}}" ng-if="criteres[2].poid == 1">
+                        <select ng-options="app as app.value for app in appreciations1.lstAppreciation"
+                                ng-model="cbx.appreciation2"
+                                ng-change="updateNote2({{criteres[2]}})">
+                        </select>
+                        <span>/ {{ criteres[2].poid }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="list card" ng-if="criteres[3]">
+            <div class="item item-body">
+                <div>
+                    <b>{{ criteres[3].libelle }}</b>
+
+                    <div class="on-right cbxCritere3" ng-if="criteres[3].poid > 1">
+                        <select ng-options="app as app.value for app in appreciationsFull.lstAppreciation"
+                                ng-model="cbx.appreciation3"
+                                ng-change="updateNote3({{criteres[3]}})">
+                        </select>
+                        <span>/ {{ criteres[3].poid }}</span>
+                    </div>
+
+                    <div class="on-right cbxCritere3" ng-if="criteres[3].poid == 1">
+                        <select ng-options="app as app.value for app in appreciations1.lstAppreciation"
+                                ng-model="cbx.appreciation"
+                                ng-change="updateNote3({{criteres[3]}})">
+                        </select>
+                        <span>/ {{ criteres[3].poid }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list card" ng-if="criteres[4]">
+            <div class="item item-body">
+                <div>
+                    <b>{{ criteres[4].libelle }}</b>
+
+                    <div class="on-right cbxCritere4" ng-if="criteres[4].poid > 1">
+                        <select ng-options="app as app.value for app in appreciationsFull.lstAppreciation"
+                                ng-model="cbx.appreciation4"
+                                ng-change="updateNote4({{criteres[4]}})">
+                        </select>
+                        <span>/ {{ criteres[4].poid }}</span>
+                    </div>
+
+                    <div class="on-right 4cbxCriter4" ng-if="criteres[3].poid == 1">
+                        <select ng-options="app as app.value for app in appreciations1.lstAppreciation"
+                                ng-model="cbx.appreciation4"
+                                ng-change="updateNote4({{criteres[4]}})">
+                        </select>
+                        <span>/ {{ criteres[4].poid }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+    </ion-content>
+</ion-view>
+<script>
+
+</script>
