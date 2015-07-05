@@ -21,30 +21,67 @@ import org.bson.types.ObjectId;
  */
 
 public class Devoir {
-    private ObjectId id;
+    private ObjectId _id;
     private String libelle;
     private String matiere;
     private Date date;
-    private transient List<Rubrique> lstRubrique;
+    private List<Rubrique> lstRubrique;
+    private List<Groupe> lstGroupe;
+
+    public Devoir(ObjectId _id, String libelle, String matiere, Date date, List<Rubrique> lstRubrique, List<Groupe> lstGroupe) {
+        this._id = _id;
+        this.libelle = libelle;
+        this.matiere = matiere;
+        this.date = date;
+        this.lstRubrique = lstRubrique;
+        this.lstGroupe = lstGroupe;
+    }
+
+    
+    public Devoir(String libelle, String matiere, Date date, List<Rubrique> lstRubrique, List<Groupe> lstGroupe) {
+        this.libelle = libelle;
+        this.matiere = matiere;
+        this.date = date;
+        this.lstRubrique = lstRubrique;
+        this.lstGroupe = lstGroupe;
+    }
+
+    public Devoir(String libelle, String matiere, Date date, List<Rubrique> lstRubrique) {
+        this.libelle = libelle;
+        this.matiere = matiere;
+        this.date = date;
+        this.lstRubrique = lstRubrique;
+        lstGroupe = new ArrayList<Groupe>();
+    }
+    
 
     public Devoir(String libelle, String matiere, Date date) {
-
+        lstGroupe = new ArrayList<Groupe>();
         lstRubrique = new ArrayList<Rubrique>();
         this.libelle = libelle;
         this.matiere = matiere;
         this.date = date;
     }
+    public Devoir(Devoir unDevoir) {
+        this._id = unDevoir.getId();
+        this.libelle = unDevoir.getLibelle();
+        this.matiere = unDevoir.getMatiere();
+        this.date = unDevoir.getDate();
+        this.lstRubrique = unDevoir.getLstRubrique();
+        this.lstGroupe = unDevoir.getLstGroupe();
+    }
 
     public Devoir() {
         lstRubrique = new ArrayList<Rubrique>();
+        lstGroupe = new ArrayList<Groupe>();
     }
 
     public ObjectId getId() {
-        return id;
+        return _id;
     }
 
     public void setId(ObjectId id) {
-        this.id = id;
+        this._id = id;
     }
 
     public String getLibelle() {
@@ -71,19 +108,31 @@ public class Devoir {
         this.date = date;
     }
 
-    public List getLstRubrique() {
-        return lstRubrique;
+    public List<Rubrique> getLstRubrique() {
+        return this.lstRubrique;
     }
 
     public void addToListRubrique(Rubrique rub) {
         lstRubrique.add(rub);
     }
 
+    public List<Groupe> getLstGroupe() {
+        return lstGroupe;
+    }
+
+    public void setLstRubrique(List<Rubrique> lstRubrique) {
+        this.lstRubrique = lstRubrique;
+    }
+
+    public void setLstGroupe(List<Groupe> lstGroupe) {
+        this.lstGroupe = lstGroupe;
+    }
+    
     public BasicDBList mapBddRubriques() {
         BasicDBList result = new BasicDBList();
         for (Rubrique rubrique : lstRubrique) {
             BasicDBObject dbRubriques = new BasicDBObject();
-            dbRubriques.append("_id", rubrique.getId());
+            //dbRubriques.append("_id", rubrique.getId());
             dbRubriques.append("libelle", rubrique.getLibelle());
             dbRubriques.append("lstCritere", rubrique.mapBddCritere());
             result.add(dbRubriques);
@@ -91,15 +140,24 @@ public class Devoir {
 
         return result;
     }
+    
+    public BasicDBList mapBddGroupes() {
+        BasicDBList result = new BasicDBList();
+        for (Groupe groupe : lstGroupe) {
+            BasicDBObject dbGroupes = new BasicDBObject();
+            //dbRubriques.append("_id", groupe.getId());
+            dbGroupes.append("libelle", groupe.getLibelle());
+            dbGroupes.append("lstEtudiant", groupe.mapBddEtudiants());
+            result.add(dbGroupes);
+        }
 
-    public void setLstRubrique(List lstRubrique) {
-        this.lstRubrique = lstRubrique;
+        return result;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this._id);
         hash = 53 * hash + Objects.hashCode(this.libelle);
         hash = 53 * hash + Objects.hashCode(this.matiere);
         hash = 53 * hash + Objects.hashCode(this.date);
@@ -116,7 +174,7 @@ public class Devoir {
             return false;
         }
         final Devoir other = (Devoir) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this._id, other._id)) {
             return false;
         }
         if (!Objects.equals(this.libelle, other.libelle)) {

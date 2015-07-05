@@ -5,15 +5,23 @@
  */
 package Model;
 
+import Entity.Critere;
 import Entity.Devoir;
+import Entity.Rubrique;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import static java.lang.System.out;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import org.bson.types.ObjectId;
 
 /**
@@ -38,9 +46,8 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         BasicDBObject doc = new BasicDBObject("libelle", obj.getLibelle())
                 .append("matiere", obj.getMatiere())
                 .append("date", obj.getDate())
-                .append("lstRubrique", obj.mapBddRubriques());
-
-        
+                .append("lstRubrique", obj.mapBddRubriques())
+                .append("lstGroupe", obj.mapBddGroupes());
         /*
          * On insère dans la BDD
          */
@@ -62,15 +69,21 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         //on crée un nouvel objet à insérer pour remplacer celui existant
         BasicDBObject newDoc = new BasicDBObject("libelle", newDevoir.getLibelle())
                 .append("matiere", newDevoir.getMatiere())
-                .append("date", newDevoir.getDate());
-
+                .append("date", newDevoir.getDate())
+                .append("lstRubrique", newDevoir.mapBddRubriques())
+                .append("lstGroupe", newDevoir.mapBddGroupes());
         //On crée les parametres de la requete
         BasicDBObject query = new BasicDBObject();
+        query.put("_id", oldDevoir.getId());
         query.put("libelle", oldDevoir.getLibelle());
         query.put("matiere", oldDevoir.getMatiere());
         query.put("date", oldDevoir.getDate());
-
+        query.put("lstRubrique", oldDevoir.mapBddRubriques());
+        query.put("lstGroupe", oldDevoir.mapBddGroupes());
         //On met à jour l'enregistrement
+        out.println("lol");
+        out.println("old: "+oldDevoir.getLibelle());
+        out.println("new: "+newDevoir.getLibelle());
         collection.update(query, newDoc);
 
         return true;
@@ -97,7 +110,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 //On ajoute l'id de l'enregistrement
                 devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
-                devoir.setLstRubrique((List<Devoir>) objet.get("lstRubrique"));
+                devoir.setLstRubrique((List<Rubrique>) objet.get("lstRubrique"));
                 //On ajoute le client à la liste
                 listDevoir.add(devoir);
             }
@@ -127,7 +140,31 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                 //On ajoute l'id de l'enregistrement
                 devoir.setId((ObjectId) objet.get("_id"));
                 //On ajoute la liste des Rubriques
-                devoir.setLstRubrique((List<Devoir>) objet.get("lstRubrique"));
+
+                BasicDBList listBDRubrique = (BasicDBList) objet.get("lstRubrique");
+                Iterator itListBDRubrique = listBDRubrique.iterator();
+
+                List<Rubrique> lstRubrique = new ArrayList<Rubrique>();
+
+                while (itListBDRubrique.hasNext()) {
+                    List<Critere> lstCritere = new ArrayList<Critere>();
+                    BasicDBObject objectCritere = (BasicDBObject) itListBDRubrique.next();
+                    BasicDBList listBDCritere = (BasicDBList) objectCritere.get("lstCritere");
+                    Iterator itListBDCritere = listBDCritere.iterator();
+                    while (itListBDCritere.hasNext()) {//On ajoute la liste des Critere
+                        BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDCritere.next();
+                        Critere unCritere = new Critere(
+                                aDBObjectCritere.get("libelle").toString(),
+                                (Integer) aDBObjectCritere.get("poid"));
+
+                        lstCritere.add(unCritere);
+                    }
+                    Rubrique uneRubrique = new Rubrique(
+                            objectCritere.get("libelle").toString(),
+                            lstCritere);
+                    lstRubrique.add(uneRubrique);
+                }
+                devoir.setLstRubrique(lstRubrique);
                 //On ajoute le client à la liste
                 listDevoir.add(devoir);
             }

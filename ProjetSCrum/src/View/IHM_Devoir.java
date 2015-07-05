@@ -6,10 +6,12 @@
 package View;
 
 import Entity.Devoir;
+import Entity.Groupe;
 import Entity.Matiere;
 import Entity.Rubrique;
 import Model.DAO_Devoir;
 import Model.DAO_Matiere;
+import static java.lang.System.out;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,91 +34,76 @@ public class IHM_Devoir extends javax.swing.JFrame {
     protected Devoir devoir;
     protected Devoir newDevoir;
     protected IHM_RubriquesCriteres IHM_Rubrique = null;
-
+    protected IHM_CreationGroupe IHM_CreationGroupe = null;
     private boolean isCreation;
 
     protected IHM_ListerDevoir IHM_ListerDevoir = null;
 
-    
     /**
      * Creates new form Devoir
      */
     public IHM_Devoir(Entity.Devoir pDevoir, IHM_ListerDevoir pIHM_ListerDevoir) {
-        
 
         newDevoir = new Devoir();
-
+        isCreation = true;
         IHM_ListerDevoir = pIHM_ListerDevoir;
 
-        
         try {
             initComponents();
             updateMatiere();
-            
-        //si on est en modification, on charge la page de modification
-        if (pDevoir != null) {
-        jButton1.setText("Modifier");
-        isCreation = false;
-                    
-        this.setVisible(true);
-        
-        
-        devoir = pDevoir;
-
-        matiereDevoir.setSelectedItem(devoir.getMatiere());
-        titreDevoir.setText(devoir.getLibelle());
-        jXDatePicker1.setDate(devoir.getDate());
-        
-        jLabel3.setText("Modification d'un devoir");
-        jButton1.setText("Modifier");
-        
-        
-        Iterator it = devoir.getLstRubrique().iterator();
-        DefaultListModel listeModel = new DefaultListModel();
-        while(it.hasNext())
-        {
-            listeModel.addElement(it);
-        }
-        jList1.setModel(listeModel);
-        
-        //Si on est en création d'un nouveau devoir
-        } else {
-            isCreation = true;
+            jButton5.setVisible(false);
             jButton1.setText("Créer");
-          
-            devoir = new Devoir();
-           
-        }
-            
-            
-            
+            //si on est en modification, on charge la page de modification
+            if (pDevoir != null) {
+                jButton1.setText("Modifier");
+                jButton5.setVisible(true);
+                isCreation = false;
+                //this.setVisible(true);
+                devoir = pDevoir;
+                newDevoir = new Devoir(pDevoir);
+                
+                matiereDevoir.setSelectedItem(devoir.getMatiere());
+                titreDevoir.setText(devoir.getLibelle());
+                jXDatePicker1.setDate(devoir.getDate());
+
+                jLabel3.setText("Modification d'un devoir");
+                jButton1.setText("Modifier");
+
+                List<Rubrique> lstRubrique = devoir.getLstRubrique();
+                DefaultListModel listeModel = new DefaultListModel();
+                for (int i = 0; i < lstRubrique.size(); i++) {
+                    listeModel.addElement(lstRubrique.get(i));
+                }
+                jList1.setModel(listeModel);
+
+                //Si on est en création d'un nouveau devoir
+                //} else {
+            }
+
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-    protected void addToListRubrique(Rubrique rub)
-    {
+
+    protected void addToListRubrique(Rubrique rub) {
         ListModel model = jList1.getModel();
         DefaultListModel listModel = new DefaultListModel();
-        
-        for(int i = 0; i < model.getSize(); i++)
-        {
+
+        for (int i = 0; i < model.getSize(); i++) {
             listModel.addElement(model.getElementAt(i));
         }
         listModel.addElement(rub);
-        
+
         jList1.setModel(listModel);
-        
-        if(isCreation)
-            devoir.addToListRubrique(rub);
-        else
+
+        if (isCreation) {
             newDevoir.addToListRubrique(rub);
-        
-        
+        } else {
+            newDevoir.addToListRubrique(rub);
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,6 +128,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        jButton5 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -169,9 +157,20 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         jLabel2.setText("Matière : ");
 
+        titreDevoir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titreDevoirActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Date du devoir : ");
 
         jButton1.setText("Valider");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -205,6 +204,14 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         jXDatePicker1.setDate(new Date());
 
+        jButton5.setText("Créer group");
+        jButton5.setActionCommand("Créer group");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,9 +219,6 @@ public class IHM_Devoir extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -240,7 +244,12 @@ public class IHM_Devoir extends javax.swing.JFrame {
                             .addComponent(titreDevoir)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 173, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                .addComponent(jButton5)
+                                .addGap(36, 36, 36))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -259,7 +268,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -276,6 +286,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton5.getAccessibleContext().setAccessibleName("Créer group");
+        jButton5.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -285,98 +298,74 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_matiereDevoirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-             if (isCreation){
-        String text = titreDevoir.getText();
 
-        String matiere = (String) matiereDevoir.getSelectedItem();
-
-        
-        Date selectedDate = jXDatePicker1.getDate();
-
-       
-        
-        if (text == "" || matiere == "" || selectedDate == null) {
-            JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
-            } else {
+        if (!titreDevoir.getText().equals("")
+                && !jXDatePicker1.getDate().equals(null)
+                && !matiereDevoir.getSelectedItem().equals(null)) {
             DAO_Devoir dao;
             try {
                 dao = new DAO_Devoir(null);
-                //Entity.Devoir devoir = new Entity.Devoir(text, matiere, selectedDate);
-                
-                this.devoir.setLibelle(text);
-                this.devoir.setMatiere(matiere);
-                this.devoir.setDate(selectedDate);
-                
-                dao.create(devoir);
+                if (isCreation) {
+                    this.newDevoir.setLibelle(titreDevoir.getText());
+                    this.newDevoir.setMatiere((String) matiereDevoir.getSelectedItem());
+                    this.newDevoir.setDate(jXDatePicker1.getDate());
+
+                    dao.create(newDevoir);
+                } else {
+                    out.println(isCreation);
+                    this.newDevoir.setLibelle(titreDevoir.getText());
+                    this.newDevoir.setMatiere((String) matiereDevoir.getSelectedItem());
+                    this.newDevoir.setDate(jXDatePicker1.getDate());
+                    out.println("old: " + devoir.getLibelle());
+                    out.println("new: " + newDevoir.getLibelle());
+
+                    dao.update(devoir, newDevoir);
+                }
             } catch (UnknownHostException ex) {
                 Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
-          
 
-        }
-
-        
-        try {
-            IHM_ListerDevoir.updateListeDevoir();
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        this.setVisible(false);
-        }   
-             }else{
-             
-        String matiere = (String) matiereDevoir.getSelectedItem();
-        String libelle = titreDevoir.getText();
-        Date selectedDate = jXDatePicker1.getDate();
-        
-        
-        
-        newDevoir.setLibelle(libelle);
-        newDevoir.setMatiere(matiere);
-        newDevoir.setDate(selectedDate);
-     
-
-        if (matiere == "" || libelle == "" || selectedDate == null) {
-            JOptionPane.showConfirmDialog(rootPane, "Erreur, vous devez remplir tous les champs!");
-        } else {
-            DAO_Devoir dao;
-            try {
-                dao = new DAO_Devoir(null);
-                dao.update(devoir, newDevoir);
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(IHM_ModifierDevoir.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             try {
-            IHM_ListerDevoir.updateListeDevoir();
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+                IHM_ListerDevoir.updateListeDevoir();
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Erreur, vous devez remplir tous les champs!");
         }
-            
-        this.setVisible(false);
-        }
-        
-                   
-             
-             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-            this.setVisible(false);
-          
+
+        this.setVisible(false);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-           IHM_Rubrique = new IHM_RubriquesCriteres(this);  
-           IHM_Rubrique.setVisible(true);
+        IHM_Rubrique = new IHM_RubriquesCriteres(this);
+        IHM_Rubrique.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void titreDevoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titreDevoirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_titreDevoirActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        IHM_CreationGroupe = new IHM_CreationGroupe(this);
+        IHM_CreationGroupe.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     public void updateMatiere() throws UnknownHostException {
         matiereDevoir.removeAllItems();
@@ -393,6 +382,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

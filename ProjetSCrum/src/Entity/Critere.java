@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -16,24 +17,30 @@ import java.util.Objects;
  */
 public class Critere {
 
-    private int id;
+    private ObjectId _id;
     private String libelle;
     protected int poid;
 
-    public Critere() {
+    public Critere(ObjectId _id, String libelle, int poid) {
+        this._id = _id;
+        this.libelle = libelle;
+        this.poid = poid;
     }
-    
+
     public Critere(String libelle, int poid) {
         this.libelle = libelle;
         this.poid = poid;
     }
 
-    public int getId() {
-        return id;
+    public Critere() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public ObjectId getId() {
+        return _id;
+    }
+
+    public void setId(ObjectId id) {
+        this._id = id;
     }
 
     public String getLibelle() {
@@ -55,7 +62,7 @@ public class Critere {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this._id);
         hash = 61 * hash + Objects.hashCode(this.libelle);
         hash = 61 * hash + this.poid;
         return hash;
@@ -70,7 +77,7 @@ public class Critere {
             return false;
         }
         final Critere other = (Critere) obj;
-        if (this.id != other.id) {
+        if (this._id != other._id) {
             return false;
         }
         if (!Objects.equals(this.libelle, other.libelle)) {
@@ -87,5 +94,4 @@ public class Critere {
         return libelle + " - " + String.valueOf(poid);
     }
 
-   
 }
