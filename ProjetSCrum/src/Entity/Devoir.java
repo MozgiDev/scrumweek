@@ -123,13 +123,25 @@ public class Devoir {
         List<Etudiant> lstEtudiant = new ArrayList<Etudiant>();
         for (int i = 0; i < lstGroupe.size(); i++) {
             List<Etudiant> lstEtuTemp = new ArrayList<Etudiant>();
-            lstEtuTemp = lstGroupe.get(i).getLstEtudiant();            
+            lstEtuTemp = lstGroupe.get(i).getLstEtudiant();
             for (int j = 0; j < lstEtuTemp.size(); j++) {
                 lstEtudiant.add(lstEtuTemp.get(j));
             }
         }
         lstEtud.removeAll(lstEtudiant);
         return lstEtud;
+    }
+
+    public List<Etudiant> getListEtudiantInGroupe() {
+        List<Etudiant> lstEtudiant = new ArrayList<Etudiant>();
+        for (int i = 0; i < lstGroupe.size(); i++) {
+            List<Etudiant> lstEtuTemp = new ArrayList<Etudiant>();
+            lstEtuTemp = lstGroupe.get(i).getLstEtudiant();
+            for (int j = 0; j < lstEtuTemp.size(); j++) {
+                lstEtudiant.add(lstEtuTemp.get(j));
+            }
+        }
+        return lstEtudiant;
     }
 
     public List<Groupe> getLstGroupe() {
