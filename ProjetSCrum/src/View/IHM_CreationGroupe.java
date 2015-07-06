@@ -64,7 +64,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_CreationGroupe.class.getName()).log(Level.SEVERE, null, ex);
         }
-        listeEtudiant = IHM_DevoirPapa.devoir.getEtudiantInGroupe(listeEtud);
+        listeEtudiant = IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
         
         return listeEtudiant;
     }
@@ -74,13 +74,13 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         List<Etudiant> lstElevesDejaEnGroupe = new ArrayList();
         
         //On parcours la liste de tous les groupes associés à ce devoir
-        for(int i = 0; i < IHM_DevoirPapa.devoir.getLstGroupe().size(); i++)
+        for(int i = 0; i < IHM_DevoirPapa.newDevoir.getLstGroupe().size(); i++)
         {            
             //On parcours chaque groupe
-            for(int j = 0; j < IHM_DevoirPapa.devoir.getLstGroupe().get(i).getLstEtudiant().size(); j++)
+            for(int j = 0; j < IHM_DevoirPapa.newDevoir.getLstGroupe().get(i).getLstEtudiant().size(); j++)
             {
                 //On récupère tous les élèves que l'on trouve dans une liste commune
-                lstElevesDejaEnGroupe.add(IHM_DevoirPapa.devoir.getLstGroupe().get(i).getLstEtudiant().get(j));
+                lstElevesDejaEnGroupe.add(IHM_DevoirPapa.newDevoir.getLstGroupe().get(i).getLstEtudiant().get(j));
             }
         }
         //On récupère la liste totale des élèves
@@ -280,7 +280,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         jList2.setModel(modeljList2);
         jList1.setModel(modeljList1);
         
-       
+        updateListeEtudiant();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

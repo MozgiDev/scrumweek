@@ -92,7 +92,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     protected void updateListeGroupe()
     {
-        List<Groupe> lstGroupe = devoir.getLstGroupe();
+        List<Groupe> lstGroupe = newDevoir.getLstGroupe();
                 DefaultListModel listeModelGroupe = new DefaultListModel();
                 for(int i = 0; i < lstGroupe.size(); i++)
                 {
