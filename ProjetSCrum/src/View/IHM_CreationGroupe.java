@@ -116,7 +116,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Création d'un groupe d'élèves");
 
@@ -240,7 +240,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        if (!jTextField1.getText().equals("") && (modeljList2.size() > 0)) {
+        if (!jTextField1.getText().equals("") 
+                && (modeljList2.size() > 0)) {
             List<Etudiant> lstEdudiant = new ArrayList<Etudiant>();            
             for (int i = 0; i < modeljList2.size(); i++) {
                 Etudiant unEtudiant = (Etudiant) modeljList2.get(i);
@@ -299,7 +300,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
