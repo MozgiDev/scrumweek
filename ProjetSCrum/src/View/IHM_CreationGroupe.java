@@ -40,7 +40,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         IHM_DevoirPapa = pIHM_Devoir;
         modeljList1 = new DefaultListModel();
         modeljList2 = new DefaultListModel();
-        updateListeEtudiant();
+        initListEtudiant();
 
     }
 
@@ -86,9 +86,18 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         //On récupère la liste totale des élèves
         getListeEtudiant();
         
-        //On y enlève les élèves déjà affectés à un groupe
-        listeEtudiant.removeAll(lstElevesDejaEnGroupe);
-        
+//        //On y enlève les élèves déjà affectés à un groupe
+//        //On parcours tous les eleves deja en groupe
+//        for(int i = 0; i < lstElevesDejaEnGroupe.size(); i++)
+//        {
+//            for(int j = 0; j < listeEtudiant.size(); j++)
+//            {
+//                if(listeEtudiant.get(j).equals(lstElevesDejaEnGroupe.get(i)))
+//                {
+//                    listeEtudiant.remove(j);
+//                }
+//            }
+//        }
         //On met à jour la liste
         updateListeEtudiant();
     }
@@ -280,7 +289,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         jList2.setModel(modeljList2);
         jList1.setModel(modeljList1);
         
-        updateListeEtudiant();
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

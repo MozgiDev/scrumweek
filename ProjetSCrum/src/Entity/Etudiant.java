@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
@@ -70,6 +71,36 @@ public class Etudiant {
     @Override
     public String toString() {
         return prenom + ", " + nom;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.prenom);
+        hash = 59 * hash + Objects.hashCode(this.nom);
+        hash = 59 * hash + Objects.hashCode(this.classe);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Etudiant other = (Etudiant) obj;
+        if (!Objects.equals(this.prenom, other.prenom)) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        if (!Objects.equals(this.classe, other.classe)) {
+            return false;
+        }
+        return true;
     }
     
     

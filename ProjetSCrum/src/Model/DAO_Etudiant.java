@@ -75,8 +75,8 @@ public class DAO_Etudiant extends DAO_Template<Etudiant> {
                 DBObject objet = cursor.next();
                 //On le cast en client en rentrant les parametres
                 Etudiant etudiant = new Etudiant(
-                        objet.get("prenom").toString(),
                         objet.get("nom").toString(),
+                        objet.get("prenom").toString(),
                         objet.get("classe").toString()
                 );
 
