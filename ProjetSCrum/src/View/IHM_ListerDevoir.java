@@ -24,6 +24,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     private DefaultListModel model = null;
     public List<Entity.Devoir> listeDevoir;
     protected Devoir devoir = null;
+
     /**
      * Creates new form ListerDevoir
      */
@@ -32,7 +33,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         model = new DefaultListModel();
         updateListeDevoir();
     }
-    
+
     public void updateListeDevoir() throws UnknownHostException {
         listeDevoir = new ArrayList<Entity.Devoir>();
         DAO_Devoir dao = new DAO_Devoir(null);
@@ -43,6 +44,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         }
         jList1.setModel(model);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +58,8 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         bt_ajouter_devoir = new javax.swing.JButton();
+        btTabDevoirEleve = new javax.swing.JButton();
+        btTabGroupeCritere = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,38 +89,58 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
             }
         });
 
+        btTabDevoirEleve.setText("Tableau Note devoir/eleve");
+        btTabDevoirEleve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTabDevoirEleveActionPerformed(evt);
+            }
+        });
+
+        btTabGroupeCritere.setText("Tableau Note groupe/critère");
+        btTabGroupeCritere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTabGroupeCritereActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_ajouter_devoir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btTabGroupeCritere)
+                    .addComponent(bt_ajouter_devoir, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(bt_ajouter_devoir)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(bt_ajouter_devoir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btTabGroupeCritere, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        btTabDevoirEleve.getAccessibleContext().setAccessibleName("Tableau");
+        btTabDevoirEleve.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -129,18 +153,29 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         Integer index = jList1.getSelectedIndex();
         devoir = listeDevoir.get(index);
-        
-        
-        IHM_Devoir modifDevoir = new IHM_Devoir(devoir ,this);
-        modifDevoir.setVisible(true);    
+
+        IHM_Devoir modifDevoir = new IHM_Devoir(devoir, this);
+        modifDevoir.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         //pas utile
     }//GEN-LAST:event_jList1ValueChanged
 
+    private void btTabDevoirEleveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabDevoirEleveActionPerformed
+        IHM_TableauDevoirEleve tableauDevoirEleve = new IHM_TableauDevoirEleve(this);
+        tableauDevoirEleve.setVisible(true);
+    }//GEN-LAST:event_btTabDevoirEleveActionPerformed
+
+    private void btTabGroupeCritereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritereActionPerformed
+        IHM_TableauCritereGroupe tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
+        tableauCritereGroupe.setVisible(true);
+    }//GEN-LAST:event_btTabGroupeCritereActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btTabDevoirEleve;
+    private javax.swing.JButton btTabGroupeCritere;
     private javax.swing.JButton bt_ajouter_devoir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;

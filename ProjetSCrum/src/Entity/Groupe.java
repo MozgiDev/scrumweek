@@ -46,8 +46,22 @@ public class Groupe {
         this.lstEtudiant = lstEtudiant;
         this.lstNote = new ArrayList<Note>();
     }
-    
-    
+
+    public Double getTotalNote() {
+        Double total = 0.0;
+        for (int i = 0; i < this.lstNote.size(); i++) {
+            total = total + this.lstNote.get(i).getNote();
+        }
+        return total;
+    }
+
+    public int getTotalPoid() {
+        int total = 0;
+        for (int i = 0; i < this.lstNote.size(); i++) {
+            total = total + this.lstNote.get(i).getPoid();
+        }
+        return total;
+    }
 
     public BasicDBList mapBddNotes() {
         BasicDBList result = new BasicDBList();
@@ -101,12 +115,21 @@ public class Groupe {
         this.lstEtudiant = lstEtudiant;
     }
 
+    public List<Note> getLstNote() {
+        return lstNote;
+    }
+
+    public void setLstNote(List<Note> lstNote) {
+        this.lstNote = lstNote;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.libelle);
-        hash = 17 * hash + Objects.hashCode(this.lstEtudiant);
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.libelle);
+        hash = 67 * hash + Objects.hashCode(this.lstEtudiant);
+        hash = 67 * hash + Objects.hashCode(this.lstNote);
         return hash;
     }
 
@@ -126,6 +149,9 @@ public class Groupe {
             return false;
         }
         if (!Objects.equals(this.lstEtudiant, other.lstEtudiant)) {
+            return false;
+        }
+        if (!Objects.equals(this.lstNote, other.lstNote)) {
             return false;
         }
         return true;

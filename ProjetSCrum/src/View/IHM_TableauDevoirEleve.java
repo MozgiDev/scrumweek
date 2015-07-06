@@ -5,6 +5,12 @@
  */
 package View;
 
+import Entity.Devoir;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Quentin
@@ -14,8 +20,41 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
     /**
      * Creates new form IHM_TableauDevoirEleve
      */
-    public IHM_TableauDevoirEleve() {
+    protected IHM_ListerDevoir IHM_ListerDevoir = null;
+    protected List<Devoir> lstDevoir = new ArrayList<Devoir>();
+
+    public IHM_TableauDevoirEleve(IHM_ListerDevoir pIHM_ListerDevoir) {
+        IHM_ListerDevoir = pIHM_ListerDevoir;
+        lstDevoir = pIHM_ListerDevoir.listeDevoir;
         initComponents();
+        initTableau();
+    }
+
+    private void initTableau() {
+        List<String> columns = new ArrayList<String>();
+        List<String[]> values = new ArrayList<String[]>();
+
+        columns.add("Etudiant");
+        //columns.add("col2");
+        //columns.add("col3");
+        
+        for (int i = 0; i < lstDevoir.size(); i++) {
+            for (int j = 0; j < lstDevoir.get(i).getLstGroupe().size(); j++) {
+
+                for (int k = 0; k < lstDevoir.get(i).getLstGroupe().get(j).getLstEtudiant().size(); k++) {
+                    columns.add(lstDevoir.get(i).getLibelle()+"  /"+lstDevoir.get(i).getLstGroupe().get(j).getTotalPoid());
+                    
+                    String[] content = new String[lstDevoir.size() + 1];
+                    content[0] = lstDevoir.get(i).getLstGroupe().get(j).getLstEtudiant().get(k).toString();
+                    content[i + 1] = lstDevoir.get(i).getLstGroupe().get(j).getTotalNote().toString();
+                    values.add(content);
+                }
+            }
+            //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
+        }
+
+        TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][]{}), columns.toArray());
+        jTable1.setModel(tableModel);
     }
 
     /**
@@ -61,30 +100,25 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(20, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(28, 28, 28))
+                .addGap(6, 6, 6))
         );
 
         pack();
@@ -93,42 +127,6 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IHM_TableauDevoirEleve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IHM_TableauDevoirEleve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IHM_TableauDevoirEleve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IHM_TableauDevoirEleve.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new IHM_TableauDevoirEleve().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

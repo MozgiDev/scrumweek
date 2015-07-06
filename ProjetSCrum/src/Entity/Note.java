@@ -15,10 +15,10 @@ import org.bson.types.ObjectId;
 public class Note {
     private ObjectId _id;
     private String libelle;
-    protected double poid;
-    protected double note;
+    protected int poid;
+    protected Double note;
 
-    public Note(String libelle, double poid, double note) {
+    public Note(String libelle, int poid, Double note) {
         this.libelle = libelle;
         this.poid = poid;
         this.note = note;
@@ -43,7 +43,7 @@ public class Note {
         this.libelle = libelle;
     }
 
-    public double getPoid() {
+    public int getPoid() {
         return poid;
     }
 
@@ -51,21 +51,21 @@ public class Note {
         this.poid = poid;
     }
 
-    public double getNote() {
+    public Double getNote() {
         return note;
     }
 
-    public void setNote(double note) {
+    public void setNote(Double note) {
         this.note = note;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this._id);
-        hash = 37 * hash + Objects.hashCode(this.libelle);
-        hash = 37 * hash + Objects.hashCode(this.poid);
-        hash = 37 * hash + (int) (Double.doubleToLongBits(this.note) ^ (Double.doubleToLongBits(this.note) >>> 32));
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this._id);
+        hash = 79 * hash + Objects.hashCode(this.libelle);
+        hash = 79 * hash + this.poid;
+        hash = 79 * hash + Objects.hashCode(this.note);
         return hash;
     }
 
@@ -87,11 +87,13 @@ public class Note {
         if (this.poid != other.poid) {
             return false;
         }
-        if (Double.doubleToLongBits(this.note) != Double.doubleToLongBits(other.note)) {
+        if (!Objects.equals(this.note, other.note)) {
             return false;
         }
         return true;
     }
+    
+    
 
     @Override
     public String toString() {
