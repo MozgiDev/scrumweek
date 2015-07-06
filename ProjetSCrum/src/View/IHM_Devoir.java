@@ -14,6 +14,7 @@ import Model.DAO_Matiere;
 import static java.lang.System.out;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -304,7 +305,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         if (!titreDevoir.getText().equals("")
                 && !jXDatePicker1.getDate().equals(null)
-                && !matiereDevoir.getSelectedItem().equals(null)) {
+                && !matiereDevoir.getSelectedItem().equals(null)
+                && jList1.getModel().getSize() != 0) {
             DAO_Devoir dao;
             try {
                 dao = new DAO_Devoir(null);
@@ -351,7 +353,25 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        //Si un element de la liste est bien sélectionné
+        if(!jList1.isSelectionEmpty())
+        {
+            DefaultListModel model = new DefaultListModel();
+            List liste = new ArrayList();
+            
+            for(int i = 0; i < jList1.getModel().getSize(); i ++)
+            {
+                model.addElement(jList1.getModel().getElementAt(i));
+                liste.add(jList1.getModel().getElementAt(i));
+            }
+            
+            model.removeElement(jList1.getSelectedValue());
+            liste.remove(jList1.getSelectedValue());
+            
+            jList1.setModel(model);
+            
+            newDevoir.setLstRubrique(liste);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
