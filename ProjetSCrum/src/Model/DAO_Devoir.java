@@ -76,9 +76,10 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
 
         //On crée les parametres de la requete
         BasicDBObject query = new BasicDBObject();
-        query.put("libelle", oldDevoir.getLibelle());
-        query.put("matiere", oldDevoir.getMatiere());
-        query.put("date", oldDevoir.getDate());
+        query.put("_id", oldDevoir.getId());
+        //query.put("libelle", oldDevoir.getLibelle());
+        //query.put("matiere", oldDevoir.getMatiere());
+        //query.put("date", oldDevoir.getDate());
 
         //On met à jour l'enregistrement
         collection.update(query, newDoc);

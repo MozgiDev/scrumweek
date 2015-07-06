@@ -45,15 +45,16 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     }
 
     public void updateListeEtudiant() {
+        List<Etudiant> listeEtud = new ArrayList<Etudiant>();
         listeEtudiant = new ArrayList<Etudiant>();
         DAO_Etudiant dao;
         try {
             dao = new DAO_Etudiant(null);
-            listeEtudiant = dao.findAll();
+            listeEtud = dao.findAll();
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_CreationGroupe.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        listeEtudiant = IHM_DevoirPapa.devoir.getEtudiantInGroupe(listeEtud);
         modeljList1.clear();
         for (int i = 0; i < listeEtudiant.size(); i++) {
             modeljList1.addElement(listeEtudiant.get(i));
@@ -215,9 +216,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
                 lstEdudiant.add(unEtudiant);
             }
             Groupe grp = new Groupe(jTextField1.getText().toString(),lstEdudiant);
-            List<Groupe> lstGroupe = new ArrayList<Groupe>(); //a debug
-            lstGroupe.add(grp);
-            IHM_DevoirPapa.newDevoir.setLstGroupe(lstGroupe);
+            IHM_DevoirPapa.newDevoir.addToListGroupe(grp);
             this.setVisible(false);
             
         } else {

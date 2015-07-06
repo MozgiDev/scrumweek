@@ -19,8 +19,8 @@ import org.bson.types.ObjectId;
  *
  * @author admin
  */
-
 public class Devoir {
+
     private ObjectId _id;
     private String libelle;
     private String matiere;
@@ -37,7 +37,6 @@ public class Devoir {
         this.lstGroupe = lstGroupe;
     }
 
-    
     public Devoir(String libelle, String matiere, Date date, List<Rubrique> lstRubrique, List<Groupe> lstGroupe) {
         this.libelle = libelle;
         this.matiere = matiere;
@@ -53,7 +52,6 @@ public class Devoir {
         this.lstRubrique = lstRubrique;
         lstGroupe = new ArrayList<Groupe>();
     }
-    
 
     public Devoir(String libelle, String matiere, Date date) {
         lstGroupe = new ArrayList<Groupe>();
@@ -62,6 +60,7 @@ public class Devoir {
         this.matiere = matiere;
         this.date = date;
     }
+
     public Devoir(Devoir unDevoir) {
         this._id = unDevoir.getId();
         this.libelle = unDevoir.getLibelle();
@@ -115,8 +114,22 @@ public class Devoir {
     public void addToListRubrique(Rubrique rub) {
         lstRubrique.add(rub);
     }
+
     public void addToListGroupe(Groupe grp) {
         lstGroupe.add(grp);
+    }
+
+    public List<Etudiant> getEtudiantInGroupe(List<Etudiant> lstEtud) {
+        List<Etudiant> lstEtudiant = new ArrayList<Etudiant>();
+        for (int i = 0; i < lstGroupe.size(); i++) {
+            List<Etudiant> lstEtuTemp = new ArrayList<Etudiant>();
+            lstEtuTemp = lstGroupe.get(i).getLstEtudiant();            
+            for (int j = 0; j < lstEtuTemp.size(); j++) {
+                lstEtudiant.add(lstEtuTemp.get(j));
+            }
+        }
+        lstEtud.removeAll(lstEtudiant);
+        return lstEtud;
     }
 
     public List<Groupe> getLstGroupe() {
@@ -130,7 +143,7 @@ public class Devoir {
     public void setLstGroupe(List<Groupe> lstGroupe) {
         this.lstGroupe = lstGroupe;
     }
-    
+
     public BasicDBList mapBddRubriques() {
         BasicDBList result = new BasicDBList();
         for (Rubrique rubrique : lstRubrique) {
@@ -143,7 +156,7 @@ public class Devoir {
 
         return result;
     }
-    
+
     public BasicDBList mapBddGroupes() {
         BasicDBList result = new BasicDBList();
         for (Groupe groupe : lstGroupe) {
