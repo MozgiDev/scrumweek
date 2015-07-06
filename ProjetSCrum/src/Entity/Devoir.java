@@ -164,6 +164,7 @@ public class Devoir {
             //dbRubriques.append("_id", groupe.getId());
             dbGroupes.append("libelle", groupe.getLibelle());
             dbGroupes.append("lstEtudiant", groupe.mapBddEtudiants());
+            dbGroupes.append("lstNote", groupe.mapBddNotes());
             result.add(dbGroupes);
         }
 

@@ -9,6 +9,7 @@ import Entity.Critere;
 import Entity.Devoir;
 import Entity.Etudiant;
 import Entity.Groupe;
+import Entity.Note;
 import Entity.Rubrique;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -171,8 +172,9 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
 
                 while (itListBDGroupe.hasNext()) {
                     List<Etudiant> lstEtudiant = new ArrayList<Etudiant>();
-                    BasicDBObject objectEtudiant = (BasicDBObject) itListBDGroupe.next();
-                    BasicDBList listBDEtudiant = (BasicDBList) objectEtudiant.get("lstEtudiant");
+                    List<Note> lstNote = new ArrayList<Note>();
+                    BasicDBObject objectsGroupe = (BasicDBObject) itListBDGroupe.next();
+                    BasicDBList listBDEtudiant = (BasicDBList) objectsGroupe.get("lstEtudiant");
                     Iterator itListBDEtudiant = listBDEtudiant.iterator();
                     while (itListBDEtudiant.hasNext()) {//On ajoute la liste des Critere
                         BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDEtudiant.next();
@@ -183,9 +185,21 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
 
                         lstEtudiant.add(unEtudiant);
                     }
+                    BasicDBList listBDNote = (BasicDBList) objectsGroupe.get("lstNote");
+                    Iterator itListBDNote = listBDNote.iterator();
+                    while (itListBDNote.hasNext()) {//On ajoute la liste des Critere
+                        BasicDBObject aDBObjectNote = (BasicDBObject) itListBDNote.next();
+                        Note uneNote = new Note(
+                                aDBObjectNote.get("libelle").toString(),
+                                (Integer) aDBObjectNote.get("poid"),
+                                (Double) aDBObjectNote.get("note"));
+
+                        lstNote.add(uneNote);
+                    }
                     Groupe unGroupe = new Groupe(
-                            objectEtudiant.get("libelle").toString(),
-                            lstEtudiant);
+                            objectsGroupe.get("libelle").toString(),
+                            lstEtudiant,
+                            lstNote);
                     lstGroupe.add(unGroupe);
                 }
                 devoir.setLstGroupe(lstGroupe);

@@ -16,30 +16,53 @@ import org.bson.types.ObjectId;
  *
  * @author Maxime
  */
-public class Groupe 
-{
-ObjectId id;
-String libelle;
-List<Etudiant> lstEtudiant;
+public class Groupe {
 
+    ObjectId id;
+    String libelle;
+    List<Etudiant> lstEtudiant;
+    List<Note> lstNote;
 
+    public Groupe() {
+        this.lstNote = new ArrayList<Note>();
+        this.lstEtudiant = new ArrayList<Etudiant>();
+    }
 
-    public Groupe() 
-    {
-        lstEtudiant = new ArrayList<Etudiant>();
+    public Groupe(String libelle, List<Etudiant> lstEtudiant, List<Note> lstNote) {
+        this.libelle = libelle;
+        this.lstEtudiant = lstEtudiant;
+        this.lstNote = lstNote;
+    }
+
+    public Groupe(ObjectId id, String libelle, List<Etudiant> lstEtudiant, List<Note> lstNote) {
+        this.id = id;
+        this.libelle = libelle;
+        this.lstEtudiant = lstEtudiant;
+        this.lstNote = lstNote;
     }
 
     public Groupe(String libelle, List<Etudiant> lstEtudiant) {
         this.libelle = libelle;
         this.lstEtudiant = lstEtudiant;
-    }
-
-    public Groupe(ObjectId id, String libelle, List<Etudiant> lstEtudiant) {
-        this.id = id;
-        this.libelle = libelle;
-        this.lstEtudiant = lstEtudiant;
+        this.lstNote = new ArrayList<Note>();
     }
     
+    
+
+    public BasicDBList mapBddNotes() {
+        BasicDBList result = new BasicDBList();
+        for (Note note : lstNote) {
+            BasicDBObject dbNotes = new BasicDBObject();
+            //dbRubriques.append("_id", etudiant.getId());
+            dbNotes.append("libelle", note.getLibelle());
+            dbNotes.append("poid", note.getPoid());
+            dbNotes.append("note", note.getNote());
+            result.add(dbNotes);
+        }
+
+        return result;
+    }
+
     public BasicDBList mapBddEtudiants() {
         BasicDBList result = new BasicDBList();
         for (Etudiant etudiant : lstEtudiant) {
@@ -112,9 +135,5 @@ List<Etudiant> lstEtudiant;
     public String toString() {
         return libelle;
     }
-    
-    
 
-
-  
 }
