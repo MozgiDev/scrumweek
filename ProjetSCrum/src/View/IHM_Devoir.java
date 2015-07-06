@@ -46,13 +46,13 @@ public class IHM_Devoir extends javax.swing.JFrame {
     public IHM_Devoir(Entity.Devoir pDevoir, IHM_ListerDevoir pIHM_ListerDevoir) {
 
         newDevoir = new Devoir();
+        devoir = new Devoir();
         isCreation = true;
         IHM_ListerDevoir = pIHM_ListerDevoir;
 
         try {
             initComponents();
             updateMatiere();
-            jButton5.setVisible(false);
             jButton1.setText("Créer");
             //si on est en modification, on charge la page de modification
             if (pDevoir != null) {
@@ -388,8 +388,16 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        IHM_Rubrique = new IHM_RubriquesCriteres(this);
-        IHM_Rubrique.setVisible(true);
+        //Si il y a moins de 5 rubriques
+        if(jList1.getModel().getSize() < 5)
+        {    
+            IHM_Rubrique = new IHM_RubriquesCriteres(this);
+            IHM_Rubrique.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Erreur, vous ne pouvez pas créer plus de 5 rubriques.");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
