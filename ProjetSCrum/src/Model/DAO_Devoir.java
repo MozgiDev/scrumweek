@@ -191,7 +191,7 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                         BasicDBObject aDBObjectNote = (BasicDBObject) itListBDNote.next();
                         Note uneNote = new Note(
                                 aDBObjectNote.get("libelle").toString(),
-                                (Double) aDBObjectNote.get("poid"),
+                                (Integer) aDBObjectNote.get("poid"),
                                 (Double) aDBObjectNote.get("note"));
 
                         lstNote.add(uneNote);
