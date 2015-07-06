@@ -110,7 +110,7 @@ List<Etudiant> lstEtudiant;
 
     @Override
     public String toString() {
-        return "Groupe{" + "id=" + id + ", libelle=" + libelle + ", lstEtudiant=" + lstEtudiant + '}';
+        return libelle;
     }
     
     

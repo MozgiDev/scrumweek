@@ -219,6 +219,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             IHM_DevoirPapa.newDevoir.addToListGroupe(grp);
             this.setVisible(false);
             
+            IHM_DevoirPapa.updateListeGroupe();
+            
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez entrer un nom à votre groupe, et y intégrer au moins un élève.");
         }
