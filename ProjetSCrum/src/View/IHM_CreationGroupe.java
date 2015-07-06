@@ -42,6 +42,10 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         modeljList2 = new DefaultListModel();
         initListEtudiant();
 
+        if(IHM_DevoirPapa.newDevoir.getLibelle() != null)
+            jLabel5.setText(IHM_DevoirPapa.newDevoir.getLibelle());
+        else
+            jLabel5.setText("Pas encore défini");
     }
 
     public void updateListeEtudiant() {
@@ -124,10 +128,16 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
-        jLabel1.setText("Création d'un groupe d'élèves");
+        jLabel1.setText("Création d'un groupe d'élèves pour le devoir :");
 
         jLabel2.setText("Nom du groupe");
 
@@ -177,6 +187,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(jList1);
 
+        jLabel5.setText("jLabel5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,13 +222,17 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
                         .addGap(0, 20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(4, 4, 4)
@@ -262,7 +278,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             IHM_DevoirPapa.updateListeGroupe();
             
             this.setVisible(false);
-            
+            IHM_DevoirPapa.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez entrer un nom à votre groupe, et y intégrer au moins un élève.");
         }
@@ -310,7 +326,12 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.setVisible(false);
+        IHM_DevoirPapa.setEnabled(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        IHM_DevoirPapa.setEnabled(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -365,6 +386,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
     private javax.swing.JScrollPane jScrollPane2;

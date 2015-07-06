@@ -440,6 +440,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_titreDevoirActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        this.setEnabled(false);
+        
         IHM_CreationGroupe = new IHM_CreationGroupe(this);
         IHM_CreationGroupe.setVisible(true);
         // TODO add your handling code here:
