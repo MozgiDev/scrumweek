@@ -372,6 +372,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
             
             newDevoir.setLstRubrique(liste);
         }
+        else{
+            JOptionPane.showMessageDialog(this,"Veuillez une rubrique à supprimer svp");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

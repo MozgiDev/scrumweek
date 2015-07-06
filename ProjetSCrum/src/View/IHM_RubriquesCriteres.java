@@ -289,6 +289,10 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
             model.remove(index);
             jList1.setModel(model);
         }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Veuillez selectionner un critère à supprimer svp");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
