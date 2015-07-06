@@ -15,10 +15,10 @@ import org.bson.types.ObjectId;
 public class Note {
     private ObjectId _id;
     private String libelle;
-    protected int poid;
+    protected double poid;
     protected double note;
 
-    public Note(String libelle, int poid, double note) {
+    public Note(String libelle, double poid, double note) {
         this.libelle = libelle;
         this.poid = poid;
         this.note = note;
@@ -43,7 +43,7 @@ public class Note {
         this.libelle = libelle;
     }
 
-    public int getPoid() {
+    public double getPoid() {
         return poid;
     }
 
@@ -64,7 +64,7 @@ public class Note {
         int hash = 3;
         hash = 37 * hash + Objects.hashCode(this._id);
         hash = 37 * hash + Objects.hashCode(this.libelle);
-        hash = 37 * hash + this.poid;
+        hash = 37 * hash + Objects.hashCode(this.poid);
         hash = 37 * hash + (int) (Double.doubleToLongBits(this.note) ^ (Double.doubleToLongBits(this.note) >>> 32));
         return hash;
     }
