@@ -223,6 +223,11 @@ public class IHM_Devoir extends javax.swing.JFrame {
         });
 
         jXDatePicker1.setDate(new Date());
+        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDatePicker1ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("+");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -343,8 +348,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (!titreDevoir.getText().equals("")
-                && !jXDatePicker1.getDate().equals(null)
-                && !matiereDevoir.getSelectedItem().equals(null)
+                && jXDatePicker1.getDate() != null
+                && matiereDevoir.getSelectedItem() != null
                 && jList1.getModel().getSize() != 0
                 && jXDatePicker1.getDate() != null) {
             DAO_Devoir dao;
@@ -463,6 +468,10 @@ public class IHM_Devoir extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Veuillez selectionner un groupe à supprimer svp");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     public void updateMatiere() throws UnknownHostException {
         matiereDevoir.removeAllItems();
