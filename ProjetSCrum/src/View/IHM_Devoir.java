@@ -49,6 +49,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         devoir = new Devoir();
         isCreation = true;
         IHM_ListerDevoir = pIHM_ListerDevoir;
+        
 
         try {
             initComponents();
@@ -86,7 +87,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        jXDatePicker1.getEditor().setEditable(false);
     }
 
     protected void updateListeGroupe()
