@@ -541,8 +541,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
         
         Rubrique rubrique = (Rubrique)jList1.getSelectedValue();
         
-        IHM_Rubrique = new IHM_RubriquesCriteres(this, rubrique);
-        IHM_Rubrique.setVisible(true);
+        IHM_Consult_Rubrique tralala = new IHM_Consult_Rubrique(rubrique);
+        tralala.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
 
 
@@ -553,8 +553,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
         
         Groupe groupe = (Groupe)jList2.getSelectedValue();
         
-        IHM_CreationGroupe = new IHM_CreationGroupe(this, groupe);
-        IHM_CreationGroupe.setVisible(true);
+        IHM_Consult_Groupe tralala = new IHM_Consult_Groupe(groupe);
+        tralala.setVisible(true);
     }//GEN-LAST:event_jList2MouseClicked
 
     private void cbxChoixClasseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxChoixClasseItemStateChanged

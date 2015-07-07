@@ -41,35 +41,6 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
         jTextField2.setText("");
     }
     
-    public IHM_RubriquesCriteres(IHM_Devoir pIHM_DevoirPapa, Rubrique pRubrique) {
-        IHM_DevoirPapa = pIHM_DevoirPapa;
-        rubrique = pRubrique;
-        //Instanciation du model de liste
-        model = new DefaultListModel();
-        cbModel = new DefaultComboBoxModel();
-        initComboBoxModel();
-        initComponents();
-        jTextField1.setText(rubrique.getLibelle());
-        jTextField2.setText("");        
-        
-        for(int i = 0; i < rubrique.getLstCritere().size(); i++)
-        {
-            model.add(i, rubrique.getLstCritere().get(i));
-        }        
-        jList1.setModel(model);
-        
-        jLabel1.setText("Consultation de rubrique");
-        jLabel5.setText("Critères");
-        jLabel6.setVisible(false);
-        jTextField2.setVisible(false);
-        jLabel12.setVisible(false);
-        jComboBox2.setVisible(false);
-        jButton3.setVisible(false);
-        jButton4.setVisible(false);
-        jButton1.setVisible(false);
-        jButton2.setText("retour");
-    }
-    
     private void initComboBoxModel()
     {        
         cbModel.addElement("1");
