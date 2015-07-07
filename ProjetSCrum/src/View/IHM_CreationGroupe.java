@@ -50,37 +50,6 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         }
     }
 
-    public IHM_CreationGroupe(IHM_Devoir pIHM_Devoir, Groupe pGroupe) {
-        initComponents();
-        groupe = pGroupe;
-        IHM_DevoirPapa = pIHM_Devoir;
-        modeljList1 = new DefaultListModel();
-        modeljList2 = new DefaultListModel();
-        initListEtudiant();
-
-        if (IHM_DevoirPapa.newDevoir.getLibelle() != null) {
-            jLabel5.setText(IHM_DevoirPapa.newDevoir.getLibelle());
-        } else {
-            jLabel5.setText("Pas encore défini");
-        }
-
-        jTextField1.setText(groupe.getLibelle());
-
-        DefaultListModel model = new DefaultListModel();
-        for (int i = 0; i < groupe.getLstEtudiant().size(); i++) {
-            model.add(i, groupe.getLstEtudiant().get(i));
-        }
-        jList2.setModel(model);
-
-        jLabel3.setVisible(false);
-        jList1.setVisible(false);
-        jList1.setEnabled(false);
-        jButton1.setVisible(false);
-        jButton2.setVisible(false);
-        jButton3.setVisible(false);
-        jButton5.setText("retour");
-    }
-
     public void updateListeEtudiant() {
         listeEtudiant = getListeEtudiant();
         modeljList1.clear();
@@ -101,7 +70,15 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             Logger.getLogger(IHM_CreationGroupe.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
+        listeEtudiant = IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
+        
+        for(int i = 0; i < listeEtudiant.size(); i++)
+        {
+            if(listeEtudiant.get(i).getClasse().equals(IHM_DevoirPapa.sClasse))
+                listeEtudiant.remove(i);
+        }
+        
+        return listeEtudiant;
     }
 
     protected void initListEtudiant() {

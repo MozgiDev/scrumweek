@@ -37,6 +37,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
     protected IHM_RubriquesCriteres IHM_Rubrique = null;
     protected IHM_CreationGroupe IHM_CreationGroupe = null;
     private boolean isCreation;
+    protected String sClasse;
 
     protected IHM_ListerDevoir IHM_ListerDevoir = null;
 
@@ -50,6 +51,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         isCreation = true;
         IHM_ListerDevoir = pIHM_ListerDevoir;
         
+        sClasse = cbxChoixClasse.getSelectedItem().toString();
 
         try {
             initComponents();
@@ -559,7 +561,8 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     private void cbxChoixClasseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxChoixClasseItemStateChanged
         try {
-            updateMatiere(cbxChoixClasse.getSelectedItem().toString());
+            sClasse = cbxChoixClasse.getSelectedItem().toString();
+            updateMatiere(sClasse);            
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
         }
