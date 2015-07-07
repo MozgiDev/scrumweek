@@ -6,16 +6,20 @@
 package View;
 
 import Entity.Devoir;
+import Entity.Etudiant;
 import Model.DAO_Devoir;
-import Model.DAO_Template;
+import Model.DAO_Etudiant;
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.UnknownHostException;
+import static java.time.Clock.system;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -182,13 +186,61 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_btTabDevoirEleveActionPerformed
 
     private void btImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportActionPerformed
-        
+
         JFileChooser choix = new JFileChooser();
         choix.showDialog(choix, null);
         File f = choix.getSelectedFile();
-      
-        
-        
+
+        try {
+            FileInputStream file = new FileInputStream(f);
+
+            //Create Workbook instance holding reference to .xlsx file
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+            //Get first/desired sheet from the workbook
+            XSSFSheet sheet = workbook.getSheetAt(0);
+
+            //Iterate through each rows one by one
+            Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.iterator();
+            while (rowIterator.hasNext()) {
+                org.apache.poi.ss.usermodel.Row row = rowIterator.next();
+                //For each row, iterate through all the columns
+                Iterator<org.apache.poi.ss.usermodel.Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    org.apache.poi.ss.usermodel.Cell cell = cellIterator.next();
+
+                    if (!cell.getStringCellValue().equals("NOM")
+                            && !cell.getStringCellValue().equals("Prénom")) {
+                        String sNom = cell.getStringCellValue();
+                        String sPrenom = "";
+
+                        if (cellIterator.hasNext()) {
+                            sPrenom = cell.getStringCellValue();
+                        }
+
+                        if (sNom != "" && sPrenom != "") {
+                            Etudiant etud = new Etudiant(sNom, sPrenom, "ASI 1");
+                            System.out.println(etud.toString());
+                            DAO_Etudiant dao_etud = new DAO_Etudiant(null);
+                            dao_etud.create(etud);
+                        }
+                    }
+//                    //Check the cell type and format accordingly
+//                    switch (cell.getCellType())
+//                    {
+//                        case org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC:
+//                            System.out.print(cell.getNumericCellValue() + " ");
+//                            break;
+//                        case org.apache.poi.ss.usermodel.Cell.CELL_TYPE_STRING:
+//                            System.out.print(cell.getStringCellValue() + ";");
+//                            break;
+//                    }   
+                }
+            }
+            file.close();
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_btImportActionPerformed
 
     private void btTabGroupeCritere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritere1ActionPerformed
