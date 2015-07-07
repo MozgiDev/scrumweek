@@ -40,11 +40,11 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
         super(conn);
     }
 
-    public boolean findByDate() {
-        Date dateNow = new Date();
-        Date dateHier = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000L);
+    public boolean findByDate(Date uneD) {
         
-        DBObject query = QueryBuilder.start().put("date").greaterThanEquals(dateHier).lessThanEquals(dateNow).get();
+                
+        BasicDBObject query = new BasicDBObject();
+        query.put("date", uneD);
         cursor = collection.find(query);
         return cursor.hasNext();
     }
