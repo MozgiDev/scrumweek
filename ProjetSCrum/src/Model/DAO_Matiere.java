@@ -6,6 +6,7 @@
 package Model;
 
 import Entity.Matiere;
+import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.Cursor;
 import com.mongodb.DBCollection;
@@ -82,8 +83,9 @@ public class DAO_Matiere extends DAO_Template<Matiere> {
        public List<Matiere> findByClasse(String uneClasse) {
         //On instancie la liste qui va contenir les clients retournés par la requête
         List<Matiere> listMatiere = new ArrayList<>();
-
-        cursor = collection.find();
+        BasicDBObject filter = new BasicDBObject();
+        BasicDBObject query = new BasicDBObject("classe", uneClasse);
+        cursor = collection.find(query, filter);
 
         try {
             //Pour chaque enregistrement trouvé
