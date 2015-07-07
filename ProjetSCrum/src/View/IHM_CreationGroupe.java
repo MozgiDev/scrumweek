@@ -74,7 +74,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         
         for(int i = 0; i < listeEtudiant.size(); i++)
         {
-            if(listeEtudiant.get(i).getClasse().equals(IHM_DevoirPapa.sClasse))
+            if(!listeEtudiant.get(i).getClasse().equals(IHM_DevoirPapa.sClasse))
                 listeEtudiant.remove(i);
         }
         
@@ -93,7 +93,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             }
         }
         //On récupère la liste totale des élèves
-        listeEtudiant = getListeEtudiant();
+        //listeEtudiant = getListeEtudiant();
 
         //On y enlève les élèves déjà affectés à un groupe
         //On parcours tous les eleves deja en groupe
