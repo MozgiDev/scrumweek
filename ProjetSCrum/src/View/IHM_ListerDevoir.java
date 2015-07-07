@@ -148,6 +148,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     private void bt_ajouter_devoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ajouter_devoirActionPerformed
         IHM_Devoir newDevoir = new IHM_Devoir(null, this);
         newDevoir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_bt_ajouter_devoirActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
