@@ -27,36 +27,38 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
         IHM_ListerDevoir = pIHM_ListerDevoir;
         lstDevoir = pIHM_ListerDevoir.listeDevoir;
         initComponents();
-        initTableau();
+
+        jTable1.setVisible(false);
+
+        jComboBox1.removeAllItems();
+        for (int i = 0; i < lstDevoir.size(); i++) {
+            jComboBox1.addItem(lstDevoir.get(i));
+        }
     }
 
-    private void initTableau() {
+    private void initTableau(Devoir unDevoir) {
         List<String> columns = new ArrayList<String>();
         List<String[]> values = new ArrayList<String[]>();
 
         columns.add("Etudiant");
-        //columns.add("col2");
-        //columns.add("col3");
-        
-        for (int i = 0; i < lstDevoir.size(); i++) {
-            columns.add(lstDevoir.get(i).getLibelle());
-            for (int j = 0; j < lstDevoir.get(i).getLstGroupe().size(); j++) {
-                columns.set(i+1,lstDevoir.get(i).getLibelle()+"  /"+lstDevoir.get(i).getLstGroupe().get(j).getTotalPoid());
-                
-                for (int k = 0; k < lstDevoir.get(i).getLstGroupe().get(j).getLstEtudiant().size(); k++) {
-                    
-                    
-                    String[] content = new String[lstDevoir.size() + 1];
-                    content[0] = lstDevoir.get(i).getLstGroupe().get(j).getLstEtudiant().get(k).toString();
-                    content[i + 1] = lstDevoir.get(i).getLstGroupe().get(j).getTotalNote().toString();
-                    values.add(content);
-                }
+
+        columns.add(unDevoir.getLibelle());
+        for (int j = 0; j < unDevoir.getLstGroupe().size(); j++) {
+            columns.set(1, unDevoir.getLibelle() + "  /" + unDevoir.getLstGroupe().get(j).getTotalPoid());
+
+            for (int k = 0; k < unDevoir.getLstGroupe().get(j).getLstEtudiant().size(); k++) {
+
+                String[] content = new String[lstDevoir.size() + 1];
+                content[0] = unDevoir.getLstGroupe().get(j).getLstEtudiant().get(k).toString();
+                content[1] = unDevoir.getLstGroupe().get(j).getTotalNote().toString();
+                values.add(content);
             }
-            //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
         }
+            //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
 
         TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][]{}), columns.toArray());
         jTable1.setModel(tableModel);
+        jTable1.setVisible(true);
     }
 
     /**
@@ -72,6 +74,7 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,6 +100,13 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,7 +116,8 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -115,9 +126,11 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(6, 6, 6))
@@ -129,8 +142,18 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        Devoir unDevoir = (Devoir) jComboBox1.getSelectedItem();
+        if (unDevoir != null) {
+            initTableau(unDevoir);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

@@ -42,21 +42,19 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
         List<String> columns = new ArrayList<String>();
         List<String[]> values = new ArrayList<String[]>();
 
-        columns.add("Groupe");
+        columns.add("Critère");
 
         for (int j = 0; j < unDevoir.getLstGroupe().size(); j++) {
-
+            String[] content = new String[2];
+            columns.add(unDevoir.getLstGroupe().get(j).getLibelle());
             for (int k = 0; k < unDevoir.getLstGroupe().get(j).getLstNote().size(); k++) {
-                columns.add(unDevoir.getLstGroupe().get(j).getLstNote().get(k).getLibelle()
-                        + "  /" + unDevoir.getLstGroupe().get(j).getLstNote().get(k).getPoid());
-
-                String[] content = new String[lstDevoir.size() + 1];
-                content[0] = unDevoir.getLstGroupe().get(j).getLibelle();
-                content[k + 1] = unDevoir.getLstGroupe().get(j).getLstNote().get(k).getNote().toString();
+                content[0] = unDevoir.getLstGroupe().get(j).getLstNote().get(k).getLibelle()
+                        + "  /" + unDevoir.getLstGroupe().get(j).getLstNote().get(k).getPoid();
+                content[1+j] = unDevoir.getLstGroupe().get(j).getLstNote().get(k).getNote().toString();
                 values.add(content);
             }
         }
-            //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
+        //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
 
         TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][]{}), columns.toArray());
         jTable1.setModel(tableModel);
@@ -147,9 +145,9 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         Devoir unDevoir = (Devoir) jComboBox1.getSelectedItem();
-        if(unDevoir!=null){
+        if (unDevoir != null) {
             initTableau(unDevoir);
-        }        
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
