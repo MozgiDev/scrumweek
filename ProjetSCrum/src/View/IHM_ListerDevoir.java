@@ -244,7 +244,8 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_btImportActionPerformed
 
     private void btTabGroupeCritere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritere1ActionPerformed
-        // TODO add your handling code here:
+        IHM_TableauCritereGroupe tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
+        tableauCritereGroupe.setVisible(true);
     }//GEN-LAST:event_btTabGroupeCritere1ActionPerformed
 
 
