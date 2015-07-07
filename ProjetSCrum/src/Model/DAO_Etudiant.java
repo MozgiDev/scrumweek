@@ -9,6 +9,7 @@ import Entity.Etudiant;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.Cursor;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -32,6 +33,30 @@ public class DAO_Etudiant extends DAO_Template<Etudiant> {
             DBObject options = BasicDBObjectBuilder.start().add("capped", false).add("size", 2000000000l).get();
             collection = db.createCollection("etudiant", options);
         }
+    }
+
+    public boolean archive() {
+        if (db.collectionExists("etudiant_save")) {
+
+        } else {
+            DBObject options = BasicDBObjectBuilder.start().add("capped", false).add("size", 2000000000l).get();
+            collection = db.createCollection("etudiant_save", options);
+        }
+        collection = db.getCollection("etudiant");
+        DBCursor cursor = collection.find();
+        try {
+            while (cursor.hasNext()) {
+                collection = db.getCollection("etudiant_save");
+                collection.insert(cursor.next());
+            }
+            collection = db.getCollection("etudiant");
+            collection.drop();
+
+        } finally {
+            cursor.close();
+        }
+
+        return true;
     }
 
     @Override

@@ -12,10 +12,11 @@ import Model.DAO_Etudiant;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.UnknownHostException;
-import static java.time.Clock.system;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -67,6 +68,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         btTabDevoirEleve = new javax.swing.JButton();
         btImport = new javax.swing.JButton();
         btTabGroupeCritere1 = new javax.swing.JButton();
+        cbxClasse = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,7 +105,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
             }
         });
 
-        btImport.setText("Importer des élèves");
+        btImport.setText("Import Elèves");
         btImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btImportActionPerformed(evt);
@@ -116,6 +118,8 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                 btTabGroupeCritere1ActionPerformed(evt);
             }
         });
+
+        cbxClasse.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ASI 1", "ASI 2" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,7 +137,10 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                     .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bt_ajouter_devoir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btTabGroupeCritere1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cbxClasse, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btImport)))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -150,7 +157,9 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btTabGroupeCritere1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btImport, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbxClasse)
+                            .addComponent(btImport, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
                 .addContainerGap())
@@ -186,6 +195,14 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_btTabDevoirEleveActionPerformed
 
     private void btImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportActionPerformed
+        try {
+            DAO_Etudiant dao = new DAO_Etudiant(null);
+            dao.archive();
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_ListerDevoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
 
         JFileChooser choix = new JFileChooser();
         choix.showDialog(choix, null);
@@ -215,11 +232,12 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                         String sPrenom = "";
 
                         if (cellIterator.hasNext()) {
+                            cell = cellIterator.next();
                             sPrenom = cell.getStringCellValue();
                         }
 
                         if (sNom != "" && sPrenom != "") {
-                            Etudiant etud = new Etudiant(sNom, sPrenom, "ASI 1");
+                            Etudiant etud = new Etudiant(sNom, sPrenom, cbxClasse.getSelectedItem().toString());
                             System.out.println(etud.toString());
                             DAO_Etudiant dao_etud = new DAO_Etudiant(null);
                             dao_etud.create(etud);
@@ -253,6 +271,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     private javax.swing.JButton btTabDevoirEleve;
     private javax.swing.JButton btTabGroupeCritere1;
     private javax.swing.JButton bt_ajouter_devoir;
+    private javax.swing.JComboBox cbxClasse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
