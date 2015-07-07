@@ -49,7 +49,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     }
 
     public void updateListeEtudiant() {
-        getListeEtudiant();
+        listeEtudiant = getListeEtudiant();
         modeljList1.clear();
         for (int i = 0; i < listeEtudiant.size(); i++) {
             modeljList1.addElement(listeEtudiant.get(i));
@@ -67,10 +67,9 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             listeEtud = dao.findAll();
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_CreationGroupe.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listeEtudiant = IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
+        }        
         
-        return listeEtudiant;
+        return IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
     }
     
     protected void initListEtudiant()
@@ -88,22 +87,26 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             }
         }
         //On récupère la liste totale des élèves
-        getListeEtudiant();
+        listeEtudiant = getListeEtudiant();
         
-//        //On y enlève les élèves déjà affectés à un groupe
-//        //On parcours tous les eleves deja en groupe
-//        for(int i = 0; i < lstElevesDejaEnGroupe.size(); i++)
-//        {
-//            for(int j = 0; j < listeEtudiant.size(); j++)
-//            {
-//                if(listeEtudiant.get(j).equals(lstElevesDejaEnGroupe.get(i)))
-//                {
-//                    listeEtudiant.remove(j);
-//                }
-//            }
-//        }
+        //On y enlève les élèves déjà affectés à un groupe
+        //On parcours tous les eleves deja en groupe
+        for(int i = 0; i < lstElevesDejaEnGroupe.size(); i++)
+        {
+            for(int j = 0; j < listeEtudiant.size(); j++)
+            {
+                if(listeEtudiant.get(j).equals(lstElevesDejaEnGroupe.get(i)))
+                {
+                    listeEtudiant.remove(j);
+                }
+            }
+        }
         //On met à jour la liste
-        updateListeEtudiant();
+        modeljList1.clear();
+        for (int i = 0; i < listeEtudiant.size(); i++) {
+            modeljList1.addElement(listeEtudiant.get(i));
+        }
+        jList1.setModel(modeljList1);
     }
 
     /**

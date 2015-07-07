@@ -40,8 +40,8 @@ public class DAO_Etudiant extends DAO_Template<Etudiant> {
          *   Création d'un objet document pour les Etudiants
          *   On lui passe en paramètre les clés associées de ses valeurs
          */
-        BasicDBObject doc = new BasicDBObject("nom", obj.getNom())
-                .append("prenom", obj.getPrenom())
+        BasicDBObject doc = new BasicDBObject("prenom", obj.getNom())
+                .append("nom", obj.getPrenom())
                 .append("classe", obj.getClasse());
 
         /*
@@ -75,8 +75,8 @@ public class DAO_Etudiant extends DAO_Template<Etudiant> {
                 DBObject objet = cursor.next();
                 //On le cast en client en rentrant les parametres
                 Etudiant etudiant = new Etudiant(
-                        objet.get("nom").toString(),
                         objet.get("prenom").toString(),
+                        objet.get("nom").toString(),
                         objet.get("classe").toString()
                 );
 
