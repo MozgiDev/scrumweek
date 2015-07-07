@@ -196,18 +196,11 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_btTabDevoirEleveActionPerformed
 
     private void btImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportActionPerformed
-        try {
-            DAO_Etudiant dao = new DAO_Etudiant(null);
-            dao.archive();
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(IHM_ListerDevoir.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
 
         JFileChooser choix = new JFileChooser();
         choix.showDialog(choix, null);
         File f = choix.getSelectedFile();
+       
 
         try {
             FileInputStream file = new FileInputStream(f);
@@ -217,7 +210,11 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
 
             //Get first/desired sheet from the workbook
             XSSFSheet sheet = workbook.getSheetAt(0);
-
+            
+            // On copie les eleves de la classe dans notre collection archive
+            DAO_Etudiant dao = new DAO_Etudiant(null);
+            dao.archive(cbxClasse.getSelectedItem().toString());
+            
             //Iterate through each rows one by one
             Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.iterator();
             while (rowIterator.hasNext()) {
@@ -258,6 +255,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
             }
             file.close();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
     }//GEN-LAST:event_btImportActionPerformed
