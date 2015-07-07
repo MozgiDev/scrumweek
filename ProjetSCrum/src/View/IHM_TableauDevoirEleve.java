@@ -39,10 +39,12 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
         //columns.add("col3");
         
         for (int i = 0; i < lstDevoir.size(); i++) {
+            columns.add(lstDevoir.get(i).getLibelle());
             for (int j = 0; j < lstDevoir.get(i).getLstGroupe().size(); j++) {
-
+                columns.set(i+1,lstDevoir.get(i).getLibelle()+"  /"+lstDevoir.get(i).getLstGroupe().get(j).getTotalPoid());
+                
                 for (int k = 0; k < lstDevoir.get(i).getLstGroupe().get(j).getLstEtudiant().size(); k++) {
-                    columns.add(lstDevoir.get(i).getLibelle()+"  /"+lstDevoir.get(i).getLstGroupe().get(j).getTotalPoid());
+                    
                     
                     String[] content = new String[lstDevoir.size() + 1];
                     content[0] = lstDevoir.get(i).getLstGroupe().get(j).getLstEtudiant().get(k).toString();

@@ -31,39 +31,36 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
         lstDevoir = pIHM_ListerDevoir.listeDevoir;
         initComponents();
         jTable1.setVisible(false);
-        
+
         jComboBox1.removeAllItems();
         for (int i = 0; i < lstDevoir.size(); i++) {
             jComboBox1.addItem(lstDevoir.get(i));
         }
     }
 
-    private void initTableau() {
+    private void initTableau(Devoir unDevoir) {
         List<String> columns = new ArrayList<String>();
         List<String[]> values = new ArrayList<String[]>();
 
         columns.add("Groupe");
-        //columns.add("col2");
-        //columns.add("col3");
 
-        for (int i = 0; i < lstDevoir.size(); i++) {// pas pour tout les devoir
-            for (int j = 0; j < lstDevoir.get(i).getLstGroupe().size(); j++) {
+        for (int j = 0; j < unDevoir.getLstGroupe().size(); j++) {
 
-                for (int k = 0; k < lstDevoir.get(i).getLstGroupe().get(j).getLstNote().size(); k++) {
-                    columns.add(lstDevoir.get(i).getLstGroupe().get(j).getLstNote().get(k).getLibelle()
-                            + "  /" + lstDevoir.get(i).getLstGroupe().get(j).getLstNote().get(k).getPoid());
+            for (int k = 0; k < unDevoir.getLstGroupe().get(j).getLstNote().size(); k++) {
+                columns.add(unDevoir.getLstGroupe().get(j).getLstNote().get(k).getLibelle()
+                        + "  /" + unDevoir.getLstGroupe().get(j).getLstNote().get(k).getPoid());
 
-                    String[] content = new String[lstDevoir.size() + 1];
-                    content[0] = lstDevoir.get(i).getLstGroupe().get(j).getLibelle();
-                    content[k + 1] = lstDevoir.get(i).getLstGroupe().get(j).getLstNote().get(k).getNote().toString();
-                    values.add(content);
-                }
+                String[] content = new String[lstDevoir.size() + 1];
+                content[0] = unDevoir.getLstGroupe().get(j).getLibelle();
+                content[k + 1] = unDevoir.getLstGroupe().get(j).getLstNote().get(k).getNote().toString();
+                values.add(content);
             }
-            //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
         }
+            //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
 
         TableModel tableModel = new DefaultTableModel(values.toArray(new Object[][]{}), columns.toArray());
         jTable1.setModel(tableModel);
+        jTable1.setVisible(true);
     }
 
     /**
@@ -106,6 +103,11 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +144,14 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        Devoir unDevoir = (Devoir) jComboBox1.getSelectedItem();
+        if(unDevoir!=null){
+            initTableau(unDevoir);
+        }        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     /**
      * @param args the command line arguments
