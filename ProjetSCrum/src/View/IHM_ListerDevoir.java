@@ -174,6 +174,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
 
         IHM_Devoir modifDevoir = new IHM_Devoir(devoir, this);
         modifDevoir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
