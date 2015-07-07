@@ -35,9 +35,11 @@ public class DAO_Etudiant extends DAO_Template<Etudiant> {
         }
     }
 
-    public boolean archive() {
+    public boolean archive(String uneClasse) {
+        // Vider la base archive a chaque fois.
         if (db.collectionExists("etudiant_save")) {
-
+            collection = db.getCollection("etudiant_save");
+            collection.drop();
         } else {
             DBObject options = BasicDBObjectBuilder.start().add("capped", false).add("size", 2000000000l).get();
             collection = db.createCollection("etudiant_save", options);
@@ -49,8 +51,10 @@ public class DAO_Etudiant extends DAO_Template<Etudiant> {
                 collection = db.getCollection("etudiant_save");
                 collection.insert(cursor.next());
             }
-            collection = db.getCollection("etudiant");
-            collection.drop();
+                collection = db.getCollection("etudiant");
+            BasicDBObject query = new BasicDBObject();
+            query.append("classe", uneClasse);
+            collection.remove(query);
 
         } finally {
             cursor.close();
