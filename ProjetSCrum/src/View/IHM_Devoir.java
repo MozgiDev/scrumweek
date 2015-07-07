@@ -487,6 +487,20 @@ public class IHM_Devoir extends javax.swing.JFrame {
         IHM_ListerDevoir.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
+    protected List<String> getLstNomGroupe()
+    {
+        List<String> lstNomGroupe = new ArrayList<String>();
+        
+        ListModel model = jList2.getModel();
+        
+        for(int i = 0; i < model.getSize(); i ++)
+        {
+            lstNomGroupe.add(model.getElementAt(i).toString());
+        }
+        
+        return lstNomGroupe;
+    }
+            
     public void updateMatiere() throws UnknownHostException {
         matiereDevoir.removeAllItems();
         DAO_Matiere dao = new DAO_Matiere(null);

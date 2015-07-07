@@ -183,6 +183,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
 
         IHM_Devoir modifDevoir = new IHM_Devoir(devoir, this);
         modifDevoir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -262,7 +263,8 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_btImportActionPerformed
 
     private void btTabGroupeCritere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritere1ActionPerformed
-        // TODO add your handling code here:
+        IHM_TableauCritereGroupe tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
+        tableauCritereGroupe.setVisible(true);
     }//GEN-LAST:event_btTabGroupeCritere1ActionPerformed
 
 
