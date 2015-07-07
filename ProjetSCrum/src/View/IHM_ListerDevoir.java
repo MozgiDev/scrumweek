@@ -6,14 +6,20 @@
 package View;
 
 import Entity.Devoir;
+import Entity.Etudiant;
 import Model.DAO_Devoir;
-import Model.DAO_Template;
+import Model.DAO_Etudiant;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.UnknownHostException;
+import static java.time.Clock.system;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -59,7 +65,8 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         bt_ajouter_devoir = new javax.swing.JButton();
         btTabDevoirEleve = new javax.swing.JButton();
-        btTabGroupeCritere = new javax.swing.JButton();
+        btImport = new javax.swing.JButton();
+        btTabGroupeCritere1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,10 +103,17 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
             }
         });
 
-        btTabGroupeCritere.setText("Tableau Note groupe/critère");
-        btTabGroupeCritere.addActionListener(new java.awt.event.ActionListener() {
+        btImport.setText("Importer des élèves");
+        btImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTabGroupeCritereActionPerformed(evt);
+                btImportActionPerformed(evt);
+            }
+        });
+
+        btTabGroupeCritere1.setText("Tableau Note groupe/critère");
+        btTabGroupeCritere1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTabGroupeCritere1ActionPerformed(evt);
             }
         });
 
@@ -115,10 +129,11 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btTabGroupeCritere)
-                    .addComponent(bt_ajouter_devoir, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_ajouter_devoir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btTabGroupeCritere1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -133,7 +148,9 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btTabGroupeCritere, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btTabGroupeCritere1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btImport, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
                 .addContainerGap())
@@ -148,6 +165,7 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     private void bt_ajouter_devoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_ajouter_devoirActionPerformed
         IHM_Devoir newDevoir = new IHM_Devoir(null, this);
         newDevoir.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_bt_ajouter_devoirActionPerformed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
@@ -167,15 +185,73 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         tableauDevoirEleve.setVisible(true);
     }//GEN-LAST:event_btTabDevoirEleveActionPerformed
 
-    private void btTabGroupeCritereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritereActionPerformed
-        IHM_TableauCritereGroupe tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
-        tableauCritereGroupe.setVisible(true);
-    }//GEN-LAST:event_btTabGroupeCritereActionPerformed
+    private void btImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportActionPerformed
+
+        JFileChooser choix = new JFileChooser();
+        choix.showDialog(choix, null);
+        File f = choix.getSelectedFile();
+
+        try {
+            FileInputStream file = new FileInputStream(f);
+
+            //Create Workbook instance holding reference to .xlsx file
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+            //Get first/desired sheet from the workbook
+            XSSFSheet sheet = workbook.getSheetAt(0);
+
+            //Iterate through each rows one by one
+            Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.iterator();
+            while (rowIterator.hasNext()) {
+                org.apache.poi.ss.usermodel.Row row = rowIterator.next();
+                //For each row, iterate through all the columns
+                Iterator<org.apache.poi.ss.usermodel.Cell> cellIterator = row.cellIterator();
+                while (cellIterator.hasNext()) {
+                    org.apache.poi.ss.usermodel.Cell cell = cellIterator.next();
+
+                    if (!cell.getStringCellValue().equals("NOM")
+                            && !cell.getStringCellValue().equals("Prénom")) {
+                        String sNom = cell.getStringCellValue();
+                        String sPrenom = "";
+
+                        if (cellIterator.hasNext()) {
+                            sPrenom = cell.getStringCellValue();
+                        }
+
+                        if (sNom != "" && sPrenom != "") {
+                            Etudiant etud = new Etudiant(sNom, sPrenom, "ASI 1");
+                            System.out.println(etud.toString());
+                            DAO_Etudiant dao_etud = new DAO_Etudiant(null);
+                            dao_etud.create(etud);
+                        }
+                    }
+//                    //Check the cell type and format accordingly
+//                    switch (cell.getCellType())
+//                    {
+//                        case org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC:
+//                            System.out.print(cell.getNumericCellValue() + " ");
+//                            break;
+//                        case org.apache.poi.ss.usermodel.Cell.CELL_TYPE_STRING:
+//                            System.out.print(cell.getStringCellValue() + ";");
+//                            break;
+//                    }   
+                }
+            }
+            file.close();
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_btImportActionPerformed
+
+    private void btTabGroupeCritere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritere1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTabGroupeCritere1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btImport;
     private javax.swing.JButton btTabDevoirEleve;
-    private javax.swing.JButton btTabGroupeCritere;
+    private javax.swing.JButton btTabGroupeCritere1;
     private javax.swing.JButton bt_ajouter_devoir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;

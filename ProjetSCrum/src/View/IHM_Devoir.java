@@ -163,6 +163,11 @@ public class IHM_Devoir extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel3.setText("Création devoir : ");
@@ -382,13 +387,14 @@ public class IHM_Devoir extends javax.swing.JFrame {
             }
 
             this.setVisible(false);
+            IHM_ListerDevoir.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Erreur, vous devez remplir tous les champs!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        IHM_ListerDevoir.setVisible(true);
         this.setVisible(false);
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -476,6 +482,10 @@ public class IHM_Devoir extends javax.swing.JFrame {
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        IHM_ListerDevoir.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     public void updateMatiere() throws UnknownHostException {
         matiereDevoir.removeAllItems();

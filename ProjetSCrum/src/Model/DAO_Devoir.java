@@ -179,8 +179,8 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
                     while (itListBDEtudiant.hasNext()) {//On ajoute la liste des Critere
                         BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDEtudiant.next();
                         Etudiant unEtudiant = new Etudiant(
-                                aDBObjectCritere.get("nom").toString(),
                                 aDBObjectCritere.get("prenom").toString(),
+                                aDBObjectCritere.get("nom").toString(),
                                 aDBObjectCritere.get("classe").toString());
 
                         lstEtudiant.add(unEtudiant);
