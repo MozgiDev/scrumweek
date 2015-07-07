@@ -59,7 +59,8 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         bt_ajouter_devoir = new javax.swing.JButton();
         btTabDevoirEleve = new javax.swing.JButton();
-        btTabGroupeCritere = new javax.swing.JButton();
+        btImport = new javax.swing.JButton();
+        btTabGroupeCritere1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,10 +97,17 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
             }
         });
 
-        btTabGroupeCritere.setText("Tableau Note groupe/critère");
-        btTabGroupeCritere.addActionListener(new java.awt.event.ActionListener() {
+        btImport.setText("Importer des élèves");
+        btImport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTabGroupeCritereActionPerformed(evt);
+                btImportActionPerformed(evt);
+            }
+        });
+
+        btTabGroupeCritere1.setText("Tableau Note groupe/critère");
+        btTabGroupeCritere1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTabGroupeCritere1ActionPerformed(evt);
             }
         });
 
@@ -115,10 +123,11 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btTabGroupeCritere)
-                    .addComponent(bt_ajouter_devoir, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bt_ajouter_devoir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btTabGroupeCritere1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -133,7 +142,9 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btTabDevoirEleve, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btTabGroupeCritere, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btTabGroupeCritere1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btImport, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
                 .addContainerGap())
@@ -168,15 +179,20 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         tableauDevoirEleve.setVisible(true);
     }//GEN-LAST:event_btTabDevoirEleveActionPerformed
 
-    private void btTabGroupeCritereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritereActionPerformed
+    private void btImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportActionPerformed
         IHM_TableauCritereGroupe tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
         tableauCritereGroupe.setVisible(true);
-    }//GEN-LAST:event_btTabGroupeCritereActionPerformed
+    }//GEN-LAST:event_btImportActionPerformed
+
+    private void btTabGroupeCritere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritere1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btTabGroupeCritere1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btImport;
     private javax.swing.JButton btTabDevoirEleve;
-    private javax.swing.JButton btTabGroupeCritere;
+    private javax.swing.JButton btTabGroupeCritere1;
     private javax.swing.JButton bt_ajouter_devoir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;

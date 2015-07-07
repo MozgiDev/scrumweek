@@ -32,10 +32,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="184" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btTabDevoirEleve" min="-2" pref="169" max="-2" attributes="0"/>
-                  <Component id="btTabGroupeCritere" min="-2" max="-2" attributes="0"/>
-                  <Component id="bt_ajouter_devoir" min="-2" pref="169" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btTabDevoirEleve" max="32767" attributes="0"/>
+                  <Component id="bt_ajouter_devoir" max="32767" attributes="0"/>
+                  <Component id="btTabGroupeCritere1" max="32767" attributes="0"/>
+                  <Component id="btImport" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
@@ -53,7 +54,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btTabDevoirEleve" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btTabGroupeCritere" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="btTabGroupeCritere1" min="-2" pref="34" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btImport" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" pref="224" max="32767" attributes="0"/>
@@ -115,12 +118,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTabDevoirEleveActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btTabGroupeCritere">
+    <Component class="javax.swing.JButton" name="btImport">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Importer des &#xe9;l&#xe8;ves"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btImportActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btTabGroupeCritere1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tableau Note groupe/crit&#xe8;re"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTabGroupeCritereActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTabGroupeCritere1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
