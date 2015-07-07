@@ -273,6 +273,17 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             
             //On check les noms de groupe existant et on empeche d'en créer un avec un nom qui existe deja
             List<String> lstNomGroupe = IHM_DevoirPapa.getLstNomGroupe();
+            if(!lstNomGroupe.isEmpty())
+            {
+                for(int i = 0; i < lstNomGroupe.size(); i++)
+                {
+                    if(jTextField1.getText().equals(lstNomGroupe.get(i)))
+                    {
+                        JOptionPane.showMessageDialog(this, "Ce nom de groupe existe déjà.");
+                        return;
+                    }
+                }
+            }
             
             List<Etudiant> lstEdudiant = new ArrayList<Etudiant>();            
             for (int i = 0; i < modeljList2.size(); i++) {
