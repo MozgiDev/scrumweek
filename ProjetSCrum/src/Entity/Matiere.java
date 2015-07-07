@@ -4,23 +4,33 @@
  * and open the template in the editor.
  */
 package Entity;
+
 import java.util.Objects;
 import org.bson.types.ObjectId;
+
 /**
  *
  * @author Jérôme
  */
 public class Matiere {
+
     ObjectId id;
     String libelle;
-    
+    String classe;
+
     public Matiere(ObjectId id, String unLibelle) {
         this.id = id;
         this.libelle = unLibelle;
     }
-    
+
+    public Matiere(ObjectId id, String unLibelle, String uneClasse) {
+        this.id = id;
+        this.libelle = unLibelle;
+        this.classe = uneClasse;
+    }
+
     public Matiere() {
-        
+
     }
 
     public ObjectId getId() {
@@ -37,6 +47,14 @@ public class Matiere {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
     }
 
     @Override
@@ -66,7 +84,5 @@ public class Matiere {
     public String toString() {
         return libelle;
     }
-    
-    
-    
+
 }

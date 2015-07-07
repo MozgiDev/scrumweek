@@ -27,11 +27,11 @@ public class DAO_Matiere extends DAO_Template<Matiere> {
 
     public DAO_Matiere(Connection conn) throws UnknownHostException {
         super(conn);
-        if (db.collectionExists("matiere")) {
-            collection = db.getCollection("matiere");
+        if (db.collectionExists("matiere2")) {
+            collection = db.getCollection("matiere2");
         } else {
             DBObject options = BasicDBObjectBuilder.start().add("capped", false).add("size", 2000000000l).get();
-            collection = db.createCollection("matiere", options);
+            collection = db.createCollection("matiere2", options);
         }
     }
 
@@ -71,6 +71,30 @@ public class DAO_Matiere extends DAO_Template<Matiere> {
                 Matiere matiere = new Matiere();
                 matiere.setLibelle(objet.get("libelle").toString());
                 matiere.setId((ObjectId) objet.get("_id"));
+                listMatiere.add(matiere);
+            }
+        } finally {
+            cursor.close();
+        }
+        return listMatiere;
+    }
+    
+       public List<Matiere> findByClasse(String uneClasse) {
+        //On instancie la liste qui va contenir les clients retournés par la requête
+        List<Matiere> listMatiere = new ArrayList<>();
+
+        cursor = collection.find();
+
+        try {
+            //Pour chaque enregistrement trouvé
+            while (cursor.hasNext()) {
+                //On instancie un objet
+                DBObject objet = cursor.next();
+                //On le cast en client en rentrant les parametres
+                Matiere matiere = new Matiere();
+                matiere.setLibelle(objet.get("libelle").toString());
+                matiere.setId((ObjectId) objet.get("_id"));
+                matiere.setClasse(objet.get("classe").toString());
                 listMatiere.add(matiere);
             }
         } finally {
