@@ -212,6 +212,16 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         jLabel5.setText("Liste des rubriques");
 
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jButton3.setText("+");
@@ -486,6 +496,22 @@ public class IHM_Devoir extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         IHM_ListerDevoir.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+        
+        
+    }//GEN-LAST:event_jList1KeyPressed
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+        //Si rien n'est selectionné on sort de la méthode
+        if(jList1.isSelectionEmpty())
+            return;
+        
+        Rubrique rubrique = (Rubrique)jList1.getSelectedValue();
+        
+        IHM_Rubrique = new IHM_RubriquesCriteres(this, rubrique);
+        IHM_Rubrique.setVisible(true);
+    }//GEN-LAST:event_jList1MouseClicked
 
     protected List<String> getLstNomGroupe()
     {
