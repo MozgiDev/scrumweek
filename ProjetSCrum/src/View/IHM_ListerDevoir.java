@@ -8,12 +8,14 @@ package View;
 import Entity.Devoir;
 import Model.DAO_Devoir;
 import Model.DAO_Template;
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -180,8 +182,13 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_btTabDevoirEleveActionPerformed
 
     private void btImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportActionPerformed
-        IHM_TableauCritereGroupe tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
-        tableauCritereGroupe.setVisible(true);
+        
+        JFileChooser choix = new JFileChooser();
+        choix.showDialog(choix, null);
+        File f = choix.getSelectedFile();
+      
+        
+        
     }//GEN-LAST:event_btImportActionPerformed
 
     private void btTabGroupeCritere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritere1ActionPerformed
