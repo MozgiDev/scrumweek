@@ -279,7 +279,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
                 {
                     if(jTextField1.getText().equals(lstNomGroupe.get(i)))
                     {
-                        JOptionPane.showMessageDialog(this, "Ce nom de groupe existe déjà.");
+                        JOptionPane.showMessageDialog(this, "Ce nom de groupe existe déjà");
                         return;
                     }
                 }
