@@ -49,7 +49,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         newDevoir = new Devoir();
         devoir = new Devoir();
         isCreation = true;
-        IHM_ListerDevoir = pIHM_ListerDevoir;        
+        IHM_ListerDevoir = pIHM_ListerDevoir;
 
         try {
             initComponents();
@@ -61,10 +61,10 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 jButton1.setText("Modifier");
                 jButton5.setVisible(true);
                 isCreation = false;
-                
+
                 devoir = new Devoir(pDevoir);
                 newDevoir = new Devoir(pDevoir);
-                
+
                 matiereDevoir.setSelectedItem(devoir.getMatiere());
                 titreDevoir.setText(devoir.getLibelle());
                 jXDatePicker1.setDate(devoir.getDate());
@@ -78,7 +78,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
                     listeModel.addElement(lstRubrique.get(i));
                 }
                 jList1.setModel(listeModel);
-                
+
                 updateListeGroupe();
 
                 //Si on est en création d'un nouveau devoir
@@ -91,17 +91,15 @@ public class IHM_Devoir extends javax.swing.JFrame {
         jXDatePicker1.getEditor().setEditable(false);
     }
 
-    protected void updateListeGroupe()
-    {
+    protected void updateListeGroupe() {
         List<Groupe> lstGroupe = newDevoir.getLstGroupe();
-                DefaultListModel listeModelGroupe = new DefaultListModel();
-                for(int i = 0; i < lstGroupe.size(); i++)
-                {
-                    listeModelGroupe.addElement(lstGroupe.get(i));
-                }
-                jList2.setModel(listeModelGroupe);
+        DefaultListModel listeModelGroupe = new DefaultListModel();
+        for (int i = 0; i < lstGroupe.size(); i++) {
+            listeModelGroupe.addElement(lstGroupe.get(i));
+        }
+        jList2.setModel(listeModelGroupe);
     }
-    
+
     protected void addToListRubrique(Rubrique rub) {
         ListModel model = jList1.getModel();
         DefaultListModel listModel = new DefaultListModel();
@@ -402,6 +400,18 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 && jList1.getModel().getSize() != 0
                 && jXDatePicker1.getDate() != null) {
             DAO_Devoir dao;
+
+            //try {
+                // On test s'il y a deja un devoir aujourd'hui
+               // dao = new DAO_Devoir(null);
+                //if (dao.findByDate()) {
+                 //   JOptionPane.showMessageDialog(this, "Erreur, Il y a deja un devoir a cette date");
+                  //  return;
+              //  }
+            //} catch (UnknownHostException ex) {
+              //  Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+
             try {
                 dao = new DAO_Devoir(null);
                 if (isCreation) {
@@ -444,39 +454,33 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //Si il y a moins de 5 rubriques
-        if(jList1.getModel().getSize() < 5)
-        {    
+        if (jList1.getModel().getSize() < 5) {
             IHM_Rubrique = new IHM_RubriquesCriteres(this);
             IHM_Rubrique.setVisible(true);
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(this, "Erreur, vous ne pouvez pas créer plus de 5 rubriques.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         //Si un element de la liste est bien sélectionné
-        if(!jList1.isSelectionEmpty())
-        {
+        if (!jList1.isSelectionEmpty()) {
             DefaultListModel model = new DefaultListModel();
             List liste = new ArrayList();
-            
-            for(int i = 0; i < jList1.getModel().getSize(); i ++)
-            {
+
+            for (int i = 0; i < jList1.getModel().getSize(); i++) {
                 model.addElement(jList1.getModel().getElementAt(i));
                 liste.add(jList1.getModel().getElementAt(i));
             }
-            
+
             model.removeElement(jList1.getSelectedValue());
             liste.remove(jList1.getSelectedValue());
-            
+
             jList1.setModel(model);
-            
+
             newDevoir.setLstRubrique(liste);
-        }
-        else{
-            JOptionPane.showMessageDialog(this,"Veuillez selectionner une rubrique à supprimer svp");
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner une rubrique à supprimer svp");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -489,9 +493,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_titreDevoirActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+
         this.setEnabled(false);
-        
+
         IHM_CreationGroupe = new IHM_CreationGroupe(this);
         IHM_CreationGroupe.setVisible(true);
         // TODO add your handling code here:
@@ -499,26 +503,23 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         //Si un element de la liste est bien sélectionné
-        if(!jList2.isSelectionEmpty())
-        {
+        if (!jList2.isSelectionEmpty()) {
             DefaultListModel model = new DefaultListModel();
             List liste = new ArrayList();
-            
-            for(int i = 0; i < jList2.getModel().getSize(); i ++)
-            {
+
+            for (int i = 0; i < jList2.getModel().getSize(); i++) {
                 model.addElement(jList2.getModel().getElementAt(i));
                 liste.add(jList2.getModel().getElementAt(i));
             }
-            
+
             model.removeElement(jList2.getSelectedValue());
             liste.remove(jList2.getSelectedValue());
-            
+
             jList2.setModel(model);
-            
+
             newDevoir.setLstGroupe(liste);
-        }
-        else{
-            JOptionPane.showMessageDialog(this,"Veuillez selectionner un groupe à supprimer svp");
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner un groupe à supprimer svp");
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -531,17 +532,18 @@ public class IHM_Devoir extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
-        
-        
+
+
     }//GEN-LAST:event_jList1KeyPressed
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         //Si rien n'est selectionné on sort de la méthode
-        if(jList1.isSelectionEmpty())
+        if (jList1.isSelectionEmpty()) {
             return;
-        
-        Rubrique rubrique = (Rubrique)jList1.getSelectedValue();
-        
+        }
+
+        Rubrique rubrique = (Rubrique) jList1.getSelectedValue();
+
         IHM_Consult_Rubrique tralala = new IHM_Consult_Rubrique(rubrique);
         tralala.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
@@ -549,11 +551,12 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
         //Si rien n'est selectionné on sort de la méthode
-        if(jList2.isSelectionEmpty())
+        if (jList2.isSelectionEmpty()) {
             return;
-        
-        Groupe groupe = (Groupe)jList2.getSelectedValue();
-        
+        }
+
+        Groupe groupe = (Groupe) jList2.getSelectedValue();
+
         IHM_Consult_Groupe tralala = new IHM_Consult_Groupe(groupe);
         tralala.setVisible(true);
     }//GEN-LAST:event_jList2MouseClicked
@@ -561,27 +564,24 @@ public class IHM_Devoir extends javax.swing.JFrame {
     private void cbxChoixClasseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxChoixClasseItemStateChanged
         try {
             sClasse = cbxChoixClasse.getSelectedItem().toString();
-            updateMatiere(sClasse);            
+            updateMatiere(sClasse);
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cbxChoixClasseItemStateChanged
 
-
-    protected List<String> getLstNomGroupe()
-    {
+    protected List<String> getLstNomGroupe() {
         List<String> lstNomGroupe = new ArrayList<String>();
-        
+
         ListModel model = jList2.getModel();
-        
-        for(int i = 0; i < model.getSize(); i ++)
-        {
+
+        for (int i = 0; i < model.getSize(); i++) {
             lstNomGroupe.add(model.getElementAt(i).toString());
         }
-        
+
         return lstNomGroupe;
     }
-            
+
     public void updateMatiere(String uneClasse) throws UnknownHostException {
         matiereDevoir.removeAllItems();
         DAO_Matiere dao = new DAO_Matiere(null);

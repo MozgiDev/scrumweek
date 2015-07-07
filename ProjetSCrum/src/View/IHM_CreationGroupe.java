@@ -71,13 +71,13 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         }
 
         listeEtudiant = IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
-        
-        for(int i = 0; i < listeEtudiant.size(); i++)
-        {
-            if(listeEtudiant.get(i).getClasse().equals(IHM_DevoirPapa.sClasse))
+
+        for (int i = 0; i < listeEtudiant.size(); i++) {
+            if (listeEtudiant.get(i).getClasse().equals(IHM_DevoirPapa.sClasse)) {
                 listeEtudiant.remove(i);
+            }
         }
-        
+
         return listeEtudiant;
     }
 
@@ -296,7 +296,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             IHM_DevoirPapa.updateListeGroupe();
 
             this.setVisible(false);
-
+            IHM_DevoirPapa.toFront();
+            IHM_DevoirPapa.repaint();
             IHM_DevoirPapa.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez entrer un nom à votre groupe, et y intégrer au moins un élève.");
@@ -343,6 +344,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.setVisible(false);
+        IHM_DevoirPapa.toFront();
+        IHM_DevoirPapa.repaint();
         IHM_DevoirPapa.setEnabled(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
