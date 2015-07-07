@@ -252,6 +252,11 @@ public class IHM_Devoir extends javax.swing.JFrame {
             }
         });
 
+        jList2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jList2);
 
         jLabel6.setText("Liste des groupes");
@@ -512,6 +517,17 @@ public class IHM_Devoir extends javax.swing.JFrame {
         IHM_Rubrique = new IHM_RubriquesCriteres(this, rubrique);
         IHM_Rubrique.setVisible(true);
     }//GEN-LAST:event_jList1MouseClicked
+
+    private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
+        //Si rien n'est selectionné on sort de la méthode
+        if(jList2.isSelectionEmpty())
+            return;
+        
+        Groupe groupe = (Groupe)jList2.getSelectedValue();
+        
+        IHM_CreationGroupe = new IHM_CreationGroupe(this, groupe);
+        IHM_CreationGroupe.setVisible(true);
+    }//GEN-LAST:event_jList2MouseClicked
 
     protected List<String> getLstNomGroupe()
     {

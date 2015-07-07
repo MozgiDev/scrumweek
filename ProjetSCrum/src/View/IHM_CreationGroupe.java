@@ -31,6 +31,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     private DefaultListModel modeljList2 = null;
     public List<Entity.Etudiant> listeEtudiant;
     protected IHM_Devoir IHM_DevoirPapa = null;
+    protected Groupe groupe = null;
 
     /**
      * Creates new form IHM_CreationGroupe
@@ -46,6 +47,37 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             jLabel5.setText(IHM_DevoirPapa.newDevoir.getLibelle());
         else
             jLabel5.setText("Pas encore défini");
+    }
+    
+    public IHM_CreationGroupe(IHM_Devoir pIHM_Devoir, Groupe pGroupe) {
+        initComponents();
+        groupe = pGroupe;
+        IHM_DevoirPapa = pIHM_Devoir;
+        modeljList1 = new DefaultListModel();
+        modeljList2 = new DefaultListModel();
+        initListEtudiant();
+
+        if(IHM_DevoirPapa.newDevoir.getLibelle() != null)
+            jLabel5.setText(IHM_DevoirPapa.newDevoir.getLibelle());
+        else
+            jLabel5.setText("Pas encore défini");
+        
+        jTextField1.setText(groupe.getLibelle());
+        
+        DefaultListModel model = new DefaultListModel();
+        for(int i = 0; i < groupe.getLstEtudiant().size(); i++)
+        {
+            model.add(i, groupe.getLstEtudiant().get(i));
+        }        
+        jList2.setModel(model);
+        
+        jLabel3.setVisible(false);
+        jList1.setVisible(false);
+        jList1.setEnabled(false);
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+        jButton5.setText("retour");
     }
 
     public void updateListeEtudiant() {
