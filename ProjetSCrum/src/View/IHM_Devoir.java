@@ -49,12 +49,11 @@ public class IHM_Devoir extends javax.swing.JFrame {
         newDevoir = new Devoir();
         devoir = new Devoir();
         isCreation = true;
-        IHM_ListerDevoir = pIHM_ListerDevoir;
-        
-        sClasse = cbxChoixClasse.getSelectedItem().toString();
+        IHM_ListerDevoir = pIHM_ListerDevoir;        
 
         try {
             initComponents();
+            sClasse = cbxChoixClasse.getSelectedItem().toString();
             //updateMatiere();
             jButton1.setText("Créer");
             //si on est en modification, on charge la page de modification
