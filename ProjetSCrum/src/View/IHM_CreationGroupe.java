@@ -43,12 +43,13 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         modeljList2 = new DefaultListModel();
         initListEtudiant();
 
-        if(IHM_DevoirPapa.newDevoir.getLibelle() != null)
+        if (IHM_DevoirPapa.newDevoir.getLibelle() != null) {
             jLabel5.setText(IHM_DevoirPapa.newDevoir.getLibelle());
-        else
+        } else {
             jLabel5.setText("Pas encore défini");
+        }
     }
-    
+
     public IHM_CreationGroupe(IHM_Devoir pIHM_Devoir, Groupe pGroupe) {
         initComponents();
         groupe = pGroupe;
@@ -57,20 +58,20 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         modeljList2 = new DefaultListModel();
         initListEtudiant();
 
-        if(IHM_DevoirPapa.newDevoir.getLibelle() != null)
+        if (IHM_DevoirPapa.newDevoir.getLibelle() != null) {
             jLabel5.setText(IHM_DevoirPapa.newDevoir.getLibelle());
-        else
+        } else {
             jLabel5.setText("Pas encore défini");
-        
+        }
+
         jTextField1.setText(groupe.getLibelle());
-        
+
         DefaultListModel model = new DefaultListModel();
-        for(int i = 0; i < groupe.getLstEtudiant().size(); i++)
-        {
+        for (int i = 0; i < groupe.getLstEtudiant().size(); i++) {
             model.add(i, groupe.getLstEtudiant().get(i));
-        }        
+        }
         jList2.setModel(model);
-        
+
         jLabel3.setVisible(false);
         jList1.setVisible(false);
         jList1.setEnabled(false);
@@ -88,9 +89,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         }
         jList1.setModel(modeljList1);
     }
-    
-    protected List<Etudiant> getListeEtudiant()
-    {
+
+    protected List<Etudiant> getListeEtudiant() {
         List<Etudiant> listeEtud = new ArrayList<Etudiant>();
         listeEtudiant = new ArrayList<Etudiant>();
         DAO_Etudiant dao;
@@ -99,36 +99,30 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             listeEtud = dao.findAll();
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_CreationGroupe.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-        
+        }
+
         return IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
     }
-    
-    protected void initListEtudiant()
-    {
+
+    protected void initListEtudiant() {
         List<Etudiant> lstElevesDejaEnGroupe = new ArrayList();
-        
+
         //On parcours la liste de tous les groupes associés à ce devoir
-        for(int i = 0; i < IHM_DevoirPapa.newDevoir.getLstGroupe().size(); i++)
-        {            
+        for (int i = 0; i < IHM_DevoirPapa.newDevoir.getLstGroupe().size(); i++) {
             //On parcours chaque groupe
-            for(int j = 0; j < IHM_DevoirPapa.newDevoir.getLstGroupe().get(i).getLstEtudiant().size(); j++)
-            {
+            for (int j = 0; j < IHM_DevoirPapa.newDevoir.getLstGroupe().get(i).getLstEtudiant().size(); j++) {
                 //On récupère tous les élèves que l'on trouve dans une liste commune
                 lstElevesDejaEnGroupe.add(IHM_DevoirPapa.newDevoir.getLstGroupe().get(i).getLstEtudiant().get(j));
             }
         }
         //On récupère la liste totale des élèves
         listeEtudiant = getListeEtudiant();
-        
+
         //On y enlève les élèves déjà affectés à un groupe
         //On parcours tous les eleves deja en groupe
-        for(int i = 0; i < lstElevesDejaEnGroupe.size(); i++)
-        {
-            for(int j = 0; j < listeEtudiant.size(); j++)
-            {
-                if(listeEtudiant.get(j).equals(lstElevesDejaEnGroupe.get(i)))
-                {
+        for (int i = 0; i < lstElevesDejaEnGroupe.size(); i++) {
+            for (int j = 0; j < listeEtudiant.size(); j++) {
+                if (listeEtudiant.get(j).equals(lstElevesDejaEnGroupe.get(i))) {
                     listeEtudiant.remove(j);
                 }
             }
@@ -300,34 +294,32 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        if (!jTextField1.getText().equals("") 
+        if (!jTextField1.getText().equals("")
                 && (modeljList2.size() > 0)) {
-            
+
             //On check les noms de groupe existant et on empeche d'en créer un avec un nom qui existe deja
             List<String> lstNomGroupe = IHM_DevoirPapa.getLstNomGroupe();
-            if(!lstNomGroupe.isEmpty())
-            {
-                for(int i = 0; i < lstNomGroupe.size(); i++)
-                {
-                    if(jTextField1.getText().equals(lstNomGroupe.get(i)))
-                    {
+            if (!lstNomGroupe.isEmpty()) {
+                for (int i = 0; i < lstNomGroupe.size(); i++) {
+                    if (jTextField1.getText().equals(lstNomGroupe.get(i))) {
                         JOptionPane.showMessageDialog(this, "Ce nom de groupe existe déjà");
                         return;
                     }
                 }
             }
-            
-            List<Etudiant> lstEdudiant = new ArrayList<Etudiant>();            
+
+            List<Etudiant> lstEdudiant = new ArrayList<Etudiant>();
             for (int i = 0; i < modeljList2.size(); i++) {
                 Etudiant unEtudiant = (Etudiant) modeljList2.get(i);
                 lstEdudiant.add(unEtudiant);
             }
-            Groupe grp = new Groupe(jTextField1.getText().toString(),lstEdudiant);
+            Groupe grp = new Groupe(jTextField1.getText().toString(), lstEdudiant);
             IHM_DevoirPapa.newDevoir.addToListGroupe(grp);
-                        
+
             IHM_DevoirPapa.updateListeGroupe();
-            
+
             this.setVisible(false);
+
             IHM_DevoirPapa.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez entrer un nom à votre groupe, et y intégrer au moins un élève.");
@@ -342,20 +334,18 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
         //On récupère les elements selectionnés et on les passent dans le model de la liste de droite
-        
         List LstSelectedValues = jList1.getSelectedValuesList();
-        
+
         for (int i = 0; i < LstSelectedValues.size(); i++) {
             modeljList2.addElement(LstSelectedValues.get(i));
             modeljList1.removeElement(LstSelectedValues.get(i));
         }
 
         //On récupère les indices des elements selectionnés et on les enlèves de la liste de gauche
-        
         jList2.setModel(modeljList2);
         jList1.setModel(modeljList1);
-        
-        
+
+
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -381,6 +371,8 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         IHM_DevoirPapa.setEnabled(true);
+        IHM_DevoirPapa.toFront();
+        IHM_DevoirPapa.repaint();
     }//GEN-LAST:event_formWindowClosed
 
     /**
