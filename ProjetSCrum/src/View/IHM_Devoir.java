@@ -56,6 +56,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
         try {
             initComponents();
             sClasse = cbxChoixClasse.getSelectedItem().toString();
+
             //updateMatiere();
             jButton1.setText("Créer");
             //si on est en modification, on charge la page de modification
@@ -91,6 +92,9 @@ public class IHM_Devoir extends javax.swing.JFrame {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
         }
         jXDatePicker1.getEditor().setEditable(false);
+        if (!this.isCreation) {
+            cbxChoixClasse.setEnabled(false);
+        }
     }
 
     protected void updateListeGroupe() {
