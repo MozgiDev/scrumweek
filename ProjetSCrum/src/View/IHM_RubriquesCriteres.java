@@ -283,7 +283,9 @@ public class IHM_RubriquesCriteres extends javax.swing.JFrame {
             int poids = Integer.parseInt(jComboBox2.getSelectedItem().toString());
             Critere critere = new Critere(libelle, poids);
             addToList(critere);
-            jTextField2.setText("");           
+            jTextField2.setText("");    
+            
+            this.jTextField2.requestFocus();
         }
         else
         {
