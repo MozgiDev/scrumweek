@@ -55,6 +55,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         try {
             initComponents();
+            
             sClasse = cbxChoixClasse.getSelectedItem().toString();
 
             //updateMatiere();
