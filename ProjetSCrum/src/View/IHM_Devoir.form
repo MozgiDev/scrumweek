@@ -196,9 +196,9 @@
           <StringArray count="5">
             <StringItem index="0" value="Java"/>
             <StringItem index="1" value="CGI"/>
-            <StringItem index="2" value="Mod"/>
-            <StringItem index="3" value="SCRUM"/>
-            <StringItem index="4" value=""/>
+            <StringItem index="2" value="SCRUM"/>
+            <StringItem index="3" value="R&amp;D"/>
+            <StringItem index="4" value=" "/>
           </StringArray>
         </Property>
       </Properties>
