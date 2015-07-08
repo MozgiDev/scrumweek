@@ -177,7 +177,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
 
         jLabel1.setText("Nom du devoir : ");
 
-        matiereDevoir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Java", "CGI", "Mod", "SCRUM", "" }));
+        matiereDevoir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Java", "CGI", "SCRUM", "R&D", " " }));
         matiereDevoir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 matiereDevoirActionPerformed(evt);
