@@ -38,7 +38,7 @@ public abstract class DAO_Template<T> {
 
        // try {
         this.mongoClient = new MongoClient("172.16.1.20", 27017);
-        //this.mongoClient = new MongoClient("192.168.0.2", 27017);
+        //this.mongoClient = new MongoClient("192.168.2.254", 27017);
         db = mongoClient.getDB("test");
 
         if (db.collectionExists("collection")) {
