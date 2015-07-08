@@ -84,7 +84,7 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 updateListeGroupe();
 
                 Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-                this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+                this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
             }
 
         } catch (Exception ex) {
@@ -404,14 +404,16 @@ public class IHM_Devoir extends javax.swing.JFrame {
             DAO_Devoir dao;
 
             try {
-                 //On test s'il y a deja un devoir aujourd'hui
                 dao = new DAO_Devoir(null);
-                if (dao.findByDate(jXDatePicker1.getDate())) {
-                    JOptionPane.showMessageDialog(this, "Erreur, Il y a deja un devoir a cette date");
-                    return;
-              }
+                //On test s'il y a deja un devoir aujourd'hui, seuelement en création
+                if (this.isCreation) {
+                    if (dao.findByDate(jXDatePicker1.getDate())) {
+                        JOptionPane.showMessageDialog(this, "Erreur, Il y a deja un devoir a cette date");
+                        return;
+                    }
+                }
             } catch (UnknownHostException ex) {
-              Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             try {
