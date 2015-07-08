@@ -6,6 +6,8 @@
 package View;
 
 import Entity.Devoir;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +36,9 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
         for (int i = 0; i < lstDevoir.size(); i++) {
             jComboBox1.addItem(lstDevoir.get(i));
         }
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     private void initTableau(Devoir unDevoir) {

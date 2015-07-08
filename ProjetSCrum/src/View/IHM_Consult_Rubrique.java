@@ -6,6 +6,8 @@
 package View;
 
 import Entity.Rubrique;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.DefaultListModel;
 
 /**
@@ -28,6 +30,9 @@ public class IHM_Consult_Rubrique extends javax.swing.JFrame {
             model.add(i, pRubrique.getLstCritere().get(i));
         }        
         jList1.setModel(model);
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**

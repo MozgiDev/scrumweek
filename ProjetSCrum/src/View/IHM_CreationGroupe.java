@@ -11,6 +11,8 @@ import Entity.Groupe;
 import Model.DAO_Devoir;
 import Model.DAO_Etudiant;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import static java.lang.System.out;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -48,6 +50,9 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
         } else {
             jLabel5.setText("Pas encore défini");
         }
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     public void updateListeEtudiant() {
