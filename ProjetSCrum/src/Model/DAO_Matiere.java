@@ -11,9 +11,11 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.Cursor;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.QueryBuilder;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -35,6 +37,7 @@ public class DAO_Matiere extends DAO_Template<Matiere> {
             collection = db.createCollection("matiere2", options);
         }
     }
+    
 
     @Override
     public boolean create(Matiere obj) {

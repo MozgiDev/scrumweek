@@ -15,6 +15,7 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import com.mongodb.QueryBuilder;
 import static java.lang.System.out;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -37,6 +38,15 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
 
     public DAO_Devoir(Connection conn) throws UnknownHostException {
         super(conn);
+    }
+
+    public boolean findByDate() {
+        Date dateNow = new Date();
+        Date dateHier = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000L);
+        
+        DBObject query = QueryBuilder.start().put("date").greaterThanEquals(dateHier).lessThanEquals(dateNow).get();
+        cursor = collection.find(query);
+        return cursor.hasNext();
     }
 
     @Override
@@ -142,68 +152,68 @@ public class DAO_Devoir extends DAO_Template<Devoir> {
 
                 List<Rubrique> lstRubrique = new ArrayList<Rubrique>();
                 BasicDBList listBDRubrique = (BasicDBList) objet.get("lstRubrique");
-                
-                if(listBDRubrique != null){
-                Iterator itListBDRubrique = listBDRubrique.iterator();
 
-                while (itListBDRubrique.hasNext()) {
-                    List<Critere> lstCritere = new ArrayList<Critere>();
-                    BasicDBObject objectCritere = (BasicDBObject) itListBDRubrique.next();
-                    BasicDBList listBDCritere = (BasicDBList) objectCritere.get("lstCritere");
-                    Iterator itListBDCritere = listBDCritere.iterator();
-                    while (itListBDCritere.hasNext()) {//On ajoute la liste des Critere
-                        BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDCritere.next();
-                        Critere unCritere = new Critere(
-                                aDBObjectCritere.get("libelle").toString(),
-                                (Integer) aDBObjectCritere.get("poid"));
+                if (listBDRubrique != null) {
+                    Iterator itListBDRubrique = listBDRubrique.iterator();
 
-                        lstCritere.add(unCritere);
+                    while (itListBDRubrique.hasNext()) {
+                        List<Critere> lstCritere = new ArrayList<Critere>();
+                        BasicDBObject objectCritere = (BasicDBObject) itListBDRubrique.next();
+                        BasicDBList listBDCritere = (BasicDBList) objectCritere.get("lstCritere");
+                        Iterator itListBDCritere = listBDCritere.iterator();
+                        while (itListBDCritere.hasNext()) {//On ajoute la liste des Critere
+                            BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDCritere.next();
+                            Critere unCritere = new Critere(
+                                    aDBObjectCritere.get("libelle").toString(),
+                                    (Integer) aDBObjectCritere.get("poid"));
+
+                            lstCritere.add(unCritere);
+                        }
+                        Rubrique uneRubrique = new Rubrique(
+                                objectCritere.get("libelle").toString(),
+                                lstCritere);
+                        lstRubrique.add(uneRubrique);
                     }
-                    Rubrique uneRubrique = new Rubrique(
-                            objectCritere.get("libelle").toString(),
-                            lstCritere);
-                    lstRubrique.add(uneRubrique);
-                }
-                devoir.setLstRubrique(lstRubrique);//ajout list Rubrique
+                    devoir.setLstRubrique(lstRubrique);//ajout list Rubrique
 
-                List<Groupe> lstGroupe = new ArrayList<Groupe>();
-                BasicDBList listBDGroupe = (BasicDBList) objet.get("lstGroupe");
-                Iterator itListBDGroupe = listBDGroupe.iterator();
+                    List<Groupe> lstGroupe = new ArrayList<Groupe>();
+                    BasicDBList listBDGroupe = (BasicDBList) objet.get("lstGroupe");
+                    Iterator itListBDGroupe = listBDGroupe.iterator();
 
-                while (itListBDGroupe.hasNext()) {
-                    List<Etudiant> lstEtudiant = new ArrayList<Etudiant>();
-                    List<Note> lstNote = new ArrayList<Note>();
-                    BasicDBObject objectsGroupe = (BasicDBObject) itListBDGroupe.next();
-                    BasicDBList listBDEtudiant = (BasicDBList) objectsGroupe.get("lstEtudiant");
-                    Iterator itListBDEtudiant = listBDEtudiant.iterator();
-                    while (itListBDEtudiant.hasNext()) {//On ajoute la liste des Critere
-                        BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDEtudiant.next();
-                        Etudiant unEtudiant = new Etudiant(
-                                aDBObjectCritere.get("prenom").toString(),
-                                aDBObjectCritere.get("nom").toString(),
-                                aDBObjectCritere.get("classe").toString());
+                    while (itListBDGroupe.hasNext()) {
+                        List<Etudiant> lstEtudiant = new ArrayList<Etudiant>();
+                        List<Note> lstNote = new ArrayList<Note>();
+                        BasicDBObject objectsGroupe = (BasicDBObject) itListBDGroupe.next();
+                        BasicDBList listBDEtudiant = (BasicDBList) objectsGroupe.get("lstEtudiant");
+                        Iterator itListBDEtudiant = listBDEtudiant.iterator();
+                        while (itListBDEtudiant.hasNext()) {//On ajoute la liste des Critere
+                            BasicDBObject aDBObjectCritere = (BasicDBObject) itListBDEtudiant.next();
+                            Etudiant unEtudiant = new Etudiant(
+                                    aDBObjectCritere.get("prenom").toString(),
+                                    aDBObjectCritere.get("nom").toString(),
+                                    aDBObjectCritere.get("classe").toString());
 
-                        lstEtudiant.add(unEtudiant);
+                            lstEtudiant.add(unEtudiant);
+                        }
+                        BasicDBList listBDNote = (BasicDBList) objectsGroupe.get("lstNote");
+                        Iterator itListBDNote = listBDNote.iterator();
+                        while (itListBDNote.hasNext()) {//On ajoute la liste des Critere
+                            BasicDBObject aDBObjectNote = (BasicDBObject) itListBDNote.next();
+                            Note uneNote = new Note(
+                                    aDBObjectNote.get("libelle").toString(),
+                                    (Integer) aDBObjectNote.get("poid"),
+                                    (Double) aDBObjectNote.get("note"));
+                            //1.5);
+
+                            lstNote.add(uneNote);
+                        }
+                        Groupe unGroupe = new Groupe(
+                                objectsGroupe.get("libelle").toString(),
+                                lstEtudiant,
+                                lstNote);
+                        lstGroupe.add(unGroupe);
                     }
-                    BasicDBList listBDNote = (BasicDBList) objectsGroupe.get("lstNote");
-                    Iterator itListBDNote = listBDNote.iterator();
-                    while (itListBDNote.hasNext()) {//On ajoute la liste des Critere
-                        BasicDBObject aDBObjectNote = (BasicDBObject) itListBDNote.next();
-                        Note uneNote = new Note(
-                                aDBObjectNote.get("libelle").toString(),
-                                (Integer) aDBObjectNote.get("poid"),
-                                (Double) aDBObjectNote.get("note"));
-                                //1.5);
-
-                        lstNote.add(uneNote);
-                    }
-                    Groupe unGroupe = new Groupe(
-                            objectsGroupe.get("libelle").toString(),
-                            lstEtudiant,
-                            lstNote);
-                    lstGroupe.add(unGroupe);
-                }
-                devoir.setLstGroupe(lstGroupe);
+                    devoir.setLstGroupe(lstGroupe);
                 }
                 //On ajoute le client à la liste
                 listDevoir.add(devoir);
