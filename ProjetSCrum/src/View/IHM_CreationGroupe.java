@@ -66,26 +66,26 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
 
     protected List<Etudiant> getListeEtudiant() {
         List<Etudiant> listeEtud = new ArrayList<Etudiant>();
-        listeEtudiant = new ArrayList<Etudiant>();
+        
         DAO_Etudiant dao;
         try {
             dao = new DAO_Etudiant(null);
             listeEtud = dao.findAll();
         } catch (UnknownHostException ex) {
             Logger.getLogger(IHM_CreationGroupe.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        listeEtudiant = IHM_DevoirPapa.newDevoir.getEtudiantInGroupe(listeEtud);
+        }      
         
-        for(int i = 0; i < listeEtudiant.size(); i++)
+        
+        for(int i = 0; i < listeEtud.size(); i++)
         {
-            if(!listeEtudiant.get(i).getClasse().equals(IHM_DevoirPapa.sClasse))
+            if(!listeEtud.get(i).getClasse().equals(IHM_DevoirPapa.sClasse))
             {            
-                listeEtudiant.remove(i);
+                listeEtud.remove(i);
+                i = i - 1;
             }
         }
 
-        return listeEtudiant;
+        return listeEtud;
     }
 
     protected void initListEtudiant() {
@@ -100,7 +100,7 @@ public class IHM_CreationGroupe extends javax.swing.JFrame {
             }
         }
         //On récupère la liste totale des élèves
-        //listeEtudiant = getListeEtudiant();
+        listeEtudiant = getListeEtudiant();
 
         //On y enlève les élèves déjà affectés à un groupe
         //On parcours tous les eleves deja en groupe
