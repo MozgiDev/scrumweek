@@ -6,8 +6,10 @@
 package View;
 
 import Entity.Devoir;
+import Model.DAO_Devoir;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -25,9 +27,10 @@ public class IHM_TableauDevoirEleve extends javax.swing.JFrame {
     protected IHM_ListerDevoir IHM_ListerDevoir = null;
     protected List<Devoir> lstDevoir = new ArrayList<Devoir>();
 
-    public IHM_TableauDevoirEleve(IHM_ListerDevoir pIHM_ListerDevoir) {
+    public IHM_TableauDevoirEleve(IHM_ListerDevoir pIHM_ListerDevoir) throws UnknownHostException {
         IHM_ListerDevoir = pIHM_ListerDevoir;
-        lstDevoir = pIHM_ListerDevoir.listeDevoir;
+        DAO_Devoir dao = new DAO_Devoir(null);
+        lstDevoir = dao.findAll();
         initComponents();
 
         jTable1.setVisible(false);

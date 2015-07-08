@@ -7,9 +7,11 @@ package View;
 
 import Entity.Devoir;
 import Entity.Note;
+import Model.DAO_Devoir;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import static java.lang.System.out;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -30,9 +32,10 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
     protected IHM_ListerDevoir IHM_ListerDevoir = null;
     protected List<Devoir> lstDevoir = new ArrayList<Devoir>();
 
-    public IHM_TableauCritereGroupe(IHM_ListerDevoir pIHM_ListerDevoir) {
+    public IHM_TableauCritereGroupe(IHM_ListerDevoir pIHM_ListerDevoir) throws UnknownHostException {
         IHM_ListerDevoir = pIHM_ListerDevoir;
-        lstDevoir = pIHM_ListerDevoir.listeDevoir;
+        DAO_Devoir dao = new DAO_Devoir(null);
+        lstDevoir = dao.findAll();
         initComponents();
         jTable1.setVisible(false);
 
