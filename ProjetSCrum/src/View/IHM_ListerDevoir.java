@@ -41,9 +41,9 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         initComponents();
         model = new DefaultListModel();
         updateListeDevoir();
-        
+
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
 
     public void updateListeDevoir() throws UnknownHostException {
@@ -196,8 +196,13 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_jList1ValueChanged
 
     private void btTabDevoirEleveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabDevoirEleveActionPerformed
-        IHM_TableauDevoirEleve tableauDevoirEleve = new IHM_TableauDevoirEleve(this);
-        tableauDevoirEleve.setVisible(true);
+        IHM_TableauDevoirEleve tableauDevoirEleve;
+        try {
+            tableauDevoirEleve = new IHM_TableauDevoirEleve(this);
+            tableauDevoirEleve.setVisible(true);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_ListerDevoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btTabDevoirEleveActionPerformed
 
     private void btImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImportActionPerformed
@@ -205,7 +210,6 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         JFileChooser choix = new JFileChooser();
         choix.showDialog(choix, null);
         File f = choix.getSelectedFile();
-       
 
         try {
             FileInputStream file = new FileInputStream(f);
@@ -215,11 +219,11 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
 
             //Get first/desired sheet from the workbook
             XSSFSheet sheet = workbook.getSheetAt(0);
-            
+
             // On copie les eleves de la classe dans notre collection archive
             DAO_Etudiant dao = new DAO_Etudiant(null);
             dao.archive(cbxClasse.getSelectedItem().toString());
-            
+
             //Iterate through each rows one by one
             Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.iterator();
             while (rowIterator.hasNext()) {
@@ -266,8 +270,13 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
     }//GEN-LAST:event_btImportActionPerformed
 
     private void btTabGroupeCritere1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTabGroupeCritere1ActionPerformed
-        IHM_TableauCritereGroupe tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
-        tableauCritereGroupe.setVisible(true);
+        IHM_TableauCritereGroupe tableauCritereGroupe;
+        try {
+            tableauCritereGroupe = new IHM_TableauCritereGroupe(this);
+            tableauCritereGroupe.setVisible(true);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IHM_ListerDevoir.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btTabGroupeCritere1ActionPerformed
 
 
