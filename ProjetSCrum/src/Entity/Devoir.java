@@ -90,9 +90,9 @@ public class Devoir {
 
     public List<Note> getNoteCritere(List<Note> noter) {
         List<Note> lstNoteCriterePoid = new ArrayList<Note>();
-        for (int i = 0; i < this.getLstRubrique().size(); i++) {
-            String libelle = this.getLstRubrique().get(i).getLibelle() + "-";
+        for (int i = 0; i < this.getLstRubrique().size(); i++) {           
             for (int j = 0; j < this.getLstRubrique().get(i).getLstCritere().size(); j++) {
+                String libelle = this.getLstRubrique().get(i).getLibelle() + "-";
                 libelle = libelle + this.getLstRubrique().get(i).getLstCritere().get(j).getLibelle();
                 Note uneNote = new Note(libelle, this.getLstRubrique().get(i).getLstCritere().get(j).getPoid());
                 lstNoteCriterePoid.add(uneNote);
