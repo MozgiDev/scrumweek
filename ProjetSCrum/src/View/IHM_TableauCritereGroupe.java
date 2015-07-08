@@ -7,6 +7,8 @@ package View;
 
 import Entity.Devoir;
 import Entity.Note;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,9 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
         for (int i = 0; i < lstDevoir.size(); i++) {
             jComboBox1.addItem(lstDevoir.get(i));
         }
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     private void initTableau(Devoir unDevoir) {

@@ -9,6 +9,8 @@ import Entity.Devoir;
 import Entity.Etudiant;
 import Model.DAO_Devoir;
 import Model.DAO_Etudiant;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.UnknownHostException;
@@ -39,6 +41,9 @@ public class IHM_ListerDevoir extends javax.swing.JFrame {
         initComponents();
         model = new DefaultListModel();
         updateListeDevoir();
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     public void updateListeDevoir() throws UnknownHostException {
