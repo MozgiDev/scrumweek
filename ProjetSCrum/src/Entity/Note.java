@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.util.List;
 import java.util.Objects;
 import org.bson.types.ObjectId;
 
@@ -13,6 +14,7 @@ import org.bson.types.ObjectId;
  * @author Marian
  */
 public class Note {
+
     private ObjectId _id;
     private String libelle;
     protected int poid;
@@ -22,6 +24,11 @@ public class Note {
         this.libelle = libelle;
         this.poid = poid;
         this.note = note;
+    }
+
+    public Note(String libelle, int poid) {
+        this.libelle = libelle;
+        this.poid = poid;
     }
 
     public Note() {
@@ -62,10 +69,8 @@ public class Note {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this._id);
         hash = 79 * hash + Objects.hashCode(this.libelle);
         hash = 79 * hash + this.poid;
-        hash = 79 * hash + Objects.hashCode(this.note);
         return hash;
     }
 
@@ -74,34 +79,18 @@ public class Note {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
         final Note other = (Note) obj;
-        if (!Objects.equals(this._id, other._id)) {
-            return false;
-        }
         if (!Objects.equals(this.libelle, other.libelle)) {
             return false;
         }
         if (this.poid != other.poid) {
             return false;
         }
-        if (!Objects.equals(this.note, other.note)) {
-            return false;
-        }
         return true;
     }
-    
-    
 
     @Override
     public String toString() {
         return "Note{" + "_id=" + _id + ", libelle=" + libelle + ", poid=" + poid + ", note=" + note + '}';
     }
-    
-    
-    
-    
-    
 }

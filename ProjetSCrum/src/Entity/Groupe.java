@@ -7,6 +7,9 @@ package Entity;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import static java.lang.System.out;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -55,12 +58,14 @@ public class Groupe {
         return total;
     }
 
-    public int getTotalPoid() {
-        int total = 0;
+    public String getTotalNote20(Devoir unDevoir) {
+        Double total = 0.0;
         for (int i = 0; i < this.lstNote.size(); i++) {
-            total = total + this.lstNote.get(i).getPoid();
+            total = total + this.lstNote.get(i).getNote();
         }
-        return total;
+        total = (total / unDevoir.getTotalPoid()) * 20;
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(total);
     }
 
     public BasicDBList mapBddNotes() {

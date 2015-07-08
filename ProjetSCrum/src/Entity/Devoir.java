@@ -10,9 +10,12 @@ import com.mongodb.BasicDBObject;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 import org.bson.types.ObjectId;
 
 /**
@@ -73,6 +76,38 @@ public class Devoir {
     public Devoir() {
         lstRubrique = new ArrayList<Rubrique>();
         lstGroupe = new ArrayList<Groupe>();
+    }
+
+    public int getTotalPoid() {
+        int total = 0;
+        for (int i = 0; i < this.getLstRubrique().size(); i++) {
+            for (int j = 0; j < this.getLstRubrique().get(i).getLstCritere().size(); j++) {
+                total = total + this.getLstRubrique().get(i).getLstCritere().get(j).getPoid();
+            }
+        }
+        return total;
+    }
+
+    public List<Note> getNoteCritere(List<Note> noter) {
+        List<Note> lstNoteCriterePoid = new ArrayList<Note>();
+        for (int i = 0; i < this.getLstRubrique().size(); i++) {
+            String libelle = this.getLstRubrique().get(i).getLibelle() + "-";
+            for (int j = 0; j < this.getLstRubrique().get(i).getLstCritere().size(); j++) {
+                libelle = libelle + this.getLstRubrique().get(i).getLstCritere().get(j).getLibelle();
+                Note uneNote = new Note(libelle, this.getLstRubrique().get(i).getLstCritere().get(j).getPoid());
+                lstNoteCriterePoid.add(uneNote);
+            }
+        }
+        for (int i = 0; i < lstNoteCriterePoid.size(); i++) {
+            for (int j = 0; j < noter.size(); j++) {
+                if(lstNoteCriterePoid.get(i).equals(noter.get(j))){
+                Collections.replaceAll(lstNoteCriterePoid,lstNoteCriterePoid.get(i), noter.get(j));
+                }
+                
+            }
+        }
+
+        return lstNoteCriterePoid;
     }
 
     public ObjectId getId() {

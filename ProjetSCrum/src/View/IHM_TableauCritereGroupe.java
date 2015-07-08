@@ -6,6 +6,8 @@
 package View;
 
 import Entity.Devoir;
+import Entity.Note;
+import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -45,14 +47,35 @@ public class IHM_TableauCritereGroupe extends javax.swing.JFrame {
         columns.add("Critère");
 
         for (int j = 0; j < unDevoir.getLstGroupe().size(); j++) {
-            String[] content = new String[2];
             columns.add(unDevoir.getLstGroupe().get(j).getLibelle());
-            for (int k = 0; k < unDevoir.getLstGroupe().get(j).getLstNote().size(); k++) {
-                content[0] = unDevoir.getLstGroupe().get(j).getLstNote().get(k).getLibelle()
-                        + "  /" + unDevoir.getLstGroupe().get(j).getLstNote().get(k).getPoid();
-                content[1+j] = unDevoir.getLstGroupe().get(j).getLstNote().get(k).getNote().toString();
-                values.add(content);
+
+            unDevoir.getNoteCritere(unDevoir.getLstGroupe().get(j).getLstNote());
+            List<Note> lolNote = new ArrayList<Note>();
+            lolNote = unDevoir.getNoteCritere(unDevoir.getLstGroupe().get(j).getLstNote());
+
+            for (int k = 0; k < lolNote.size(); k++) {
+                String[] content = new String[1 + unDevoir.getLstGroupe().size() ];
+
+                //out.println(unDevoir.getLstGroupe().get(j).getLstNote().get(k).getLibelle());
+                content[0] = lolNote.get(k).getLibelle()
+                        + "  /" + lolNote.get(k).getPoid();
+                if (lolNote.get(k).getNote() != null) {
+                    content[1 + j] = lolNote.get(k).getNote().toString();
+                } else {
+                    content[1 + j] = "0";
+                }
+
+                if (values.size() > k) {
+                    String[] conTemp = new String[1 + unDevoir.getLstGroupe().size()];
+                    conTemp = values.get(k);                   
+                    conTemp[1+j] = content[1+j];
+                    values.set(k, conTemp);
+                } else {
+                    values.add(content);
+                }
+
             }
+
         }
         //values.add(new String[]{"val" + i + " col1", "val" + i + " col2", "val" + i + " col3"});
 
