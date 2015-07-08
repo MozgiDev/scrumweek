@@ -83,11 +83,10 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 }
                 jList1.setModel(listeModel);
 
-                updateListeGroupe();
-
-                Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-                this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+                updateListeGroupe();                
             }
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         } catch (Exception ex) {
             Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
