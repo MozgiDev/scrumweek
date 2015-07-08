@@ -401,16 +401,16 @@ public class IHM_Devoir extends javax.swing.JFrame {
                 && jXDatePicker1.getDate() != null) {
             DAO_Devoir dao;
 
-            //try {
-                // On test s'il y a deja un devoir aujourd'hui
-               // dao = new DAO_Devoir(null);
-                //if (dao.findByDate()) {
-                 //   JOptionPane.showMessageDialog(this, "Erreur, Il y a deja un devoir a cette date");
-                  //  return;
-              //  }
-            //} catch (UnknownHostException ex) {
-              //  Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
-            //}
+            try {
+                 //On test s'il y a deja un devoir aujourd'hui
+                dao = new DAO_Devoir(null);
+                if (dao.findByDate(jXDatePicker1.getDate())) {
+                    JOptionPane.showMessageDialog(this, "Erreur, Il y a deja un devoir a cette date");
+                    return;
+              }
+            } catch (UnknownHostException ex) {
+              Logger.getLogger(IHM_Devoir.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             try {
                 dao = new DAO_Devoir(null);
